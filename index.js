@@ -3,19 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
+import App from './App.js'
 
-class App extends React. Component{
-
-    render(){
-
-        return(
-
-            <div>Welcome To React</div>
-
-        )
-
-    }
-
-}
 
 ReactDOM.render(<App />, document.getElementById('root'))
