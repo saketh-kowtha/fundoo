@@ -1,0 +1,54 @@
+.login-container{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    .input-group{
+        position: relative;
+        width: 100%;
+        margin-top: 35px;
+        margin-bottom: 10px;
+        input{
+            height: 50px;
+            width: 400px;
+            border-radius: 5px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            font-size: 18px;
+            outline: none;
+            border: 1px solid #e4e4e4;
+            &:focus{
+                border-color: #4688df;
+                border-width: 2px;
+            }
+            &:focus ~ span{
+                top: -9px;
+                left: 12px;
+                color: #4688df;
+                padding: 0px 5px;
+                font-size: 14px;
+            }
+        }
+        span{
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            transition: 0.2s;
+            pointer-events: none;
+            background: #fff;
+            color: gray
+        }
+    }
+    .form{
+        padding: 50px;
+        .header{
+            text-align: center;
+        }
+    }
+}
+
+
+
+
+
