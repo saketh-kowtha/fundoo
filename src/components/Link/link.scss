@@ -1,0 +1,16 @@
+
+.link{
+    color: #4688df;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+    padding: 5px;
+
+    &:active, &:focus{
+        background-color: #cadbf1;
+    }
+}
+
+.small{
+    padding: 1px;
+}

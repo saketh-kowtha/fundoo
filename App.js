@@ -1,11 +1,11 @@
 import React from 'react';
 import './index.css'
 
-import Card from './src/components/Card'
+import Link from './src/components/Link'
 export default class App extends React.Component {
     render() {
         return (
-           <Card interactive>OK</Card>
+           <Link name="Click Me" />
            )
     }
 }
