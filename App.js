@@ -1,12 +1,11 @@
 import React from 'react';
 import './index.css'
 
-import Login from './src/Screens/Login'
-
+import Card from './src/components/Card'
 export default class App extends React.Component {
     render() {
         return (
-           <Login />
-        )
+           <Card interactive>OK</Card>
+           )
     }
 }
