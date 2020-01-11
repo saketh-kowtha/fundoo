@@ -16,6 +16,10 @@ export default class Login extends React.Component {
 
     }
 
+    handleInput = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
 
     render() {
         return  <div className="login-container">
@@ -27,7 +31,7 @@ export default class Login extends React.Component {
                                 <p>to continue to Fundoo</p>
                             </div>
                             <div>
-                                 <Input name="Username" />
+                                <Input name="Username" validate={(input) => ({ status: isNaN(input), message: "Invalid Input" })} onChange={this.handleInput}/>
                                 <Input name="Password" />
                                 <Link name="Forgot Pasword" small/>
                             </div>

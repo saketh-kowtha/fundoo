@@ -31,7 +31,7 @@
         .input-group{
             position: relative;
             width: 100%;
-            margin-top: 12px;
+            margin-top: 25px;
             margin-bottom: 10px;
             input{
                 height: 50px;
@@ -54,6 +54,9 @@
                     font-size: 14px;
                 }
             }
+
+
+
             span{
                 position: absolute;
                 top: 15px;
@@ -62,6 +65,33 @@
                 pointer-events: none;
                 background: #fff;
                 color: gray
+            }
+        }
+
+        .active {
+            input {
+                border-color: #4688df;
+                border-width: 2px;
+                color: black;
+            }
+
+            span {
+                top: -9px;
+                left: 12px;
+                color: #4688df;
+                padding: 0px 5px;
+                font-size: 14px ;
+            }
+
+        }
+
+        .warning {
+            input {
+                border-color: red !important;
+                border-width: 2px;
+            }
+            input,span {
+                color: red !important;
             }
         }
     }
