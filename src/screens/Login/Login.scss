@@ -1,3 +1,5 @@
+
+
 .login-container{
     display: flex;
     width: 100%;
@@ -7,6 +9,15 @@
     .form{
         height: fit-content;
         padding: 50px 35px;
+        @media only screen and (max-width: 760px) {
+            box-shadow: none;
+            padding: 50px 10px;
+        }
+    
+        @media only screen and (min-width: 760px) and (max-width: 1024px) {
+            box-shadow: none;
+            padding: 50px 10px;
+        }
         .header{
             text-align: center;
             p:first-child {
@@ -30,9 +41,9 @@
 
         .input-group{
             position: relative;
-            width: 100%;
-            margin-top: 25px;
-            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            margin: 0px 0px 28px 0px;
             input{
                 height: 50px;
                 width: 350px;
@@ -54,8 +65,6 @@
                     font-size: 14px;
                 }
             }
-
-
 
             span{
                 position: absolute;
@@ -80,7 +89,7 @@
                 left: 12px;
                 color: #4688df;
                 padding: 0px 5px;
-                font-size: 14px ;
+                font-size: 14px;
             }
 
         }
@@ -90,10 +99,90 @@
                 border-color: red !important;
                 border-width: 2px;
             }
+            span{
+                top: -9px;
+                left: 12px;
+                padding: 0px 5px;
+                font-size: 14px;
+            }
             input,span {
                 color: red !important;
             }
         }
+
+
+        .row{
+            display: flex;
+            flex-direction: row;
+            margin: 0px 0px 10px 0px;
+            @media only screen and (max-width: 760px) {
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+        
+            @media only screen and (min-width: 760px) and (max-width: 1024px) {
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+            input{
+                font-size: 16px;
+                width: 300px;
+                margin-left: 10px;
+                @media only screen and (max-width: 760px) {
+                    margin-left: 0px;
+                    width: 350px;
+                }
+            
+                @media only screen and (min-width: 760px) and (max-width: 1024px) {
+                    margin-left: 0px;
+                    width: 350px;
+                }
+                padding: 0 20px;
+                &:focus ~ span{
+                    left: 20px;
+                    top: -8px;
+                    @media only screen and (max-width: 760px) {
+                        left: 10px;
+                    }
+                
+                    @media only screen and (min-width: 760px) and (max-width: 1024px) {
+                        left: 10px;
+                    }
+                    font-size: 14px;
+                }
+            }
+
+            .active span {
+                top: -8px;
+                left: 20px;
+                @media only screen and (max-width: 760px) {
+                    left: 10px;
+                }
+            
+                @media only screen and (min-width: 760px) and (max-width: 1024px) {
+                    left: 10px;
+                }
+                color: #4688df;
+                padding: 0px 5px;
+                font-size: 14px ;
+            }    
+    
+            .warning span {
+                top: -8px;
+                left: 20px;
+                @media only screen and (max-width: 760px) {
+                    left: 10px;
+                }
+            
+                @media only screen and (min-width: 760px) and (max-width: 1024px) {
+                    left: 10px;
+                }
+                color: #4688df;
+                padding: 0px 5px;
+                font-size: 14px ;
+            }    
+        }
+
     }
 }
 
