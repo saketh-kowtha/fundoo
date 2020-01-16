@@ -44,25 +44,25 @@ const validateEmail = (email) => {
 
 
 const validateLogin = (data) => {
-    let res = validateUsername(data.username) 
+    let res = validateUsername(data.username.value) 
     if(res != true)
         return {errorMsg: res, feild: "username"}
-    res = validatePassword(data.password)
+    res = validatePassword(data.password.value)
     if(res != true)
         return {errorMsg: res, feild: "password"}
     return true
 }
 
 const validateSignUp = (data) => {
-    let res = validateUsername(data.firstname) 
+    let res = validateUsername(data.firstname.value) 
     if(res != true)
         return {errorMsg: res, feild: "firstname"}
-    res = validateUsername(data.lastname)
+    res = validateUsername(data.lastname.value)
     if(res != true)
         return {errorMsg: res, feild: "lastname"}
-    if(data.password !== data.confirmpassword)
+    if(data.password !== data.confirmpassword.value)
         return {errorMsg: "Password and Re-Password are mismached", feild: "password"}
-    res = validatePassword(data.password)
+    res = validatePassword(data.password.value)
     if(res != true)
         return {errorMsg: res, feild: "password"}
     return true
