@@ -112,6 +112,9 @@
 				border-radius: 0px;
 				border-color: rgb(170, 170, 170) !important;
 			}
+			input:disabled {
+				background-color : #ffff;
+			}
 		}
 		.row {
 			display: flex;
