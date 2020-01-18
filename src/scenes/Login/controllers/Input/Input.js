@@ -1,26 +1,24 @@
 import React from 'react'
-import ErrorMessage from './ErrorMessage'
+import {WARNING, ACTIVE} from '../../../../constants'
 
 class LoginInput extends React.PureComponent {
 
     constructor(props) {
         super(props)
         this.state = {
-            input: "",
+            input: this.props.value || "",
             errorMsg: "" ,
         }
     }
 
+
     componentDidUpdate(prevProps, prevState){
         if (this.props.errorMsg !== prevProps.errorMsg) {
-            this.setState({errorMsg: this.props.errorMsg || ""});
-        }       
+            this.setState({errorMsg: this.props.errorMsg || ""})
+        }  
     }
 
-    componentWillUnmount(){
-        console.log("unnnnn")
-    }
-
+ 
     handleInput = (event) => {
         const {name, value} = event.target
         this.setState({input: value})
@@ -43,17 +41,19 @@ class LoginInput extends React.PureComponent {
 
 
     render() {
-        let className = "input-group"
+        let className = ["input-group"]
         if (this.state.input != "" && this.state.input.length > 0)
-            className += " active"
+            className.push(ACTIVE)
 
         if(this.state.errorMsg != ""){
-            className += " warning"
+            className.push(WARNING)
         }
-        return <div className={className}>
-                    <input name={this.props.name.toLowerCase()} type={this.props.secret ? "password" : "text"} onChange={this.handleInput} onKeyPress={this.handleInputKeyPress}/>
-                    <span >{this.props.name}</span>
-                    { this.state.errorMsg != "" ? <ErrorMessage message={this.state.errorMsg} /> : ""}
+
+
+        return <div className={className.join(" ")}>
+                    <input value={this.state.input} name={this.props.name.toLowerCase().replace(/\s/g,'')} type={this.props.secret ? "password" : "text"} onChange={this.handleInput} onKeyDown={this.handleInputKeyPress}/>
+                    <span>{this.props.label}</span>
+                    <span className="input-error-msg">{this.state.errorMsg}</span>
                 </div>
     }
 

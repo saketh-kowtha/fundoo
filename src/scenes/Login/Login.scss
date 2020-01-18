@@ -1,0 +1,164 @@
+@mixin span-focus {
+	top: -9px;
+	left: 12px;
+	padding: 0px 5px;
+	font-size: 14px;
+}
+
+@mixin active-warning-span {
+	span {
+		left: 20px;
+		top: -8px;
+		padding: 0px 5px;
+	}
+}
+
+.login-container {
+	display: flex;
+	width: 100%;
+	flex-flow: column;
+	height: calc(100vh - 16px);
+	justify-content: center;
+	align-items: center;
+	.form {
+		padding: 50px 35px;
+		min-height: 400px;
+		.header {
+			text-align: center;
+			p {
+				&:first-child {
+					line-height: 10px;
+					font-size: 30px;
+                    @each $index, $color in (1: #5086ec, 2: #d85040, 3: #f0bc42, 4: #5086ec, 5: #77b57b, 6: #d85040) {        
+						span:nth-child(#{$index}){
+							color: $color
+						}
+					}
+				}
+			}
+		}
+		.footer {
+			display: flex;
+			margin-top: 30px;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.input-group {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			margin: 0px 0px 28px 0px;
+			.input-error-msg{
+				margin-top: 60px; 
+				font-size: 14px;
+				color: #ff0000;
+			}
+			input {
+				height: 50px;
+				width: 350px;
+				border-radius: 5px;
+				padding: 0 20px;
+				box-sizing: border-box;
+				font-size: 18px;
+				outline: none;
+				border: 1px solid #e4e4e4;
+				&:focus {
+					border-color: #4688df;
+					border-width: 2px;
+					~ {
+						span {
+							@include span-focus();
+							color: #4688df;
+						}
+					}
+				}
+			}
+			span {
+				position: absolute;
+				top: 15px;
+				left: 20px;
+				transition: 0.2s;
+				pointer-events: none;
+				background: #fff;
+				color: #808080;
+			}
+		}
+		.active {
+			input {
+				border-color: #4688df;
+				border-width: 2px;
+				color: #000000;
+			}
+			span {
+				@include span-focus();
+				color: #4688df;
+			}
+		}
+		.warning {
+			input {
+				border-color: #ff0000 !important;
+				border-width: 2px;
+				color: #ff0000 !important;
+			}
+			span {
+				@include span-focus();
+				color: #ff0000 !important;
+			}
+		}
+		.row {
+			display: flex;
+			flex-direction: row;
+			margin: 0px 0px 10px 0px;
+			input {
+				font-size: 16px;
+				width: 300px;
+				margin-left: 10px;
+				padding: 0 20px;
+				&:focus {
+					~ {
+						span {
+							left: 20px;
+							top: -8px;
+						}
+					}
+				}
+			}
+			.active, .warning {
+				@include active-warning-span();
+			}
+		}
+	}
+}
+@media only screen and (max-width: 760px) {
+	@mixin active-warning-span {
+		span {
+			left: 10px;
+			font-size: 14px;
+		}
+	}
+	.login-container {
+		.form {
+			box-shadow: none;
+			padding: 50px 10px;
+			.row {
+				flex-direction: column;
+				flex-wrap: wrap;
+				input {
+					margin-left: 0px;
+					width: 350px;
+					&:focus {
+						~ {
+							span {
+								left: 10px;
+								font-size: 14px;
+							}
+						}
+					}
+				}
+				.active, .warning {
+					@include active-warning-span();
+				}
+			}
+		}
+	}
+}

@@ -5,20 +5,39 @@ import './card.scss'
  * Elevated Card Component
  * @param {*} props 
  */
-const elevatedCard = (props) => <div className={"card elevated " + props.className} >{props.children}</div>
+const elevatedCard = (props) => {
+    let className = ["card"]
+    className.push("elevated")
+    if(props.className)
+        className.push(props.className)
+    return <div className={className.join(" ")} >{props.children}</div>
+}
 
 
 /**
  * Ouline Card Component
  * @param {*} props 
  */
-const oulinedCard = (props) => <div className={"card outlined " + props.className}>{props.children}</div>
+const oulinedCard = (props) => {
+    let className = ["card"]
+    className.push("outlined")
+    if(props.className)
+        className.push(props.className)
+    return <div className={className.join(" ")} >{props.children}</div>
+}
 
 /**
  * Interactive Card Component
  * @param {*} props 
  */
-const interactiveCard = (props) => <div className={"card outlined interactive " + props.className}>{props.children}</div>
+const interactiveCard = (props) => {
+    let className = ["card"]
+    className.push("outlined")
+    className.push("interactive")
+    if(props.className)
+        className.push(props.className)
+    return <div className={className.join(" ")} >{props.children}</div>
+}
 
 /**
  * Card Component
