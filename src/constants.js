@@ -10,3 +10,6 @@ export const LANGUAGES = {
     "jp" : "Japanise",
     "fr": "French"
 }
+
+export const OFFLINE = "Lost Connection you are in Offline"
+export const ONLINE = "Welcome Back to Online"

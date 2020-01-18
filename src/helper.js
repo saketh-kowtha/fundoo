@@ -1,4 +1,5 @@
-import {LANGUAGES} from './constants'
+import {LANGUAGES, OFFLINE, ONLINE} from './constants'
+import showToast from './components/Toast'
 
 export const languageChangeEvent = (lang) => {
     localStorage.setItem("lang", LANGUAGES[lang] ? lang : "en")
@@ -15,3 +16,9 @@ export const getParameterByName = (name, url) =>{
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+
+// navigator.onLine
+
+window.addEventListener("online", () => showToast(ONLINE))
+window.addEventListener("offline", () => showToast(OFFLINE))

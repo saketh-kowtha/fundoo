@@ -5,8 +5,8 @@ const strings =
 {
     "en": {
         title: "Fundoo",
-        firstName: "Firstname",
-        lastName: "Lastname",
+        firstName: "First name",
+        lastName: "Last name",
         email: "Email",
         password: "Password",
         confirmPassword: "Confirm Password",

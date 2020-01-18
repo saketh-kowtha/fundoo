@@ -77,18 +77,22 @@ class Login extends React.Component{
                 errMsg: ""
             }
         },
-        state: this.props.view || LOGIN
+        state: this.props.view || LOGIN,
+        isSuggestionList: true
     }
 
     componentDidMount = () =>{
         this._isMount = true
+        let usersList = localStorage.getItem("usersList")
+        if(!usersList)
+            this.setState({isSuggestionList: false})
     }
 
     componentWillUnmount = () =>{
         this._isMount = false
     }
 
-    updateSate = (feild, value) => {
+    updateState = (feild, value) => {
         if(!this._isMount)
             return
         if(!feild)
@@ -100,7 +104,7 @@ class Login extends React.Component{
         const stateData = {...this.state}
         stateData[this.state.state][name].value = input
         // this.setState({stateData})
-        this.updateSate(null, stateData)
+        this.updateState(null, stateData)
     }
 
 
@@ -113,7 +117,7 @@ class Login extends React.Component{
                 showToast(errMsg, ERROR)
             })
             // this.setState({[this.state.state]: stateData})
-            this.updateSate([this.state.state], stateData)
+            this.updateState([this.state.state], stateData)
         }
         else
             showToast(data)
@@ -130,6 +134,18 @@ class Login extends React.Component{
         if(err){
             showToast(err, ERROR)
         }
+        else{
+            user = localStorage.getItem("usersList")
+            if(user)
+            {
+                user = user.split(",")
+                user.push(data.email)
+            }
+            else 
+                user = [data.email]
+            localStorage.setItem("userList", JSON.stringify(user))
+            this.props.history.push("/Dashboard")
+        }
     }
 
     clearErrorMsgs = () => {
@@ -137,7 +153,7 @@ class Login extends React.Component{
         Object.keys(stateData).forEach(feild => {
             stateData[feild].errMsg = ""
         })
-        this.updateSate([this.state.state], stateData)
+        this.updateState([this.state.state], stateData)
         // this.setState({
         //     [this.state.state] : stateData
         // })
@@ -153,7 +169,7 @@ class Login extends React.Component{
             {
                 stateData[loginValidation.feild].errMsg = loginValidation.errorMsg
                 // console.log(loginValidation, stateData[loginValidation.feild])
-                this.updateSate("login", stateData)
+                this.updateState("login", stateData)
                 // this.setState({login: stateData})
             }
             else if(loginValidation === true)
@@ -167,7 +183,7 @@ class Login extends React.Component{
             if(resetValidation != true){
                 stateData['email'].errMsg = resetValidation
                 // this.setState({reset: stateData})    
-                this.updateSate("reset", stateData)
+                this.updateState("reset", stateData)
             }
             else
                 http.forgotPassword(stateData, this.resetResponseHandler)
@@ -180,7 +196,7 @@ class Login extends React.Component{
             {
                 stateData[signUpValidation.feild].errMsg = signUpValidation.errorMsg
                 // this.setState({signUp: stateData})
-                this.updateSate("signUp", stateData)
+                this.updateState("signUp", stateData)
 
             }
             else if(signUpValidation === true)
@@ -221,6 +237,26 @@ class Login extends React.Component{
                 </div>
     }
 
+     setUsername = (name) => {
+        const stateData = {...this.state}
+        stateData.isSuggestionList = false
+        stateData.login.username.value = name
+        this.updateState(null, stateData)
+        this.setState({isSuggestionList: false})
+    }
+
+    LoginUserSuggestion = () => {
+        let usersList = localStorage.getItem("usersList")
+        if(!usersList)
+            return
+        usersList = usersList.split(",").map(element => element.trim())
+        return <div>
+            {
+                usersList.map(user => <Input  key={user} label={user} onClick = {(user) => this.setUsername(user)} disabled={"true"} value={user} />)
+            }
+            <Input key={'Other Account'} value={'Other Account'} onClick = {() => this.setUsername("")} disabled={"true"} />
+            </div>
+    }
 
     SignUp = () => {
         let _this = {...this.state.signUp}
@@ -308,6 +344,7 @@ class Login extends React.Component{
                             name={"username"} 
                             key={userName}
                             label={userName}
+                            value = {this.state.login.username.value}
                             errorMsg={this.state.login.username.errMsg} 
                             onChange={this.handleUserInput} 
                             validate={validateEmail}/>
@@ -348,8 +385,10 @@ class Login extends React.Component{
     }
 
     render(){
-        if(this.state.state === "login")
-            return this.Layout(this.Login())
+        if(this.state.state === "login" && this.state.isSuggestionList )
+            return this.Layout(this.LoginUserSuggestion())
+        else if(this.state.state === "login" )
+            return  this.Layout(this.Login())
         else if(this.state.state === "signUp")
             return this.Layout(this.SignUp())
         else
@@ -357,7 +396,5 @@ class Login extends React.Component{
     }
 
 }
-
-
 
 export default withRouter(Login)

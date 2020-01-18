@@ -105,6 +105,14 @@
 				color: #ff0000 !important;
 			}
 		}
+
+		.readOnly{
+			input{
+				border-width: 0px 0px 1px 0px;
+				border-radius: 0px;
+				border-color: rgb(170, 170, 170) !important;
+			}
+		}
 		.row {
 			display: flex;
 			flex-direction: row;

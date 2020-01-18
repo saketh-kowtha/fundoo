@@ -42,6 +42,7 @@ class LoginInput extends React.PureComponent {
 
     render() {
         let className = ["input-group"]
+        let name = null
         if (this.state.input != "" && this.state.input.length > 0)
             className.push(ACTIVE)
 
@@ -49,10 +50,15 @@ class LoginInput extends React.PureComponent {
             className.push(WARNING)
         }
 
+        if(this.props.disabled === "true")
+            className.push("readOnly")
 
-        return <div className={className.join(" ")}>
-                    <input value={this.state.input} name={this.props.name.toLowerCase().replace(/\s/g,'')} type={this.props.secret ? "password" : "text"} onChange={this.handleInput} onKeyDown={this.handleInputKeyPress}/>
-                    <span>{this.props.label}</span>
+        if(this.props.name)
+            name = this.props.name.toLowerCase().replace(/\s/g,'')
+
+        return <div className={className.join(" ")} onClick={() => this.props.onClick ? this.props.onClick(this.props.label) : ""}>
+                    <input value={this.state.input} disabled={this.props.disabled == "true" ? true : false} name={name} type={this.props.secret ? "password" : "text"} onChange={this.handleInput} onKeyDown={this.handleInputKeyPress}/>
+                    {this.props.disabled !== "true" ? <span>{this.props.label}</span> : ""}
                     <span className="input-error-msg">{this.state.errorMsg}</span>
                 </div>
     }
