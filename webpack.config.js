@@ -23,6 +23,18 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    // options: {
+                        // name: 'assets/[name].[ext]',
+                        // publicPath: 'img'
+                    // }
+                  }
+                ]
+            },
+            {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {

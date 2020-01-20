@@ -1,0 +1,26 @@
+.not-found{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  div{
+    text-align: center;
+    strong{
+      color: #000
+    }
+    color: rgba(#000, 0.5)
+  }
+  svg.MuiSvgIcon-root{
+    font-size: 80px !important;
+  }
+  @media only screen and (max-width: 768px) {
+    align-items: flex-start;
+    div{
+      margin-top: 30px;
+      padding: 10px;
+    }
+    svg.MuiSvgIcon-root{
+      font-size: 70px !important;
+    }
+  }
+}

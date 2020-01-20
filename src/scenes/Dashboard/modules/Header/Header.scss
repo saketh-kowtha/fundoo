@@ -1,9 +1,119 @@
-.header{
-    width: 100%;
+.nav-header{
     display: flex;
+    position: sticky;
+    top: 0px;
+    left: 0px;
     justify-content: space-between;
-    .left, .right{
+    border-bottom: 1px solid #d3d3d3;
+    .left, .right, .center{
+        color: #5f6368;
+        padding: 15px 10px;
         display: flex;
-        padding: 10px 50px;
+        align-items: center;
+        div{
+            img{
+                width: 30px;
+            }
+        }
     }
+
+    .profile{
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .nav-icon{
+        border-radius: 50%;
+        display: inline-block;
+        padding: 12px;
+        overflow: hidden;
+        vertical-align: middle;
+        cursor: pointer;
+        height: 24px;
+        width: 24px;
+        -moz-user-select: none;
+        flex: 0 0 auto;
+        &:hover{
+            background-color: #3c404314;
+        }
+    }
+
+    .center{
+        div{
+            position: relative;
+        }
+        input{
+            width: 700px;
+            border-radius: 5px;
+            border-style: none;
+            font-size: 18px;
+            padding: 10px;
+            padding-left: 40px;
+            outline: none;
+            color: #5f6368;
+            background-color: #3c404314;
+            &:focus{
+                background-color: #ffffff;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
+            }
+        }
+
+        .search-icon{
+            top: -5px;
+            position: absolute; 
+        }
+
+    }
+
+    .left{
+
+        div:nth-child(2){
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    .right{
+        div{
+            margin-right: 5px;
+        }
+    }
+
+    @media only screen and (width: 768px){
+        .left, .right, .center{
+            padding: 5px; 
+        }
+        .left{
+            div:nth-child(2){
+                display: none;
+            }
+        }
+        .right{
+            div:nth-child(2), div:nth-child(4){
+                display: none;
+            }
+        }
+        .center{
+            display: none;
+        }
+        .mobile-search{
+            display: block !important;
+            div{
+                position: inherit;
+                .left-icon{
+                    position: absolute; 
+                    left: 5px;
+                    z-index: 9999;
+                }
+                input{
+                    position: absolute;
+                    left: 10px;
+                    top: 10px;
+                    width: 65%;
+                    background-color: #fff;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);        
+                }
+            }
+        }
+    }
+
 }

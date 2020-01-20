@@ -9,11 +9,12 @@ import {
 
 import Login from './src/scenes/Login'
 import Dashboard from './src/scenes/Dashboard'
+import NotFound from './src/scenes/NotFound'
 
 import {LOGIN, SIGNUP, RESETPASSWORD} from './src/constants'
 
 const createHistory =  require("history").createBrowserHistory;
-const history = createHistory();   
+const history = createHistory();
 
 history.listen((location, action) => {
     window.history.pushState({}, null, "?lang="+(localStorage.getItem('lang') || 'en'))
@@ -28,6 +29,10 @@ export default class App extends React.Component {
                 <Route path="/signup" component={() => <Login view={SIGNUP}/>} />
                 <Route path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
                 <Route path="/Dashboard" component={Dashboard} />
+                <Route exact path="/">
+                  {() => history.push("/login")}
+                </Route>
+                <Route component={NotFound}/>
               </Switch>
           </Router>
         )
