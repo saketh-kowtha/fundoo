@@ -1,8 +1,16 @@
 import React from 'react'
 
+import './Dashboard.scss'
+import Header from './modules/Header/Header'
+import Sidebar from './modules/Sidebar/Sidebar'
+
 class Dashboard extends React.Component {
     render() {
-        return <div>Welcome To Dahboard</div>
+        return <div className="dashboard">
+            <Header />
+            <Sidebar/>
+            {/* <Content /> */}
+        </div>
     }
 }
 

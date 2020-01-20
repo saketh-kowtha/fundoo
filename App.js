@@ -8,6 +8,7 @@ import {
   } from "react-router-dom";
 
 import Login from './src/scenes/Login'
+import Dashboard from './src/scenes/Dashboard'
 
 import {LOGIN, SIGNUP, RESETPASSWORD} from './src/constants'
 
@@ -25,8 +26,8 @@ export default class App extends React.Component {
               <Switch>
                 <Route path="/login" component={() => <Login view={LOGIN}/>} />
                 <Route path="/signup" component={() => <Login view={SIGNUP}/>} />
-              <Route path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
-              <Route path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
+                <Route path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
+                <Route path="/Dashboard" component={Dashboard} />
               </Switch>
           </Router>
         )
