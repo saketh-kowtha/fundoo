@@ -1,7 +1,16 @@
+/**
+ * @author Kowtha Saketh
+ * @description NotFound Scene
+ */
+
 import React from 'react'
 import './NotFound.scss'
 import SentimentDissatisfied from '@material-ui/icons/SentimentDissatisfied'
 
+/**
+ * @name NotFound
+ * @param {*} props 
+ */
 const NotFound = (props) => {
   return <div className="not-found">
             <div>

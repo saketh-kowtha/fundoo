@@ -1,3 +1,7 @@
+/**
+ * @author Kowtha Saketh
+ * @description Login Input Component
+ */
 import React from 'react'
 import {WARNING, ACTIVE} from '../../../../constants'
 

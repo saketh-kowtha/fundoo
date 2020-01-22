@@ -1,18 +1,26 @@
+/**
+ * @author Kowtha Saketh
+ * @description API Urls and Methods are stored in this file
+ */
+
+
+ // HTTP Method Types 
 const POST = "post"
 const GET = "get"
-
+const URL = "http://fundoonotes.incubation.bridgelabz.com"
+//API end point URl's
 const APIS = {
     signUp: {
         method: POST,
-        url: "http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp"
+        url: `${URL}/api/user/userSignUp`
     },
     login: {
         method: POST,
-        url: "http://fundoonotes.incubation.bridgelabz.com/api/user/login"
+        url: `${URL}/api/user/login`
     },
     reset: {
         method: POST,
-        url:"http://fundoonotes.incubation.bridgelabz.com/api/user/reset"
+        url: `${URL}/api/user/reset`
     }
 }
 

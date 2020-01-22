@@ -1,7 +1,18 @@
+/**
+ * @author Kowtha Saketh
+ * @description Toast Component
+ */
+
 import React from 'react'
 import ReactDom from 'react-dom'
 import './toast.scss'
 import {SUCCESS, ERROR} from '../../constants'
+
+
+/**
+ * @name Toast 
+ * @param {*} props 
+ */
 const Toast = (props) => {
     let className = ["toast"]
     className.push((props.type !== SUCCESS ? ERROR : SUCCESS))
@@ -11,7 +22,10 @@ const Toast = (props) => {
 }
 
 
-
+/**
+ * @name showToast 
+ * @param {*} props 
+ */
 const showToast = (data, type=SUCCESS) => {
     let toast = document.getElementById("toast")
     if(toast)

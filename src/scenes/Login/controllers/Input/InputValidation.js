@@ -1,4 +1,9 @@
 
+/**
+ * 
+ * @param {*} username 
+ * @description Validating Username
+ */
 const validateUsername = (username) => {
     if(!username || username.trim() == "")
         return "Username Should not be empty"
@@ -8,12 +13,23 @@ const validateUsername = (username) => {
 }
 
 
+/**
+ * 
+ * @param {*} username 
+ * @description validate Password 
+ */
 const validatePassword = (password) => {
     if(!password || password.trim() == "")
         return "Password Should not be empty"
     return true
 }
 
+
+/**
+ * 
+ * @param {*} username 
+ * @description validate Email
+ */
 const validateEmail = (email) => {
     const atCount = (email.match(/@/g) && email.match(/@/g).length || 0)
     const _email = email.split("@")
@@ -43,6 +59,11 @@ const validateEmail = (email) => {
 }
 
 
+/**
+ * 
+ * @param {*} username 
+ * @description validate Login
+ */
 const validateLogin = (data) => {
     let res = validateEmail(data.username.value) 
     if(res != true)
@@ -53,6 +74,11 @@ const validateLogin = (data) => {
     return true
 }
 
+/**
+ * 
+ * @param {*} username 
+ * @description validate Signup
+ */
 const validateSignUp = (data) => {
     let res = validateUsername(data.firstname.value) 
     if(res != true)

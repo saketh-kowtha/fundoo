@@ -1,3 +1,5 @@
+//Fundoo application constans
+
 export const SIGNUP = "signUp"
 export const LOGIN = "login"
 export const RESETPASSWORD = "reset"

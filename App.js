@@ -1,25 +1,39 @@
+/**
+ * @author Kowtha Saketh
+ * @description Fundoo App  root files
+ */
+
 import React from 'react';
 import './index.css'
 import {
     Router,
     Switch,
     Route,
-    Link
   } from "react-router-dom";
 
-import Login from './src/scenes/Login'
-import Dashboard from './src/scenes/Dashboard'
-import NotFound from './src/scenes/NotFound'
+import Login from './src/scenes/Login/Login'
+import Dashboard from './src/scenes/Dashboard/Dashboard'
+import NotFound from './src/scenes/NotFound/NotFound'
+
 
 import {LOGIN, SIGNUP, RESETPASSWORD} from './src/constants'
 
+//Creating Routes History 
 const createHistory =  require("history").createBrowserHistory;
 const history = createHistory();
 
+
+
+
+//History listener to update language param in URL
 history.listen((location, action) => {
     window.history.pushState({}, null, "?lang="+(localStorage.getItem('lang') || 'en'))
 })
 
+/**
+ * @class App
+ * @description Root Component of this project routes are declared here
+ */
 export default class App extends React.Component {
     render() {
         return (

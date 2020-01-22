@@ -1,9 +1,21 @@
+/**
+ * @author Kowtha Saketh
+ * @description Fundoo App http calls 
+ */
+
 import axios from 'axios'
 
 import APIS from '../apis/apisCollection'
-
+const {invalidEmail, invalidCredntails} = require("../../strings")
+import {SIGNUP, LOGIN, RESETPASSWORD} from '../../constants'
 const http = {}
 
+/**
+ * @name Signup 
+ * @description Signup API
+ * @param{1} Payload Data for API
+ * @param{2} API callback
+ */
 http.signUp = (data, cb) => {
     let payLoad = {}
     payLoad.firstName = data.firstname.value
@@ -11,7 +23,7 @@ http.signUp = (data, cb) => {
     payLoad.password = data.password.value
     payLoad.email = data.email.value
     payLoad.service = "advance"
-    let {url, method} = APIS["signUp"]
+    let {url, method} = APIS[SIGNUP]
     axios({
             method,
             url,
@@ -32,12 +44,17 @@ http.signUp = (data, cb) => {
     })
 }
 
-
+/**
+ * @name login 
+ * @description login API
+ * @param{1} Payload Data for API
+ * @param{2} API callback
+ */
 http.login = (data, cb) => {
     let payLoad = {}
     payLoad.password = data.password.value
     payLoad.username = data.username.value
-    let {url, method} = APIS["login"]
+    let {url, method} = APIS[LOGIN]
     axios({
             method,
             url,
@@ -50,16 +67,21 @@ http.login = (data, cb) => {
     .catch(errorResponse => {
         let error = (errorResponse && errorResponse.response && errorResponse.response.data && errorResponse.response.data.error) || null
         if(error  && error.name === "Error" && error.statusCode === 401){
-            cb("Invalid Credintails", null)
+            cb(invalidCredntails, null)
         }
     })
 }
 
-
+/**
+ * @name forgotPassword 
+ * @description forgotPassword API
+ * @param{1} Payload Data for API
+ * @param{2} API callback
+ */
 http.forgotPassword = (data, cb) => {
     let payLoad = {}
     payLoad.email = data.email.value
-    let {url, method} = APIS["reset"]
+    let {url, method} = APIS[RESETPASSWORD]
     axios({
             method,
             url,
@@ -72,7 +94,7 @@ http.forgotPassword = (data, cb) => {
     .catch(errorResponse => {
         let error = (errorResponse && errorResponse.response && errorResponse.response.data && errorResponse.response.data.error) || null
         if(error  && error.name === "Error" && error.statusCode === 404){
-            cb("Invalid Email", null)
+            cb(invalidEmail, null)
         }
     })
 }

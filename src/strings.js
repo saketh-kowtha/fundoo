@@ -1,3 +1,8 @@
+/**
+ * @author Kowtha Saketh
+ * @description Fundoo Strings collection 
+ */
+
 import {getParameterByName} from './helper'
 import {LANGUAGES} from './constants'
 
@@ -19,7 +24,9 @@ const strings =
         createAccount: "Create Account",
         send: "Send",
         forgetPasswordDesc: "Enter your recovery email",
-        findYourMail: "Find Your Email"
+        findYourMail: "Find Your Email",
+        invalidcredntails:"Invalid Credintails",
+        invalidEmail: "Invalid EMail"
     },
     "fr":{
         title:"Fundoo",
@@ -59,7 +66,10 @@ const strings =
     }
 }
 
-
+/**
+ * @name geti18N
+ * @description Returns Required strings
+ */
 const geti18N = () =>{
     const lang = getParameterByName("lang") || "en"
     if(LANGUAGES[lang])

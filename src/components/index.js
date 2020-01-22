@@ -2,7 +2,7 @@ import Card from './Card'
 import Button from './Button'
 import Toast from './Toast'
 import Link from './Link'
-import Dropdown from './Dropdown'
+import List from './List'
 import LanguageSelection from './LanguageSelection'
 
 export {
@@ -10,6 +10,6 @@ export {
     Button,
     Toast,
     Link,
-    Dropdown,
-    LanguageSelection
+    LanguageSelection, 
+    List
 }

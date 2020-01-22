@@ -1,5 +1,9 @@
+/**
+ * @author Kowtha Saketh
+ * @description Login Scene
+ */
 import React from 'react'
-import { Card, Link, Button, LanguageSelection } from '../../components/'
+import { Card, Link, Button, LanguageSelection, List } from '../../components'
 import Input from './controllers/Input/Input'
 import {
     validateUsername,
@@ -32,12 +36,13 @@ import http from '../../services/http'
 import showToast from '../../components/Toast'
 import { LOGIN, RESETPASSWORD, ERROR, SIGNUP } from '../../constants'
 import { withRouter } from "react-router-dom";
-
+import { connect } from 'react-redux';
+import {addUser} from '../../actions/userActions'
 /**
  * @name Login
  */
 class Login extends React.Component {
-
+    //Initlizing State
     state = {
         login: {
             username: {
@@ -81,6 +86,7 @@ class Login extends React.Component {
         isSuggestionList: true
     }
 
+
     componentDidMount = () => {
         this._isMount = true
         let usersList = localStorage.getItem("usersList")
@@ -92,6 +98,10 @@ class Login extends React.Component {
         this._isMount = false
     }
 
+    /**
+     * @name updateState
+     * @description This method used like state middleware in this page
+     */
     updateState = (feild, value) => {
         if (!this._isMount)
             return
@@ -100,14 +110,15 @@ class Login extends React.Component {
         this.setState({ feild: value })
     }
 
+    //User input handling
     handleUserInput = (name, input) => {
         const stateData = { ...this.state }
         stateData[this.state.state][name].value = input
-        // this.setState({stateData})
         this.updateState(null, stateData)
     }
 
 
+    //Signup API response handler
     signupResponseHandler = (err, data) => {
         if (err) {
             const stateData = { ...this.state.signUp }
@@ -116,13 +127,13 @@ class Login extends React.Component {
                 stateData[key].errMsg = errMsg
                 showToast(errMsg, ERROR)
             })
-            // this.setState({[this.state.state]: stateData})
             this.updateState([this.state.state], stateData)
         }
         else
             showToast(data)
     }
 
+    //Reset Password API response handler
     resetResponseHandler = (err, data) => {
         if (err)
             showToast(err, ERROR)
@@ -130,6 +141,7 @@ class Login extends React.Component {
             showToast(data)
     }
 
+    //Login API response handler
     loginResponseHandler = (err, data) => {
         if (err) {
             showToast(err, ERROR)
@@ -143,23 +155,22 @@ class Login extends React.Component {
             }
             else
                 user = [data.email]
-            alert(user)
-            localStorage.setItem("usersList", user.join(","))
+            localStorage.setItem("usersList", user.filter((userName, index) => user.indexOf(userName) == index).join(",") )
+            this.props.addUser(data)
             this.props.history.push("/Dashboard")
         }
     }
 
+    //This metohod will remove all error before validation
     clearErrorMsgs = () => {
         let stateData = { ...this.state[this.state.state] }
         Object.keys(stateData).forEach(feild => {
             stateData[feild].errMsg = ""
         })
         this.updateState([this.state.state], stateData)
-        // this.setState({
-        //     [this.state.state] : stateData
-        // })
     }
 
+    //Common validation method for signup, login and reset
     validate = () => {
         this.clearErrorMsgs()
         if (this.state.state === LOGIN) {
@@ -201,6 +212,7 @@ class Login extends React.Component {
         }
     }
 
+    //Forget password JSX component
     ForgetPassword = () => {
         return <div>
             <div className="header">
@@ -232,7 +244,10 @@ class Login extends React.Component {
         </div>
     }
 
+
     setUsername = (name) => {
+        if(name === "Other Account")
+            name = ""
         const stateData = { ...this.state }
         stateData.isSuggestionList = false
         stateData.login.username.value = name
@@ -240,19 +255,19 @@ class Login extends React.Component {
         this.setState({ isSuggestionList: false })
     }
 
+    //LoginUserSuggestionJSX component
     LoginUserSuggestion = () => {
         let usersList = localStorage.getItem("usersList")
         if (!usersList)
             return
-        usersList = usersList.split(",").map(element => element.trim())
+        usersList = usersList.split(",").map(element => ({label: element.trim(), icon: 'perm_identity'}))
+        usersList.push({label: "Other Account", icon: 'perm_identity'})
         return <div>
-            {
-                usersList.map(user => <Input key={user} label={user} onClick={(user) => this.setUsername(user)} disabled={"true"} value={user} />)
-            }
-            <Input key={'Other Account'} value={'Other Account'} onClick={() => this.setUsername("")} disabled={"true"} />
+             <List className="login-users-list" data={usersList} onSelect={(e) => this.setUsername(e)}/>
         </div>
     }
 
+    //Signup JJSX component
     SignUp = () => {
         let _this = { ...this.state.signUp }
         return <div>
@@ -327,6 +342,7 @@ class Login extends React.Component {
         </div>
     }
 
+    //Login component
     Login = () => {
         return <div>
             <div className="header">
@@ -367,6 +383,7 @@ class Login extends React.Component {
     }
 
 
+    //Layout JSX component
     Layout = (view) => {
         return <React.Fragment>
             <div className="login-container">
@@ -392,4 +409,12 @@ class Login extends React.Component {
 
 }
 
-export default withRouter(Login)
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addUser: (userDeatils) => dispatch(addUser(userDeatils))
+    }
+}
+
+
+export default withRouter(connect(null, mapDispatchToProps)(Login))

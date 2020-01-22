@@ -1,3 +1,8 @@
+/**
+ * @author Kowtha Saketh
+ * @description Card Component
+ */
+
 import React from 'react'
 import './card.scss'
 
