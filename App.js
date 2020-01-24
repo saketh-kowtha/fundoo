@@ -23,7 +23,6 @@ const createHistory =  require("history").createBrowserHistory;
 const history = createHistory();
 
 
-
 //History listener to update language param in URL
 history.listen((location, action) => {
   if(window.location.href.indexOf("Dashboard") == -1)
