@@ -6,8 +6,11 @@
 import axios from 'axios'
 
 import APIS from '../apis/apisCollection'
-const {invalidEmail, invalidCredntails} = require("../../strings")
-import {SIGNUP, LOGIN, RESETPASSWORD} from '../../constants'
+import geti18N from '../../strings'
+import { SIGNUP, LOGIN, RESETPASSWORD } from '../../constants'
+
+
+const {inCorrectPasswd, invalidEmail} = geti18N()
 const http = {}
 
 /**
@@ -60,15 +63,18 @@ http.login = (data, cb) => {
             url,
             data: payLoad
     })
-    .then(successResponse => {
+        .then(successResponse => {
         if(successResponse && successResponse.data.id)
             cb(null,successResponse.data)
     })
-    .catch(errorResponse => {
-        let error = (errorResponse && errorResponse.response && errorResponse.response.data && errorResponse.response.data.error) || null
-        if(error  && error.name === "Error" && error.statusCode === 401){
-            cb(invalidCredntails, null)
-        }
+        .catch(errorResponse => {
+            console.log(errorResponse.response)
+
+            let error = (errorResponse && errorResponse.response && errorResponse.response.status) 
+            if (error && error == 401) {
+                alert(inCorrectPasswd)
+                cb(inCorrectPasswd, null)
+            }
     })
 }
 

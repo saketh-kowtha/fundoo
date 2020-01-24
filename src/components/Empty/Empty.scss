@@ -1,0 +1,16 @@
+@import "../../../index.scss";
+
+
+.empty-container{
+    margin: 50px;
+    i {
+        margin: 5px;
+        font-size: 90px;
+        color: rgba($black, 0.3);
+        display: block;
+    }
+    span{
+        color: rgba($black, 0.3);
+        font-size: 20px;
+    }    
+}

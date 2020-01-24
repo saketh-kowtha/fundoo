@@ -6,7 +6,8 @@ import Header from './modules/Header/Header'
 import Sidebar from './modules/Sidebar/Sidebar'
 import Content from './modules/Content/Content'
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { withRouter, HashRouter } from "react-router-dom";
+
 
 class Dashboard extends React.Component {
 
@@ -19,13 +20,15 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        return <div className="dashboard">
-            <Header toggle={this.handleToggle} image={this.props.user.imageUrl} />
-            <div style={{display: 'flex'}}>
-                <Sidebar enable={this.state.sideBar}/>
-                <Content />
-            </div>
-        </div>
+        return <HashRouter hashType="noslash" basename={"/"}>
+                    <div className="dashboard">
+                        <Header toggle={this.handleToggle} image={this.props.user.imageUrl} />
+                        <div style={{display: 'flex'}}>
+                            <Sidebar enable={this.state.sideBar}/>
+                            <Content  />
+                        </div>
+                    </div>
+                </HashRouter>
     }
 }
 
@@ -36,4 +39,4 @@ const mapToProps = (state) =>{
     }
 }
 
-export default connect(mapToProps, null)(Dashboard)
+export default withRouter(connect(mapToProps, null)(Dashboard))

@@ -2,29 +2,21 @@ import React from 'react'
 
 import '../Content/Content.scss'
 
-import {HashRouter as Router, Switch, Route} from 'react-router-dom'
+import {HashRouter as Router, useRouteMatch ,Switch, Route, Redirect, withRouter} from 'react-router-dom'
 
-import Notes from './modules/Notes/Notes'
-import Trash from './modules/Trash/Trash'
-import Reminders from './modules/Reminders/Reminders'
-import Archive from './modules/Archive/Archive'
+import Layout from './modules/Layout.js'
 
-const createHistory =  require("history").createBrowserHistory;
-
-const history = createHistory();
 
 const Content = (props) => {
-    return <div className="content">
-            <Router basename={"/Dashboard"}>
+  return <div className="content">
               <Switch>
-                <Route exact path="/Notes" component={Notes} />
-                <Route exact path="/Trash" component={Trash} />
-                <Route exact path="/Reminders" component={Reminders} />
-                <Route exact path="Archive" component={Archive} />
-                <Route exact path="/" component={Notes} />
+                  <Route exact path={`/Notes`} component={() => <Layout name="notes" />} />
+                  <Route path={`/Trash`} component={() => <Layout name="trash" />} />
+                  <Route path={`/Reminders`} component={() => <Layout name="reminders" />} />
+                  <Route path={`/Archive`} component={() => <Layout name="archive" />} />
+                  <Route exact path={`/`} component={() => <Layout name="notes" />} />
               </Switch>
-          </Router>
     </div>
 }
 
-export default Content
+export default withRouter(Content)

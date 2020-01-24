@@ -9,8 +9,13 @@
         padding-top: 10px;
         overflow: auto;
       }
+
+      // li .list-item a{
+      //   color: inherit;
+      //   text-decoration: inherit;
+      // }
       
-      li a {
+      li .list-heading, li .list-item {
         display: flex;
         color: $listElementColor;
         padding: 16px 20px;

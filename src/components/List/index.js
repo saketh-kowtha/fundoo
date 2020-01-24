@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 import './list.scss'
 
 class List extends React.Component  {
@@ -19,12 +19,12 @@ class List extends React.Component  {
                                 {
                                     item.heading 
                                         ? <a className="list-heading">{item.heading}</a>
-                                        : <a className={"list-item" + (activeEle === item.label ? " active" : "")} >
+                                        : <Link to={item.to ? "/"+ item.to : "#"} className={"list-item" + (activeEle === item.label ? " active" : "")} >
                                                 <React.Fragment>
                                                     {item.icon ? <i className="material-icons-outlined">{item.icon}</i> : null}
                                                     <span>{item.label}</span>
                                                 </React.Fragment>
-                                            </a>
+                                            </Link>
                                         }
                                 </li>)
                         }

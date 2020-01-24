@@ -25,11 +25,11 @@ const strings =
         send: "Send",
         forgetPasswordDesc: "Enter your recovery email",
         findYourMail: "Find Your Email",
-        invalidcredntails:"Invalid Credintails",
+        inCorrectPasswd:"Invalid Credintails",
         invalidEmail: "Invalid EMail"
     },
     "fr":{
-        title:"Fundoo",
+        title:"Fundoo", 
         firstName:"Prénom",
         lastName:"Nom de famille",
         email:"Email",

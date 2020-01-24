@@ -19,7 +19,6 @@ class Sidebar extends React.PureComponent{
     setActivelement = (e) =>{
         this.setState({activeElement: e}, () => {
             this.props.modifyTitle(this.state.activeElement)
-            this.props.history.push("#/" + e)
         })
     }
 
@@ -28,8 +27,8 @@ class Sidebar extends React.PureComponent{
 
             <List key="selections" data={
                     [
-                        {label: "Notes", icon: 'emoji_objects'},
-                        {label: "Reminders", icon: 'notifications'},
+                        {label: "Notes", icon: 'emoji_objects', to: "Notes"},
+                        {label: "Reminders", icon: 'notifications', to: "Reminders"},
                     ]
                 } 
                 activeEle={this.state.activeElement}
@@ -49,8 +48,8 @@ class Sidebar extends React.PureComponent{
 
             <List key="actions" data={
                     [
-                        {label: "Archive", icon: 'archive'},
-                        {label: "Trash", icon: 'delete'},
+                        {label: "Archive", icon: 'archive', to: "Archive"},
+                        {label: "Trash", icon: 'delete', to: "Trash"},
                     ]
                 } 
                 activeEle={this.state.activeElement}
