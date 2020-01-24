@@ -1,0 +1,75 @@
+/*
+    Root Style file
+*/
+
+
+
+
+body {
+    margin: 0px;
+    font-family: 'roboto','Noto Sans Myanmar UI',arial,sans-serif;
+}
+
+
+
+
+$black : rgb(26, 26, 26);
+$white : #fff;
+$lightYellow: #feefc3;
+$red: #da4a4a;
+$blue: #4688df;
+$selectableHover: #3c404314;
+
+
+$listElementColor: $black;
+$listLabelColor: $black;
+$listActiveBackgroundColor: $lightYellow;
+$listElementSize: 16px;
+
+
+$toastTextColor: $white;
+$toastBgColor: $black;
+$toastErrorBgColor: $red;
+
+
+$linkColor: $blue;
+$linkSize: 14px;
+$linkHover: #cadbf1;
+$linkDecoration: bold;
+
+
+$cardBackground: $white;
+$cardBorderRadius: 10px;
+$cardOulinedShadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
+$cardInterActiveShadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+$cardElevatedShadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+
+$buttonBgColor: $blue;
+$buttonFontSize: 14px;
+$buttonFgColor: $white;
+
+
+$borderColor: #d3d3d3;
+
+
+
+
+
+
+$logoColors: (1: #5086ec, 2: #d85040, 3: #f0bc42, 4: #5086ec, 5: #77b57b, 6: #d85040);
+$logoSize: 30px;
+$smallInputSize: 14px;
+$defaultInputSize: 16px;
+$largeInputSize: 18px;
+$loginErrorColor: $red;
+$loginInputDefaultBorderColor: #e4e4e4;
+$loginInputActiveColor: $blue;
+$loginLabelBackground: $white;
+$loginLabelColor: #808080;
+$loginInputColor: $black;
+
+
+$notFoundTextColor: $black;
+$sadEmojiSizedefault: 80px;
+$sadEmojiSizeMobile: 70px;

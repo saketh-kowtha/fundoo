@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import './index.css'
+import './index.scss'
 import {
     Router,
     Switch,
@@ -24,9 +24,9 @@ const history = createHistory();
 
 
 
-
 //History listener to update language param in URL
 history.listen((location, action) => {
+  if(window.location.href.indexOf("Dashboard") == -1)
     window.history.pushState({}, null, "?lang="+(localStorage.getItem('lang') || 'en'))
 })
 

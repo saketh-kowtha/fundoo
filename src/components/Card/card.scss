@@ -1,27 +1,29 @@
+@import "../../../index.scss";
+
 //Common Card
 .card{
-    background: #fff;
+    background: $cardBackground;
     border-radius: 2px;
     display: inline-block;
-    border-radius: 10px;
+    border-radius: $cardBorderRadius;
 }
 
 //outlined Card 
 .outlined{
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
+    box-shadow: $cardOulinedShadow;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 //interactive Card 
 .interactive{
     &:hover{
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        box-shadow: $cardInterActiveShadow;
         transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     }
 }
 
 //elevated
 .elevated{
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: $cardElevatedShadow;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }

@@ -1,23 +1,74 @@
 .sidebar{
-    width: 20%;
     height: calc(100vh - 65px);
     z-index: 1;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    transition: 0.5s;
     position: relative;
-    // .footer{
-    //     position: absolute;
-    //     bottom:5px;
-    // }
 }
 
+
+.active-sidebar {
+    width: 25%;
+    animation: open .3s;
+}
+
+.inactive-sidebar {
+    width: 0%;
+    animation: close .3s;
+}
+
+
+@keyframes open{
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 25%;
+    }
+}
+
+
+@keyframes close{
+    0%{
+        width: 25%;
+    }
+    100%{
+        width: 0%;
+    }
+}
 
 @media only screen and (max-width: 768px){
     .sidebar{
         width: 90%;
         height: calc(100vh - 65px);
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    .active {
+        left: 0px;
+        animation: open .2s;
+    }
+    
+    .inactive {
+        left: -90%;
+        animation: close .2s;
+    }
+    
+    
+    @keyframes open{
+        0%{
+            left: -90%;
+        }
+        100%{
+            left: 0%;
+        }
+    }
+    
+    
+    @keyframes close{
+        0%{
+            left: 0%;
+        }
+        100%{
+            left: -90%;
+        }
     }
 }

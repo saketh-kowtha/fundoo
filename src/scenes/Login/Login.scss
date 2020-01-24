@@ -1,8 +1,10 @@
+@import "../../../index.scss";
+
 @mixin span-focus {
 	top: -9px;
 	left: 12px;
 	padding: 0px 5px;
-	font-size: 14px;
+	font-size: $smallInputSize;
 }
 
 @mixin active-warning-span {
@@ -28,8 +30,8 @@
 			p {
 				&:first-child {
 					line-height: 10px;
-					font-size: 30px;
-                    @each $index, $color in (1: #5086ec, 2: #d85040, 3: #f0bc42, 4: #5086ec, 5: #77b57b, 6: #d85040) {        
+					font-size: $logoSize;
+                    @each $index, $color in $logoColors {        
 						span:nth-child(#{$index}){
 							color: $color
 						}
@@ -50,8 +52,8 @@
 			margin: 0px 0px 28px 0px;
 			.input-error-msg{
 				margin-top: 60px; 
-				font-size: 14px;
-				color: #ff0000;
+				font-size: $smallInputSize;
+				color: $loginErrorColor;
 			}
 			input {
 				height: 50px;
@@ -59,16 +61,16 @@
 				border-radius: 5px;
 				padding: 0 20px;
 				box-sizing: border-box;
-				font-size: 18px;
+				font-size: $largeInputSize;
 				outline: none;
-				border: 1px solid #e4e4e4;
+				border: 1px solid $loginInputDefaultBorderColor;
 				&:focus {
-					border-color: #4688df;
+					border-color: $loginInputActiveColor;
 					border-width: 2px;
 					~ {
 						span {
 							@include span-focus();
-							color: #4688df;
+							color: $loginInputActiveColor;
 						}
 					}
 				}
@@ -79,49 +81,39 @@
 				left: 20px;
 				transition: 0.2s;
 				pointer-events: none;
-				background: #fff;
-				color: #808080;
+				background: $loginLabelBackground;
+				color: $loginLabelColor;
 			}
 		}
 		.active {
 			input {
-				border-color: #4688df;
+				border-color: $loginInputActiveColor;
 				border-width: 2px;
-				color: #000000;
+				color: $loginInputColor;
 			}
 			span {
 				@include span-focus();
-				color: #4688df;
+				color: $loginInputActiveColor;
 			}
 		}
 		.warning {
 			input {
-				border-color: #ff0000 !important;
+				border-color: $loginErrorColor !important;
 				border-width: 2px;
-				color: #ff0000 !important;
+				color: $loginErrorColor !important;
 			}
 			span {
 				@include span-focus();
-				color: #ff0000 !important;
+				color: $loginErrorColor !important;
 			}
 		}
 
-		.readOnly{
-			input{
-				border-width: 0px 0px 1px 0px;
-				border-radius: 0px;
-				border-color: rgb(170, 170, 170) !important;
-			}
-			input:disabled {
-				background-color : #ffff;
-			}
-		}
 		.row {
 			display: flex;
 			flex-direction: row;
 			margin: 0px 0px 10px 0px;
 			input {
-				font-size: 16px;
+				font-size: $defaultInputSize;
 				width: 300px;
 				margin-left: 10px;
 				padding: 0 20px;
@@ -142,7 +134,7 @@
 	.login-users-list{
 		width: 350px;
 		li{
-			border-bottom: 1px solid rgb(230, 230, 230);
+			border-bottom: 1px solid $loginInputDefaultBorderColor;
 			cursor: pointer;
 			a{
 				border-top-right-radius: 0px;
@@ -155,7 +147,7 @@
 	@mixin active-warning-span {
 		span {
 			left: 10px;
-			font-size: 14px;
+			font-size: $smallInputSize;
 		}
 	}
 	.login-container {
@@ -172,7 +164,7 @@
 						~ {
 							span {
 								left: 10px;
-								font-size: 14px;
+								font-size: $smallInputSize;
 							}
 						}
 					}

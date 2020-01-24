@@ -1,4 +1,4 @@
-
+@import "../../../index.scss";
 
 .toast{
     position: absolute;
@@ -6,7 +6,7 @@
     padding: 10px 20px;
     left: 50%;
     transform: translate(-50%, 0);
-    color: #fff;
+    color: $toastTextColor;
     border-radius: 6px;
     z-index: 2000;
     animation: fadeIn .2s;
@@ -22,9 +22,9 @@
 }
 
 .success{
-    background-color: #1b1b1b;
+    background-color: $toastBgColor;
 }
 
 .error{
-    background-color: rgb(218, 74, 74);
+    background-color: $toastErrorBgColor;
 }
