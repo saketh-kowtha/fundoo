@@ -4,3 +4,10 @@ export const addUser = (user) => ({
     user
 })
 
+
+
+export const updateImage = (imgPath) => ({
+    type: "UPDATE_IMAGE",
+    imgPath
+})
+

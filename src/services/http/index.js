@@ -68,8 +68,6 @@ http.login = (data, cb) => {
             cb(null,successResponse.data)
     })
         .catch(errorResponse => {
-            console.log(errorResponse.response)
-
             let error = (errorResponse && errorResponse.response && errorResponse.response.status) 
             if (error && error == 401) {
                 alert(inCorrectPasswd)
@@ -106,6 +104,32 @@ http.forgotPassword = (data, cb) => {
 }
 
 
+http.updateProfilePic = (data, cb) => {
+    let {url, method} = APIS['changeProfilePic']
+    axios({
+        method,
+        url,
+        data
+    })
+        .then(successResponse => {
+            if (successResponse && successResponse.data && successResponse.data.status && successResponse.data.status.success) {
+                cb("Image Updated Successfully", successResponse.data.status.imageUrl)
+            }
+            else
+                cb("Something Went Wrong")
+        })
+        .catch(errorResponse => {
+            if (errorResponse && errorResponse.response && errorResponse.response.data && errorResponse.response.data.error) {
+                const error = errorResponse.response.data.error
+                if (error && error.statusCode === 401) {
+                    cb("Authorization Required")                
+                }
+                else if (error && error.statusCode === 500) {
+                    cb("Invalid File")
+                }
+            }
+         })
+}
 
 export default http
 

@@ -11,3 +11,9 @@
     padding: 12px 28px;
     background-color: $buttonBgColor;
 }
+
+.btn[type="small"]{
+    font-size: calc($buttonFontSize - 6);
+    padding: 8px 18px;
+
+}

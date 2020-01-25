@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
         return <HashRouter hashType="noslash" basename={"/"}>
                     <div className="dashboard">
                         <Header toggle={this.handleToggle} image={this.props.user.imageUrl} />
-                        <div style={{display: 'flex'}}>
+                        <div>
                             <Sidebar enable={this.state.sideBar}/>
                             <Content  />
                         </div>

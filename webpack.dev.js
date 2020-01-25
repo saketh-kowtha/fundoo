@@ -39,7 +39,7 @@ module.exports = (env, options) => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-env', "@babel/preset-react"],
-                            plugins: ["@babel/plugin-transform-arrow-functions", "@babel/plugin-proposal-class-properties"]
+                            plugins: ["@babel/plugin-transform-arrow-functions", "@babel/plugin-proposal-class-properties" , "@babel/plugin-transform-runtime"]
                         }
                     }
                 }

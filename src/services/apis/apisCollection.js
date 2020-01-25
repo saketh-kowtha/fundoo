@@ -4,6 +4,8 @@
  */
 
 
+import store from "../../store"
+
  // HTTP Method Types 
 const POST = "post"
 const GET = "get"
@@ -21,6 +23,10 @@ const APIS = {
     reset: {
         method: POST,
         url: `${URL}/api/user/reset`
+    },
+    changeProfilePic: {
+        method: POST,
+        url: `${URL}/api/user/uploadProfileImage?access_token=` + store.getState().user.id
     }
 }
 

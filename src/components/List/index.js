@@ -19,7 +19,7 @@ class List extends React.Component  {
                                 {
                                     item.heading 
                                         ? <a className="list-heading">{item.heading}</a>
-                                        : <Link to={item.to ? "/"+ item.to : "#"} className={"list-item" + (activeEle === item.label ? " active" : "")} >
+                                            : <Link to={item.to ? "/" + item.to : "#"} onClick={item.onClick ? item.onClick : ()=>{ }} className={"list-item" + (activeEle === item.label ? " active" : "")} >
                                                 <React.Fragment>
                                                     {item.icon ? <i className="material-icons-outlined">{item.icon}</i> : null}
                                                     <span>{item.label}</span>

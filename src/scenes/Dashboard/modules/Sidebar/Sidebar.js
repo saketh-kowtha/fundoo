@@ -4,11 +4,14 @@ import List from '../../../../components/List'
 import { connect } from 'react-redux';
 import {modifyTitle} from '../../../../actions/fundooTitleAction'
 import { withRouter } from "react-router-dom";
+import Modal from '../../../../components/Modal';
 
 class Sidebar extends React.PureComponent{
     state = {
         tree: this.props.enable,
-        activeElement: "Notes"
+        activeElement: "Notes",
+        labels: [],
+        modal: false
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -38,8 +41,9 @@ class Sidebar extends React.PureComponent{
 
             <List key="labels" data={
                 [
-                    {heading: "Labels"},
-                    {label: "New", icon: 'emoji_objects'},
+                    { heading: "Labels" },
+                    {label: "Label", icon: 'label'},
+                    { label: "New", icon: 'edit', onClick: () => this.setState({ modal: true }) },
                 ]
             } 
             />
@@ -54,8 +58,18 @@ class Sidebar extends React.PureComponent{
                 } 
                 activeEle={this.state.activeElement}
                 onSelect={this.setActivelement}
-                />
+            />
+
+            {   
+                this.state.modal
+                    ? 
+                        <Modal onClose={() => this.setState({modal: false})}>
+                            <p>Hello</p>
+                            <p>World</p>
+                        </Modal>
+                    : null
           
+            }
         </div>    
     }
 

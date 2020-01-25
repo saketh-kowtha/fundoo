@@ -1,7 +1,11 @@
+@import "../.../../../../../../index.scss";
+
+
 .sidebar{
     width: 25%;
     height: calc(100vh - 65px);
     z-index: 1;
+    background-color: $white;
     position: relative;
 }
 
@@ -44,28 +48,32 @@
 
 @media only screen and (max-width: 768px){
     .sidebar{
-        width: 90%;
+        width: 95%;
+        position: absolute;
         height: calc(100vh - 65px);
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
 
     .active-sidebar {
         left: 0px;
-        animation: open .2s;
+        animation: open .3s;
     }
     
     .inactive-sidebar {
         left: -90%;
-        animation: close .2s;
+        width: 0%;
+        animation: close .3s;
     }
     
     
     @keyframes open{
         0%{
             left: -90%;
+            width: 0%
         }
         100%{
             left: 0%;
+            width: 95%
         }
     }
     
@@ -73,9 +81,12 @@
     @keyframes close{
         0%{
             left: 0%;
+            width: 95%
+    
         }
         100%{
             left: -90%;
+            width: 0%;
         }
     }
 }

@@ -1,7 +1,10 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 
 import rootReducer from './reducers'
 
+import createSagaMiddleware from 'redux-saga';
+
+import {helloSaga} from './sagas'
 
 const loadState = () => {
     try {
@@ -18,23 +21,25 @@ const loadState = () => {
 
 const persistedState = loadState();
 
+const sagaMiddleWare = createSagaMiddleware()
 
-const store = createStore(rootReducer, persistedState)
 
 const saveState = (data) => {
     try {
-
         const serializedState = JSON.stringify(data);
         sessionStorage.setItem('state', serializedState);
     } catch {
         // ignore write errors
     }
 };
-  
+
+const store = createStore(rootReducer, persistedState, applyMiddleware(sagaMiddleWare))
+
+sagaMiddleWare.run(helloSaga) 
+
 store.subscribe(() => {
     saveState(store.getState());
 }); 
-
 
 
 
