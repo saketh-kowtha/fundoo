@@ -143,7 +143,6 @@ class Login extends React.Component {
 
     //Login API response handler
     loginResponseHandler = (err, data) => {
-        console.log(err, data)
         if (err) {
             showToast(err, ERROR)
         }

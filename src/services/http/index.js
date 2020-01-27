@@ -3,7 +3,7 @@
  * @description Fundoo App http calls 
  */
 
-import axios from 'axios'
+import axios from './axios'
 
 import APIS from '../apis/apisCollection'
 import geti18N from '../../strings'
@@ -70,7 +70,6 @@ http.login = (data, cb) => {
         .catch(errorResponse => {
             let error = (errorResponse && errorResponse.response && errorResponse.response.status) 
             if (error && error == 401) {
-                alert(inCorrectPasswd)
                 cb(inCorrectPasswd, null)
             }
     })
@@ -103,6 +102,20 @@ http.forgotPassword = (data, cb) => {
     })
 }
 
+http.signOut = (cb) => {
+    let {url, method} = APIS['signOut']
+    axios({
+        method,
+        url,
+    })
+        .then(successResponse => {
+            if(successResponse.status === 204)
+            cb("OK")
+        })
+        .catch(errorResponse => {
+        cb(null)
+         })
+}
 
 http.updateProfilePic = (data, cb) => {
     let {url, method} = APIS['changeProfilePic']

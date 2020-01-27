@@ -6,6 +6,8 @@ import Header from './modules/Header/Header'
 import Sidebar from './modules/Sidebar/Sidebar'
 import Content from './modules/Content/Content'
 import { connect } from 'react-redux';
+
+
 import { withRouter, HashRouter } from "react-router-dom";
 
 
@@ -18,6 +20,8 @@ class Dashboard extends React.Component {
     handleToggle = () => {
         this.setState({sideBar: !this.state.sideBar})
     }
+
+
 
     render() {
         this.data = ["Label 1", "Label 2"]

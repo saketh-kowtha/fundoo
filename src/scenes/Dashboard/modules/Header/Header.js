@@ -9,6 +9,7 @@ import showToast from '../../../../components/Toast'
 import { updateImage } from '../../../../actions/userActions'
 import http from '../../../../services/http'
 import geti18N from '../../../../strings'
+import {withRouter} from 'react-router-dom'
 
 const {signOut, search} = geti18N()
 
@@ -33,14 +34,23 @@ class Header extends React.Component{
     }
 
     uploadPicture = (e) => {
-        var formData = new FormData();
+        const formData = new FormData();
         formData.append("file", e.target.files[0])
         http.updateProfilePic(formData, (msg, path) => {
             if(path)
                 this.props.updateImage(path)
             showToast(msg)
         })
+    }
 
+    signOut = () =>{
+        http.signOut((data) => {
+            if (data === "OK")
+            {
+                sessionStorage.clear()
+                window.location.href = "/"
+            }
+        })
     }
 
     render() {
@@ -87,7 +97,7 @@ class Header extends React.Component{
                                     </div>
                                     <hr className="border"/>
                                     <div>
-                                        <Button type="small">{signOut}</Button>
+                                        <Button type="small" onClick={this.signOut}>{signOut}</Button>
                                     </div>
                                 </Card>
                             : null
@@ -114,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Header))

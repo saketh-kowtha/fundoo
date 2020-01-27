@@ -3,6 +3,7 @@ import './sidebar.scss'
 import List from '../../../../components/List'
 import { connect } from 'react-redux';
 import {modifyTitle} from '../../../../actions/fundooTitleAction'
+import {toggleSidebar} from '../../../../actions/layoutActions'
 import { withRouter } from "react-router-dom";
 import Modal from '../../../../components/Modal';
 
@@ -10,17 +11,12 @@ import {primary, secondary} from '../../../../config/sidebarItems'
 
 class Sidebar extends React.PureComponent{
     state = {
-        tree: this.props.enable,
         activeElement: "Notes",
         labels: [],
         modal: false
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if (this.props.enable !== prevProps.enable) {
-            this.setState({tree: this.props.enable})
-        }  
-    }
+
     setActivelement = (e) =>{
         this.setState({activeElement: e}, () => {
             this.props.modifyTitle(this.state.activeElement)
@@ -31,7 +27,7 @@ class Sidebar extends React.PureComponent{
         return <div className={"sidebar" + (!this.props.enable ? " inactive-sidebar" : " active-sidebar")}>
 
             <List key="selections" data={primary} 
-                activeEle={this.state.activeElement}
+                active={this.state.activeElement}
                 onSelect={this.setActivelement}
                 />
             <hr className="border"/>
@@ -48,7 +44,7 @@ class Sidebar extends React.PureComponent{
             <hr className="border"/>
 
             <List key="actions" data={secondary} 
-                activeEle={this.state.activeElement}
+                active={this.state.activeElement}
                 onSelect={this.setActivelement}
             />
 
@@ -73,4 +69,11 @@ function mapDispatchToProps(dispatch) {
         modifyTitle: (title) => dispatch(modifyTitle(title))
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        toggleSidebar: state.layout.toggle
+    }
+}
+
 export default withRouter(connect(null, mapDispatchToProps)(Sidebar))

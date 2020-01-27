@@ -4,7 +4,7 @@ import rootReducer from './reducers'
 
 import createSagaMiddleware from 'redux-saga';
 
-import {helloSaga} from './sagas'
+import rootSaga from './sagas'
 
 const loadState = () => {
     try {
@@ -35,13 +35,14 @@ const saveState = (data) => {
 
 const store = createStore(rootReducer, persistedState, applyMiddleware(sagaMiddleWare))
 
-sagaMiddleWare.run(helloSaga) 
 
 store.subscribe(() => {
     saveState(store.getState());
 }); 
 
 
+sagaMiddleWare.run(rootSaga) 
 
+export const action = (type) => store.dispatch({type})
 
 export default store
