@@ -1,24 +1,33 @@
+/**
+ * @author Kowtha Saketh
+ * @description Empty Component
+ */
+
 import React from 'react'
 
 import './Empty.scss'
+
+import geti18N from "../../strings"
+
+const {emptyNotes, notificationsEmpty, emptyArchive, emptyTrash} = geti18N()
 
 const Empty = (props) => {
     const feild = {
         "notes": {
             icon: "emoji_objects",
-            text: "Notes you add appear here"
+            text: emptyNotes
         },
         "reminders": {
             icon: "notifications",
-            text: "Notes with upcoming reminders appear here"
+            text: notificationsEmpty
         },
         "archive": {
             icon: "archive",
-            text: "Your archived notes appear here"
+            text: emptyArchive
         },
         "trash": {
             icon: "delete",
-            text: "No notes in Trash"
+            text: emptyTrash
         }
     }
     return <div className="empty-container">

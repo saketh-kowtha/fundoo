@@ -1,3 +1,8 @@
+/*
+    Author : Kowtha Saketh
+    Description: Fundoo Toast
+*/
+
 @import "../../../index.scss";
 
 .toast{
@@ -21,9 +26,13 @@
     }
 }
 
+//success toast
+
 .success{
     background-color: $toastBgColor;
 }
+
+//error toast
 
 .error{
     background-color: $toastErrorBgColor;

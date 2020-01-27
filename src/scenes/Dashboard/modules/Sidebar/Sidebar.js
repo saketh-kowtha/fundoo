@@ -6,6 +6,8 @@ import {modifyTitle} from '../../../../actions/fundooTitleAction'
 import { withRouter } from "react-router-dom";
 import Modal from '../../../../components/Modal';
 
+import {primary, secondary} from '../../../../config/sidebarItems'
+
 class Sidebar extends React.PureComponent{
     state = {
         tree: this.props.enable,
@@ -28,12 +30,7 @@ class Sidebar extends React.PureComponent{
     render() {
         return <div className={"sidebar" + (!this.props.enable ? " inactive-sidebar" : " active-sidebar")}>
 
-            <List key="selections" data={
-                    [
-                        {label: "Notes", icon: 'emoji_objects', to: "Notes"},
-                        {label: "Reminders", icon: 'notifications', to: "Reminders"},
-                    ]
-                } 
+            <List key="selections" data={primary} 
                 activeEle={this.state.activeElement}
                 onSelect={this.setActivelement}
                 />
@@ -50,12 +47,7 @@ class Sidebar extends React.PureComponent{
             
             <hr className="border"/>
 
-            <List key="actions" data={
-                    [
-                        {label: "Archive", icon: 'archive', to: "Archive"},
-                        {label: "Trash", icon: 'delete', to: "Trash"},
-                    ]
-                } 
+            <List key="actions" data={secondary} 
                 activeEle={this.state.activeElement}
                 onSelect={this.setActivelement}
             />
@@ -64,8 +56,9 @@ class Sidebar extends React.PureComponent{
                 this.state.modal
                     ? 
                         <Modal onClose={() => this.setState({modal: false})}>
-                            <p>Hello</p>
-                            <p>World</p>
+                            {
+                                this.props.labels.map(e => <div key={e}><span>del</span><input value={e} type="text" /><span>pen</span></div>)
+                            }
                         </Modal>
                     : null
           

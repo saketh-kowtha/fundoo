@@ -1,10 +1,15 @@
+/*
+    Author : Kowtha Saketh
+    Description: Login,  Signup, Reset stylesheet
+*/
+
 @import "../../../index.scss";
 
 @mixin span-focus {
 	top: -9px;
 	left: 12px;
 	padding: 0px 5px;
-	font-size: $smallInputSize;
+	font-size: $small;
 }
 
 @mixin active-warning-span {
@@ -30,7 +35,7 @@
 			p {
 				&:first-child {
 					line-height: 10px;
-					font-size: $logoSize;
+					font-size: $huge;
                     @each $index, $color in $logoColors {        
 						span:nth-child(#{$index}){
 							color: $color
@@ -52,7 +57,7 @@
 			margin: 0px 0px 28px 0px;
 			.input-error-msg{
 				margin-top: 60px; 
-				font-size: $smallInputSize;
+				font-size: $small;
 				color: $loginErrorColor;
 			}
 			input {
@@ -61,7 +66,7 @@
 				border-radius: 5px;
 				padding: 0 20px;
 				box-sizing: border-box;
-				font-size: $largeInputSize;
+				font-size: $large;
 				outline: none;
 				border: 1px solid $loginInputDefaultBorderColor;
 				&:focus {
@@ -113,7 +118,7 @@
 			flex-direction: row;
 			margin: 0px 0px 10px 0px;
 			input {
-				font-size: $defaultInputSize;
+				font-size: $default;
 				width: 300px;
 				margin-left: 10px;
 				padding: 0 20px;
@@ -147,7 +152,7 @@
 	@mixin active-warning-span {
 		span {
 			left: 10px;
-			font-size: $smallInputSize;
+			font-size: $small;
 		}
 	}
 	.login-container {
@@ -164,7 +169,7 @@
 						~ {
 							span {
 								left: 10px;
-								font-size: $smallInputSize;
+								font-size: $small;
 							}
 						}
 					}

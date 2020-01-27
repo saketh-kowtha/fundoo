@@ -15,3 +15,13 @@ export const LANGUAGES = {
 
 export const OFFLINE = "Lost Connection you are in Offline"
 export const ONLINE = "Welcome Back to Online"
+
+
+
+
+
+// Redux 
+export const ADD_TITLE="ADD_TITLE"
+export const ADD_USER="ADD_USER"
+export const UPDATE_IMAGE="UPDATE_IMAGE"
+

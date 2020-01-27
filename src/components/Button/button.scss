@@ -1,10 +1,16 @@
+/*
+    Author : Kowtha Saketh
+    Description: Fundoo Buttons style
+*/
+
 @import "../../../index.scss";
-//Scss for button
+
+//default button
 .btn{
     border: none;
     border-radius: 4px;
     color: $buttonFgColor;
-    font-size: $buttonFontSize;
+    font-size: $small;
     font-weight: bold;
     cursor: pointer;
     outline: none;
@@ -12,8 +18,9 @@
     background-color: $buttonBgColor;
 }
 
+//small button
 .btn[type="small"]{
-    font-size: calc($buttonFontSize - 6);
+    font-size: calc($small - 6);
     padding: 8px 18px;
 
 }

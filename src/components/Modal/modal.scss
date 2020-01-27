@@ -1,7 +1,11 @@
+/*
+    Author : Kowtha Saketh
+    Description: Fundoo Modal
+*/
+
 @import '../../../index.scss';
 
 .modal {
-    //display: none; 
     position: fixed;
     z-index: 1; 
     padding-top: 100px;
@@ -20,12 +24,20 @@
         width: 30%;
       }
       
+      .modal-content > div{
+        margin-top: 20px;
+        text-align: center;
+      }
+
       .close {
         color: $black;
         float: right;
-        font-size: 28px;
+        font-size: $huge;
         font-weight: bold;
+        margin-bottom: 20px;
       }
+
+  
       
       .close:hover,
       .close:focus {

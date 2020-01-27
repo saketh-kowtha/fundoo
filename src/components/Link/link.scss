@@ -1,12 +1,17 @@
+/*
+    Author : Kowtha Saketh
+    Description: Fundoo Links
+*/
+
 @import "../../../index.scss";
 
-//link common
+//default link
 .link{
     color: $linkColor;
     text-transform: capitalize;
     cursor: pointer;
     padding: 5px;
-    font-size: $linkSize;
+    font-size: $small;
     font-weight: $linkDecoration;
     &:active, &:focus{
         background-color: $linkHover;

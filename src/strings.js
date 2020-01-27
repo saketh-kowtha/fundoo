@@ -19,6 +19,7 @@ const strings =
         signInDesc: "to Continue with Fundoo",
         signUpDesc: "to Start with Fundoo",
         signUp: "Sign Up",
+        signOut: "Sign Out",
         userName: "Username",
         forgotPasswd: "Forgot Password?",
         createAccount: "Create Account",
@@ -26,7 +27,19 @@ const strings =
         forgetPasswordDesc: "Enter your recovery email",
         findYourMail: "Find Your Email",
         inCorrectPasswd:"Invalid Credintails",
-        invalidEmail: "Invalid EMail"
+        invalidEmail: "Invalid EMail",
+        notFound: "404",
+        thatsError: "That's an error.",
+        search: "Search",
+        notificationsEmpty: "Notes with upcoming reminders appear here",
+        emptyNotes: "Notes you add appear here",
+        emptyArchive: "Your archived notes appear here",
+        emptyTrash: "No notes in Trash",
+        requestUrlError: "The Requested URL dosen't exist was not found on this server.",
+        somethingWrong: "Something Went Wrong",
+        imageUpdated: "Image Updated Successfully",
+        authRequired: "Authorization Required",
+        invalidFile: "Invalid File"
     },
     "fr":{
         title:"Fundoo", 
@@ -62,7 +75,7 @@ const strings =
         createAccount:"アカウントを作成する",
         send:"送る",
         forgetPasswordDesc:"予備のメールアドレスを入力してください",
-        findYourMail:"メールを探す"
+        findYourMail:"メールを探す",
     }
 }
 

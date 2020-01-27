@@ -10,7 +10,7 @@ import geti18N from '../../strings'
 import { SIGNUP, LOGIN, RESETPASSWORD } from '../../constants'
 
 
-const {inCorrectPasswd, invalidEmail} = geti18N()
+const {inCorrectPasswd, invalidEmail, imageUpdated, somethingWrong, authRequired, invalidFile} = geti18N()
 const http = {}
 
 /**
@@ -113,19 +113,19 @@ http.updateProfilePic = (data, cb) => {
     })
         .then(successResponse => {
             if (successResponse && successResponse.data && successResponse.data.status && successResponse.data.status.success) {
-                cb("Image Updated Successfully", successResponse.data.status.imageUrl)
+                cb(imageUpdated, successResponse.data.status.imageUrl)
             }
             else
-                cb("Something Went Wrong")
+                cb(somethingWrong)
         })
         .catch(errorResponse => {
             if (errorResponse && errorResponse.response && errorResponse.response.data && errorResponse.response.data.error) {
                 const error = errorResponse.response.data.error
                 if (error && error.statusCode === 401) {
-                    cb("Authorization Required")                
+                    cb(authRequired)                
                 }
                 else if (error && error.statusCode === 500) {
-                    cb("Invalid File")
+                    cb(invalidFile)
                 }
             }
          })

@@ -1,0 +1,57 @@
+/*
+    Author : Kowtha Saketh
+    Description: Fundoo colors and shoadows
+*/
+
+/* Fundoo Colors */
+$black : rgb(26, 26, 26);
+$white : #fff;
+$lightYellow: #feefc3;
+$red: #da4a4a;
+$blue: #4688df;
+$selectableHover: #3c404314;
+$grey: #5f6368;
+/* List */
+$listElementColor: $black;
+$listLabelColor: $black;
+$listActiveBackgroundColor: $lightYellow;
+
+/* Toast */
+$toastTextColor: $white;
+$toastBgColor: $black;
+$toastErrorBgColor: $red;
+
+/* Link */
+$linkColor: $blue;
+$linkHover: #cadbf1;
+$linkDecoration: bold;
+
+/* Card */
+$cardBackground: $white;
+$cardOulinedShadow: 0 1px 3px #0000001f, 0 1px 5px #0000003d;
+$cardInterActiveShadow: 0 14px 28px #00000040, 0 10px 10px #00000038;
+$cardElevatedShadow: 0 3px 6px #00000029, 0 3px 6px #0000003b;
+
+/* Card */
+$buttonBgColor: $blue;
+$buttonFgColor: $white;
+
+/* Border */
+$borderColor: #d3d3d3;
+
+/* LOGO */
+$logoColors: (1: #5086ec, 2: #d85040, 3: #f0bc42, 4: #5086ec, 5: #77b57b, 6: #d85040);
+
+
+/* Login, Signup, Forget Password Scenes */
+$loginErrorColor: $red;
+$loginInputDefaultBorderColor: #e4e4e4;
+$loginInputActiveColor: $blue;
+$loginLabelBackground: $white;
+$loginLabelColor: #808080;
+$loginInputColor: $black;
+
+
+/* 404 Not Found Scene */
+$notFoundTextColor: $black;
+

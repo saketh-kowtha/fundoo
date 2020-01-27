@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../../../../components/Card'
-import {Menu, Replay, GridOnSharp,  SettingsSharp, InvertColors, Search, ArrowBack } from '@material-ui/icons/'
+import {Menu, Replay, GridOnSharp,  SettingsSharp, Search, ArrowBack } from '@material-ui/icons/'
 import './Header.scss'
 import logo from '../../../../../assets/logo.png'
 import {connect} from 'react-redux'
@@ -8,6 +8,9 @@ import { Button } from '../../../../components'
 import showToast from '../../../../components/Toast'
 import { updateImage } from '../../../../actions/userActions'
 import http from '../../../../services/http'
+import geti18N from '../../../../strings'
+
+const {signOut, search} = geti18N()
 
 class Header extends React.Component{
     constructor(props) {
@@ -60,7 +63,7 @@ class Header extends React.Component{
                             ? <Search className="search-icon nav-icon"/>
                             : <ArrowBack onClick={this.toggleMobileSearchView} className="nav-icon left-icon"/>
                 }
-                <input type="text" placeholder="Search"/>
+                <input type="text" placeholder={search}/>
 
             </div>
 
@@ -84,7 +87,7 @@ class Header extends React.Component{
                                     </div>
                                     <hr className="border"/>
                                     <div>
-                                        <Button type="small">Sign out</Button>
+                                        <Button type="small">{signOut}</Button>
                                     </div>
                                 </Card>
                             : null

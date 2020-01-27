@@ -1,11 +1,16 @@
+/*
+    Author : Kowtha Saketh
+    Description: Fundoo Card
+*/
+
 @import "../../../index.scss";
 
-//Common Card
+//Card skelton
 .card{
     background: $cardBackground;
     border-radius: 2px;
     display: inline-block;
-    border-radius: $cardBorderRadius;
+    border-radius: 10px;
 }
 
 //outlined Card 

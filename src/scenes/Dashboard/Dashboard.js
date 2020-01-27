@@ -20,11 +20,12 @@ class Dashboard extends React.Component {
     }
 
     render() {
+        this.data = ["Label 1", "Label 2"]
         return <HashRouter hashType="noslash" basename={"/"}>
                     <div className="dashboard">
                         <Header toggle={this.handleToggle} image={this.props.user.imageUrl} />
                         <div>
-                            <Sidebar enable={this.state.sideBar}/>
+                            <Sidebar labels={this.data} enable={this.state.sideBar}/>
                             <Content  />
                         </div>
                     </div>

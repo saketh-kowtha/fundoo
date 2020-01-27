@@ -1,3 +1,8 @@
+/*
+    Author : Kowtha Saketh
+    Description: Fundoo List view
+*/
+
 @import "../../../index.scss";
 
 
@@ -9,12 +14,8 @@
         padding-top: 10px;
         overflow: auto;
       }
-
-      // li .list-item a{
-      //   color: inherit;
-      //   text-decoration: inherit;
-      // }
       
+      //list heading and list item
       li .list-heading, li .list-item {
         display: flex;
         color: $listElementColor;
@@ -32,7 +33,7 @@
     }
 
     li span{
-        font-size: $listElementSize;
+        font-size: $default;
     }
 
     li .list-heading{

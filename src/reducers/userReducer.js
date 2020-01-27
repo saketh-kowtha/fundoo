@@ -1,10 +1,16 @@
+/**
+ * @author Kowtha Saketh
+ * @description user reducer
+ */
+
+import {ADD_USER, UPDATE_IMAGE} from '../constants'
 
 const user = (state = {}, action) => {
     switch(action.type) {
-       case 'ADD_USER':
+       case ADD_USER:
          return {...action.user};
      
-      case 'UPDATE_IMAGE':
+      case UPDATE_IMAGE:
         return {...state, imageUrl: action.imgPath}
       
        default:
