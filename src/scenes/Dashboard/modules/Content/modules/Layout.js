@@ -8,7 +8,11 @@ import { action } from "../../../../../store"
 
 import Empty from '../../../../../components/Empty'
 
+import Notes from '../../../../../components/Notes'
+
 import Loading from '../../../../../components/Loading'
+
+import { Card } from '../../../../../components';
 
 
 class Layout extends React.PureComponent{
@@ -42,7 +46,8 @@ class Layout extends React.PureComponent{
 
     input() {
         return <div>
-                <input type="text" placeholder={"Take a Note"}/>
+            <input type="text" placeholder={"Take a Note"} />
+
         </div>
     }
 
@@ -70,7 +75,12 @@ class Layout extends React.PureComponent{
         
         return <div className="content">
             {this.input()}
-            <Empty name={this.props.name} />
+            <div className="row">
+                <Notes />
+                <Notes />
+                <Notes />
+            </div>
+            {/* <Empty name={this.props.name} /> */}
         </div>        
     }
 

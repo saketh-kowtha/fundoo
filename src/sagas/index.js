@@ -16,7 +16,6 @@ function* getNoteList() {
     let { url, method } = APIS["notesList"]
     try {
         yield put({ type: "SET_LAYOUT_ITEM_LOADING", loading: true })
-        yield delay(4000)
         const response = yield call(axios.get, url)
         if(response && response.data && response.data.data && response.data.data.success)
             yield put({type: "SET_LAYOUT_ITEM", data: response.data.data.data })

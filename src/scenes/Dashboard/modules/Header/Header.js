@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import { Button } from '../../../../components'
 import showToast from '../../../../components/Toast'
 import { updateImage } from '../../../../actions/userActions'
+import { toggleSidebar } from '../../../../actions/layoutActions'
 import http from '../../../../services/http'
 import geti18N from '../../../../strings'
 import {withRouter} from 'react-router-dom'
@@ -56,8 +57,8 @@ class Header extends React.Component{
     render() {
         const color = Math.ceil(Math.random() * 10 % this.colors.length) - 1
         
-        const image = this.props.image
-            ? <img className="nav-icon profile" src={`http://fundoonotes.incubation.bridgelabz.com/${this.props.image}`} />
+        const image = this.props.user.imageUrl
+            ? <img className="nav-icon profile" src={`http://fundoonotes.incubation.bridgelabz.com/${this.props.user.imageUrl}`} />
             : <span className={`nav-icon profile text ${this.colors[color]}`}>{this.props.user.email[0].toLocaleUpperCase()}</span>
                 
         return <div className="navbar">
@@ -119,7 +120,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateImage: (imgPath) => dispatch(updateImage(imgPath))
+        updateImage: (imgPath) => dispatch(updateImage(imgPath)),
+        toggle: () => dispatch(toggleSidebar())
     }
 }
 

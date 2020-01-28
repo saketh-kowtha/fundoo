@@ -6,6 +6,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootSaga from './sagas'
 
+import { composeWithDevTools } from 'redux-devtools-extension'
+
 const loadState = () => {
     try {
       const serializedState = sessionStorage.getItem('state');
@@ -33,7 +35,7 @@ const saveState = (data) => {
     }
 };
 
-const store = createStore(rootReducer, persistedState, applyMiddleware(sagaMiddleWare))
+const store = createStore(rootReducer, persistedState, composeWithDevTools(applyMiddleware(sagaMiddleWare)))
 
 
 store.subscribe(() => {

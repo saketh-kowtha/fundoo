@@ -17,14 +17,38 @@ class Sidebar extends React.PureComponent{
     }
 
 
-    setActivelement = (e) =>{
-        this.setState({activeElement: e}, () => {
+    setActivelement = (element) =>{
+        this.setState({activeElement: element}, () => {
             this.props.modifyTitle(this.state.activeElement)
         })
     }
 
+    deleteLabel = (labelName) => {
+        //Delete Action
+    }
+
+    updateLabel = (labelName) => {
+        //Update Action
+    }
+
+    newLabel = (labelName) => {
+        //Add Action
+    }
+
+    setActiveLabelName = (item) => this.setState({activeLabel: item})
+
+    setNewLabel = (event) => this.setState({newLabel: event.target.value})
+
+    modalItem = (item, isActive) => {
+        return <div key={item} className="modal-item">
+                    <i className="material-icons-outlined" onClick={() => this.deleteLabel(item)}>close</i>
+                    <input value={this.state.activeLabel === item ? this.state.newLabel : item} type="text" autoFocus={isActive} onClick={() => this.setActiveLabelName(item)} onChange={this.setNewLabel}/>
+                    <i className="material-icons-outlined" onClick={() => this.updateLabel(item)}>done</i>
+                </div>
+    }
+
     render() {
-        return <div className={"sidebar" + (!this.props.enable ? " inactive-sidebar" : " active-sidebar")}>
+        return <div className={"sidebar" + (!this.props.toggle ? " inactive-sidebar" : " active-sidebar")}>
 
             <List key="selections" data={primary} 
                 active={this.state.activeElement}
@@ -35,8 +59,8 @@ class Sidebar extends React.PureComponent{
             <List key="labels" data={
                 [
                     { heading: "Labels" },
-                    {label: "Label", icon: 'label'},
-                    { label: "New", icon: 'edit', onClick: () => this.setState({ modal: true }) },
+                    ...this.props.labels.map(label => ({label: label, icon: "label"})),
+                    { label: "Edit Labels", icon: 'edit', onClick: () => this.setState({ modal: true }) },
                 ]
             } 
             />
@@ -52,12 +76,11 @@ class Sidebar extends React.PureComponent{
                 this.state.modal
                     ? 
                         <Modal onClose={() => this.setState({modal: false})}>
-                            {
-                                this.props.labels.map(e => <div key={e}><span>del</span><input value={e} type="text" /><span>pen</span></div>)
-                            }
+                        {
+                            [...this.props.labels.map(this.modalItem), this.modalItem("New Label", true)]
+                        }
                         </Modal>
                     : null
-          
             }
         </div>    
     }
@@ -72,8 +95,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        toggleSidebar: state.layout.toggle
+        toggle: state.layout.toggle
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(Sidebar))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sidebar))

@@ -5,14 +5,18 @@
 
 import { SET_LAYOUT_ITEM } from '../constants'
 
-const layout = (state = {toggle: false}, action) => {
+const defaultState = {
+    toggle: false
+}
+
+const layout = (state = defaultState, action) => {
     switch(action.type) {
         case SET_LAYOUT_ITEM:
-            return { ...state, ...action.data};
+            return { ...state, ...action.data, loading: false};
         case 'SET_LAYOUT_ITEM_LOADING':
             return { ...state, loading: true }
         case 'TOGGLE_SIDEBAR':
-            return {toggle: !state.layout.toggle}
+            return {...state, toggle: !state.toggle}
        default:
          return state;
     }
