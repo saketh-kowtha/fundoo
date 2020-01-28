@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './index';
+import Button from './index';
 
-describe('MyComponent', () => {
-  it('should render correctly in "debug" mode', () => {
-    const component = shallow(<App />);
+describe('Button', () => {
   
-    expect(component).toMatchSnapshot();
-    expect(component.props.className).toEqual("btn")
-  });
+    it('should render correctly ', () => {
+        const component = shallow(<Button />);
+        expect(component.hasClass("abc"))
+        
+    });
+    
 });
-
