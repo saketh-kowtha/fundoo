@@ -73,14 +73,16 @@ class Layout extends React.PureComponent{
         if (this.props.loading)
             return <Loading />
         
+        
         return <div className="content">
             {this.input()}
             <div className="row">
-                <Notes />
-                <Notes />
-                <Notes />
+                {
+                    this.props.items.length === 0 
+                        ? <Empty name={this.props.name} />
+                        : this.props.items.map(item => <Notes key={item.title} data={item} />)
+               }
             </div>
-            {/* <Empty name={this.props.name} /> */}
         </div>        
     }
 
@@ -88,7 +90,7 @@ class Layout extends React.PureComponent{
 
 
 
-const mapStateToProps = (state) => ({ items: state.layout,loading: state.layout.loading })
+const mapStateToProps = (state) => ({ items: state.layout.data,loading: state.layout.loading })
 
 
 export default connect(mapStateToProps, null)(Layout)

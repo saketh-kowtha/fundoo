@@ -4,7 +4,7 @@ import "./Notes.scss"
 
 const Notes = (props) => {
     return <div className="notes">
-            Card
+            {props.data.title}
     </div>
 }
 

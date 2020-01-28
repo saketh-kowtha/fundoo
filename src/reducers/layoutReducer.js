@@ -12,7 +12,7 @@ const defaultState = {
 const layout = (state = defaultState, action) => {
     switch(action.type) {
         case SET_LAYOUT_ITEM:
-            return { ...state, ...action.data, loading: false};
+            return { ...state, data: action.data, loading: false};
         case 'SET_LAYOUT_ITEM_LOADING':
             return { ...state, loading: true }
         case 'TOGGLE_SIDEBAR':

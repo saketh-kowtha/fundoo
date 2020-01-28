@@ -1,13 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import App from './App';
+import renderer from 'react-test-renderer';
+import { mount } from 'enzyme';
+import App, { Counter, dataReducer } from './App';
 
-describe('MyComponent', () => {
-  it('should render correctly in "debug" mode', () => {
-    const component = shallow(<App />);
-  
-    expect(component).toMatchSnapshot();
-    
+const list = ['a', 'b', 'c'];
+describe('App', () => {
+  describe('Reducer', () => {
+  });
+  test('snapshot renders', () => {
+    const component = renderer.create(<App />);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  it('renders the inner Counter', () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.find(Counter).length).toEqual(1);
   });
 });
 
