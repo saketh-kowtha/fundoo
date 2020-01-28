@@ -78,7 +78,7 @@ class Layout extends React.PureComponent{
             {this.input()}
             <div className="row">
                 {
-                    this.props.items.length === 0 
+                    this.props.items && this.props.items.length === 0 
                         ? <Empty name={this.props.name} />
                         : this.props.items.map(item => <Notes key={item.title} data={item} />)
                }

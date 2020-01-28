@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import App, { Counter, dataReducer } from './App';
 
-const list = ['a', 'b', 'c'];
 describe('App', () => {
   describe('Reducer', () => {
   });
