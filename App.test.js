@@ -7,6 +7,7 @@ describe('MyComponent', () => {
     const component = shallow(<App />);
   
     expect(component).toMatchSnapshot();
+    
   });
 });
 

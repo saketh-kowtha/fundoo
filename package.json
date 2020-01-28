@@ -53,7 +53,15 @@
       "enzyme-to-json/serializer"
     ],
     "setupFiles": [
-      "./src/setupTests.js"
-    ]
+      "./setupTests.js"
+    ],
+    "testRegex": "((\\.|/*.)(test))\\.js?$",
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "moduleNameMapper":{
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg|png|jpg|jpeg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   }
 }
