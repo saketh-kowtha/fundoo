@@ -7,6 +7,7 @@ import {HashRouter as Router, useRouteMatch ,Switch, Route, Redirect, withRouter
 import Layout from './modules/Layout.js'
 
 
+
 const Content = (props) => {
   return <div className="content">
               <Switch>

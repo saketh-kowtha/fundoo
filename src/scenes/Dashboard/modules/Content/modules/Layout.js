@@ -1,26 +1,86 @@
 import React from 'react'
 
 import "./Layout.scss"
-import {Menu, Replay, GridOnSharp,  SettingsSharp, InvertColors, Search, ArrowBack } from '@material-ui/icons/'
+
+import { connect } from 'react-redux';
+
+import { action } from "../../../../../store"
 
 import Empty from '../../../../../components/Empty'
-class Layout extends React.Component{
+
+import Notes from '../../../../../components/Notes'
+
+import Loading from '../../../../../components/Loading'
+
+import { Card } from '../../../../../components';
+
+
+class Layout extends React.PureComponent{
 
     constructor(props) {
         super(props)
 
     }
 
-    input(){
+
+    fetchNotes() {
+        action("FETCH_NOTES")
+    }
+
+    fetchReminders() {
+        action("FETCH_REMINDERS")
+    }
+
+    fetchArchive() {
+        action("FETCH_ARCHIVE")
+    }
+
+    fetchTrash() {
+        action("FETCH_TRASH")
+    }
+
+    fetchLabel(name) {
+        action("FETCH_LABEL", name)
+    }
+
+
+    input() {
         return <div>
-                <input type="text" placeholder={"Take a Note"}/>
+            <input type="text" placeholder={"Take a Note"} />
+
         </div>
     }
 
+
+    UNSAFE_componentWillMount() {
+        switch (this.props.name) {
+            case "notes":
+                this.fetchNotes()
+                break;
+            case "reminder":
+                this.fetchReminders()
+                break;
+            case "trash":
+                this.fetchTrash()
+                break;
+            case "archive":
+                this.fetchArchive()
+                break;
+        }
+    }
+
     render() {
-        return <div>
+        if (this.props.loading)
+            return <Loading />
+        
+        return <div className="content">
             {this.input()}
-            <Empty name={this.props.name} />
+            <div className="row">
+                <Notes />
+                <Notes />
+                <Notes />
+            </div>
+            {/* <Empty name={this.props.name} /> */}
         </div>        
     }
 
@@ -28,4 +88,7 @@ class Layout extends React.Component{
 
 
 
-export default Layout
+const mapStateToProps = (state) => ({ items: state.layout,loading: state.layout.loading })
+
+
+export default connect(mapStateToProps, null)(Layout)

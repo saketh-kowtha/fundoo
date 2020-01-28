@@ -13,6 +13,8 @@
     position: sticky;
     justify-content: space-between;
     border-bottom: 1px solid #d3d3d3;
+    background-color: $white;
+    z-index: 3;
     .left, .right, .center{
         color: #5f6368;
         display: flex;
@@ -28,7 +30,7 @@
 
     .nav-icon{
         border-radius: 50%;
-        z-index: 9999;
+        z-index: 3;
         display: inline-block;
         padding: 12px;
         overflow: hidden;

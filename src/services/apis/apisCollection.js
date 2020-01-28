@@ -3,8 +3,8 @@
  * @description API Urls and Methods are stored in this file
  */
 
-
 import store from "../../store"
+
 
  // HTTP Method Types 
 const POST = "post"
@@ -24,9 +24,29 @@ const APIS = {
         method: POST,
         url: `${URL}/api/user/reset`
     },
+    signOut: {
+        method: POST,
+        url: `${URL}/api/user/logout`
+    },
     changeProfilePic: {
         method: POST,
-        url: `${URL}/api/user/uploadProfileImage?access_token=` + store.getState().user.id
+        url: `${URL}/api/user/uploadProfileImage`
+    },
+    notesList: {
+        method: GET,
+        url: `${URL}/api/notes/getNotesList`
+    },
+    remindersList: {
+        method: GET,
+        url: `${URL}/api/notes/getReminderNotesList`
+    },
+    archiveList: {
+        method: GET,
+        url: `${URL}/api/notes/getArchiveNotesList`
+    },
+    trashList: {
+        method: GET,
+        url: `${URL}/api/notes/getTrashNotesList`
     }
 }
 

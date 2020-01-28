@@ -24,4 +24,4 @@ export const ONLINE = "Welcome Back to Online"
 export const ADD_TITLE="ADD_TITLE"
 export const ADD_USER="ADD_USER"
 export const UPDATE_IMAGE="UPDATE_IMAGE"
-
+export const SET_LAYOUT_ITEM="SET_LAYOUT_ITEM"

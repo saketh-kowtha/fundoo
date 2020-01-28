@@ -10,7 +10,7 @@ import './list.scss'
 class List extends React.Component  {
   
     render(){
-        const activeEle = this.props.activeEle
+        const active = this.props.active
         return <div className="list">
                     <ul {...this.props}>
                         {
@@ -19,7 +19,7 @@ class List extends React.Component  {
                                 {
                                     item.heading 
                                         ? <a className="list-heading">{item.heading}</a>
-                                            : <Link to={item.to ? "/" + item.to : "#"} onClick={item.onClick ? item.onClick : ()=>{ }} className={"list-item" + (activeEle === item.label ? " active" : "")} >
+                                            : <Link to={item.to ? "/" + item.to : "#"} onClick={item.onClick ? item.onClick : ()=>{ }} className={"list-item" + (active === item.label ? " active" : "")} >
                                                 <React.Fragment>
                                                     {item.icon ? <i className="material-icons-outlined">{item.icon}</i> : null}
                                                     <span>{item.label}</span>

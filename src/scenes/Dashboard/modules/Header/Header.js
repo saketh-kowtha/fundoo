@@ -7,8 +7,10 @@ import {connect} from 'react-redux'
 import { Button } from '../../../../components'
 import showToast from '../../../../components/Toast'
 import { updateImage } from '../../../../actions/userActions'
+import { toggleSidebar } from '../../../../actions/layoutActions'
 import http from '../../../../services/http'
 import geti18N from '../../../../strings'
+import {withRouter} from 'react-router-dom'
 
 const {signOut, search} = geti18N()
 
@@ -33,21 +35,30 @@ class Header extends React.Component{
     }
 
     uploadPicture = (e) => {
-        var formData = new FormData();
+        const formData = new FormData();
         formData.append("file", e.target.files[0])
         http.updateProfilePic(formData, (msg, path) => {
             if(path)
                 this.props.updateImage(path)
             showToast(msg)
         })
+    }
 
+    signOut = () =>{
+        http.signOut((data) => {
+            if (data === "OK")
+            {
+                sessionStorage.clear()
+                window.location.href = "/"
+            }
+        })
     }
 
     render() {
         const color = Math.ceil(Math.random() * 10 % this.colors.length) - 1
         
-        const image = this.props.image
-            ? <img className="nav-icon profile" src={`http://fundoonotes.incubation.bridgelabz.com/${this.props.image}`} />
+        const image = this.props.user.imageUrl
+            ? <img className="nav-icon profile" src={`http://fundoonotes.incubation.bridgelabz.com/${this.props.user.imageUrl}`} />
             : <span className={`nav-icon profile text ${this.colors[color]}`}>{this.props.user.email[0].toLocaleUpperCase()}</span>
                 
         return <div className="navbar">
@@ -87,7 +98,7 @@ class Header extends React.Component{
                                     </div>
                                     <hr className="border"/>
                                     <div>
-                                        <Button type="small">{signOut}</Button>
+                                        <Button type="small" onClick={this.signOut}>{signOut}</Button>
                                     </div>
                                 </Card>
                             : null
@@ -109,9 +120,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateImage: (imgPath) => dispatch(updateImage(imgPath))
+        updateImage: (imgPath) => dispatch(updateImage(imgPath)),
+        toggle: () => dispatch(toggleSidebar())
     }
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Header))

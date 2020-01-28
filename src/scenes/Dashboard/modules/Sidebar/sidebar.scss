@@ -12,6 +12,21 @@
     z-index: 1;
     background-color: $white;
     position: relative;
+
+    .modal-item{
+        display: flex; 
+        justify-content:center;
+        align-items:center;
+        input{
+            margin-left: 10px;
+            width: 150px;
+            border: none;
+            outline: none;
+            &:focus{
+                border-bottom: 1px solid $grey;
+            }
+        }
+    }
 }
 
 

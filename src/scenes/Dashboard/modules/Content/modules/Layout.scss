@@ -1,13 +1,19 @@
 @import "../../../../../../index.scss";
 
-input{
-    width: 40%;
-    border-radius: 5px;
-    border-style: none;
-    font-size: $default;
-    padding: 10px;
-    outline: none;
-    color: $grey;
-    background-color: $white;
-    box-shadow: $cardOulinedShadow;
+.content{
+    width: 100%;
+    overflow: hidden;
+    input{
+        width: 40%;
+        border-radius: 5px;
+        border-style: none;
+        font-size: $default;
+        padding: 10px;
+        outline: none;
+        color: $grey;
+        background-color: $white;
+        box-shadow: $cardOulinedShadow;
+    }
 }
+
+

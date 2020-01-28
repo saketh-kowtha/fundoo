@@ -11,8 +11,8 @@ const user = (state = {}, action) => {
          return {...action.user};
      
       case UPDATE_IMAGE:
+        console.log({ ...state })
         return {...state, imageUrl: action.imgPath}
-      
        default:
          return state;
     }
