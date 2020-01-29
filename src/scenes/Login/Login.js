@@ -107,7 +107,7 @@ class Login extends React.Component {
             return
         if (!feild)
             this.setState({ value })
-        this.setState({ feild: value })
+        this.setState({ [feild]: value })
     }
 
     //User input handling
@@ -417,4 +417,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default withRouter(connect(null, mapDispatchToProps)(Login))
+// export default withRouter(connect(null, mapDispatchToProps)(Login))
+export default Login

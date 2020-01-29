@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Should Show error message on Invalid Credintails 1`] = `ReactWrapper {}`;
+
+exports[`Login Should be snapshot 1`] = `ReactWrapper {}`;
+
+exports[`Login Should match snapshot 1`] = `ReactWrapper {}`;

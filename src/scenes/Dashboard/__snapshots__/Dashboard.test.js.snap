@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard should HashRouter have noslash prop  1`] = `ShallowWrapper {}`;
+
+exports[`Dashboard should render correctly  1`] = `ShallowWrapper {}`;

@@ -37,6 +37,7 @@ class LoginInput extends React.PureComponent {
             if (ipValidateReponse != true && this.state.input !=""){
                 this.setState({errorMsg: ipValidateReponse})
             }
+
             else{
                 this.setState({ errorMsg: "" })
             }
@@ -68,6 +69,5 @@ class LoginInput extends React.PureComponent {
     }
 
 }
-
 
 export default LoginInput
