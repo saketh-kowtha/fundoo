@@ -11,8 +11,8 @@
 
  import showToast from '../../components/Toast'
 
- axios.interceptors.request.use(function (config) {
-    if (!navigator.onLine)
+axios.interceptors.request.use(function (config) {    
+   if (!navigator.onLine)
       return showToast("No Internet Connection")
    const token = store.getState().user.id;
    if(token)

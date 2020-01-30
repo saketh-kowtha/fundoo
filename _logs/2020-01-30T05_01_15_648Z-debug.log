@@ -1,0 +1,34 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'test',
+1 verbose cli   'src/components/Card/Card.test.js'
+1 verbose cli ]
+2 info using npm@6.13.4
+3 info using node@v12.14.0
+4 verbose stack Error: Failed to parse json
+4 verbose stack Unexpected token } in JSON at position 1585 while parsing near '...er": "^3.10.1"
+4 verbose stack   },
+4 verbose stack }
+4 verbose stack '
+4 verbose stack     at parseError (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:470:11)
+4 verbose stack     at parseJson (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:105:26)
+4 verbose stack     at /usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:52:5
+4 verbose stack     at /usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:115:16
+4 verbose stack     at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:61:3)
+5 verbose cwd /home/admin1/Desktop/fundoo
+6 verbose Linux 4.15.0-74-generic
+7 verbose argv "/usr/bin/node" "/usr/bin/npm" "test" "src/components/Card/Card.test.js"
+8 verbose node v12.14.0
+9 verbose npm  v6.13.4
+10 error code EJSONPARSE
+11 error file /home/admin1/Desktop/fundoo/package.json
+12 error JSON.parse Failed to parse json
+12 error JSON.parse Unexpected token } in JSON at position 1585 while parsing near '...er": "^3.10.1"
+12 error JSON.parse   },
+12 error JSON.parse }
+12 error JSON.parse '
+13 error JSON.parse Failed to parse package.json data.
+13 error JSON.parse package.json must be actual JSON, not just JavaScript.
+14 verbose exit [ 1, true ]

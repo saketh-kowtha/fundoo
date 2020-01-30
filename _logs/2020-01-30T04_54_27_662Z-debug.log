@@ -1,0 +1,20 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'test',
+1 verbose cli   './src/scenes/Login/Login.test.js'
+1 verbose cli ]
+2 info using npm@6.13.4
+3 info using node@v12.14.0
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle fundoo@1.0.0~pretest: fundoo@1.0.0
+6 info lifecycle fundoo@1.0.0~test: fundoo@1.0.0
+7 verbose lifecycle fundoo@1.0.0~test: unsafe-perm in lifecycle true
+8 verbose lifecycle fundoo@1.0.0~test: PATH: /usr/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/admin1/Desktop/fundoo/node_modules/.bin:/home/admin1/anaconda3/bin:/home/admin1/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/admin1/.local/share/npm-packages/bin:/home/admin1/Android/Sdk/emulator:/home/admin1/Android/Sdk/tools:/home/admin1/Android/Sdk/tools/bin:/home/admin1/Android/Sdk/platform-tools
+9 verbose lifecycle fundoo@1.0.0~test: CWD: /home/admin1/Desktop/fundoo
+10 silly lifecycle fundoo@1.0.0~test: Args: [ '-c', 'jest "./src/scenes/Login/Login.test.js"' ]
+11 timing npm Completed in 94674ms
+12 error cb() never called!
+13 error This is an error with npm itself. Please report this error at:
+14 error <https://npm.community>

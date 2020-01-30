@@ -12,14 +12,11 @@ import Notes from '../../../../../components/Notes'
 
 import Loading from '../../../../../components/Loading'
 
-import { Card } from '../../../../../components';
-
 
 class Layout extends React.PureComponent{
 
     constructor(props) {
         super(props)
-
     }
 
 
@@ -57,7 +54,7 @@ class Layout extends React.PureComponent{
             case "notes":
                 this.fetchNotes()
                 break;
-            case "reminder":
+            case "reminders":
                 this.fetchReminders()
                 break;
             case "trash":
@@ -69,20 +66,21 @@ class Layout extends React.PureComponent{
         }
     }
 
+
+
     render() {
-        if (this.props.loading)
+        if (!this.props.items || this.props.loading)
             return <Loading />
         
         
         return <div className="content">
             {this.input()}
-            <div className="row">
+
                 {
                     this.props.items && this.props.items.length === 0 
                         ? <Empty name={this.props.name} />
-                        : this.props.items.map(item => <Notes key={item.title} data={item} />)
+                    : <Notes data={this.props.items} type={this.props.name}/>
                }
-            </div>
         </div>        
     }
 
@@ -90,7 +88,7 @@ class Layout extends React.PureComponent{
 
 
 
-const mapStateToProps = (state) => ({ items: state.layout.data,loading: state.layout.loading })
+const mapStateToProps = (state) => ({ items: state.layout.data, loading: state.layout.loading })
 
 
 export default connect(mapStateToProps, null)(Layout)

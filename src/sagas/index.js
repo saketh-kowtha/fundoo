@@ -13,9 +13,9 @@ function* helloSaga() {
  * Notes
  */
 function* getNoteList() {
-    let { url, method } = APIS["notesList"]
+    let { url } = APIS["notesList"]
     try {
-        yield put({ type: "SET_LAYOUT_ITEM_LOADING", loading: true })
+        yield put({type: "SET_LAYOUT_ITEM_LOADING"})
         const response = yield call(axios.get, url)
         if(response && response.data && response.data.data && response.data.data.success)
             yield put({type: "SET_LAYOUT_ITEM", data: response.data.data.data })
@@ -30,6 +30,7 @@ function* getNoteList() {
 function* getRemindersList() {
     let { url, method } = APIS["remindersList"]
     try {
+        yield put({type: "SET_LAYOUT_ITEM_LOADING"})
         const response = yield call(axios.get, url)
         if(response && response.data && response.data.data && response.data.data.success)
             yield put({type: "SET_LAYOUT_ITEM", data: response.data.data.data })
@@ -42,7 +43,7 @@ function* getRemindersList() {
 
 
 function* getArchiveList() {
-    let { url, method } = APIS["archiveList"]
+    let { url } = APIS["archiveList"]
     try {
         const response = yield call(axios.get, url)
         if(response && response.data && response.data.data && response.data.data.success)
@@ -76,6 +77,8 @@ function* watchFetchList() {
                 takeEvery("FETCH_TRASH", getTrashList)
             ])
 }
+
+
 
 
 

@@ -47,6 +47,14 @@ const APIS = {
     trashList: {
         method: GET,
         url: `${URL}/api/notes/getTrashNotesList`
+    },
+    pinUnpinNotes: {
+        method: POST,
+        url: `${URL}/api/notes/pinUnpinNotes`
+    },
+    archiveNotes: {
+        method: POST,
+        url: `${URL}/api/notes/archiveNotes`
     }
 }
 

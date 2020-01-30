@@ -157,7 +157,7 @@ class Login extends React.Component {
                 user = [data.email]
             localStorage.setItem("usersList", user.filter((userName, index) => user.indexOf(userName) == index).join(",") )
             this.props.addUser(data)
-            this.props.history.push("/Dashboard")
+            this.props.history.push("/Dashboard#Notes")
         }
     }
 
@@ -417,5 +417,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-// export default withRouter(connect(null, mapDispatchToProps)(Login))
-export default Login
+export default withRouter(connect(null, mapDispatchToProps)(Login))
+// export default Login
