@@ -8,13 +8,10 @@
 .navbar{
     display: flex;
     height: 60px;
-    top: 0px;
-    left: 0px;
-    position: sticky;
+    z-index: 1;
     justify-content: space-between;
     border-bottom: 1px solid #d3d3d3;
     background-color: $white;
-    z-index: 3;
     .left, .right, .center{
         color: #5f6368;
         display: flex;
@@ -95,14 +92,13 @@
                 position: absolute; 
             }       
     }
-    .right{
-        // width: 20%;
-    }
+
     .account-card{
         min-height: 100px;
         min-width: 250px;
         position: absolute;
         right: 5px;
+        background-color: $white;
         top: 50px;
         padding: 10px;
         .btn{
@@ -148,7 +144,9 @@
                 }
             }
         }
-
+        div[title='Row View'], div[title='Column View']{
+            display: none;
+        }
         .account-card{
             width: 90%;
             position: absolute;

@@ -2,8 +2,23 @@
     Author : Kowtha Saketh
     Description: Content stylesheet
 */
+
+@import "../../../../../index.scss";
+
 .content{
-    text-align: center;
     width: 100%;
+    overflow: auto;
+    text-align: center;
+    height: calc(100vh - 65px);
+}
+.content > div{
     padding: 10px 0px;
+}
+
+@media only screen and (max-width: 768px){
+    .content{
+        input{
+            width: 80%
+        }
+    }
 }

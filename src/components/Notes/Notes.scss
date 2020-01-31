@@ -4,6 +4,7 @@
     display: flex;
     width: 90%;
     margin: 0 auto;
+    margin-top: 10px;
     flex-wrap: wrap;
     justify-content: center;
 
@@ -11,7 +12,8 @@
         position: relative;
         width: 238px;
         min-height: 104px;
-        margin: 20px 10px 50px 10px;
+        margin: 10px;
+        z-index: 0;
         padding: 20px;
         color : $grey;
         font-size: $large;
@@ -72,6 +74,27 @@
             position: absolute;
             bottom: 5px;
             display: none;
+        }
+    }
+}
+
+.grid-row{
+    flex-direction: row;
+}
+
+.grid-column{
+    flex-direction: column;
+    .note{
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .grid-row, .grid-column{
+        .note{
+            width: 100%;
         }
     }
 }

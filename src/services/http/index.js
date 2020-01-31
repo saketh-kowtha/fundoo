@@ -147,10 +147,9 @@ http.updateProfilePic = (data, cb) => {
 http.pinUnpinNotes = (data) => new Promise((resolve, reject) => {
     let { url, method } = APIS['pinUnpinNotes']
     let payLoad = {
-        isPined: data.isPined,
+        isPined: !data.isPined,
         noteIdList: [data.id]
     }
-    console.log(url, method, payLoad)
     axios({
         url: url,
         method: method,
@@ -166,7 +165,6 @@ http.archiveNotes = (data) => new Promise((resolve, reject) => {
         isArchived: !data.isArchived,
         noteIdList: [data.id]
     }
-    console.log(url, method, payLoad)
     axios({
         url: url,
         method: method,
@@ -175,6 +173,7 @@ http.archiveNotes = (data) => new Promise((resolve, reject) => {
     .then((success) => resolve(success.data))
     .catch((error) => reject(error.response))
 })
+
 
 export default http
 

@@ -1,13 +1,13 @@
 import React from 'react'
 import Card from '../../../../components/Card'
-import {Menu, Replay, GridOnSharp,  SettingsSharp, Search, ArrowBack } from '@material-ui/icons/'
+import {Menu, Replay, GridOnSharp,  SettingsSharp, Search, ArrowBack, ViewModuleOutlined, ViewColumn, ViewStream } from '@material-ui/icons/'
 import './Header.scss'
 import logo from '../../../../../assets/logo.png'
 import {connect} from 'react-redux'
 import { Button } from '../../../../components'
 import showToast from '../../../../components/Toast'
 import { updateImage } from '../../../../actions/userActions'
-import { toggleSidebar } from '../../../../actions/layoutActions'
+import { toggleSidebar, gridView } from '../../../../actions/layoutActions'
 import http from '../../../../services/http'
 import geti18N from '../../../../strings'
 import {withRouter} from 'react-router-dom'
@@ -54,6 +54,8 @@ class Header extends React.Component{
         })
     }
 
+    
+
     render() {
         const color = Math.ceil(Math.random() * 10 % this.colors.length) - 1
         
@@ -86,7 +88,7 @@ class Header extends React.Component{
                             : (() => !this.state.mobileSearchView ? <Search onClick={this.toggleMobileSearchView} />  : null)()
                     }
                 </div>
-                <div className="nav-icon"><GridOnSharp /></div>
+                <div className="nav-icon" onClick={this.props.gridView} title={ this.props.grid === "column" ? "Column View" : "Row View"}>{ this.props.grid === "column"? <ViewColumn /> : <ViewStream />}</div>
                 <div className="nav-icon"><SettingsSharp /></div>
                 <div>
                     <div onClick={() => this.setState({ showActionCard: !this.state.showActionCard })}>{image}</div>
@@ -114,14 +116,16 @@ class Header extends React.Component{
 const mapStateToProps = (state) => {
     return {
         title: state.title,
-        user: state.user
+        user: state.user,
+        grid: state.layout.grid || "row"
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         updateImage: (imgPath) => dispatch(updateImage(imgPath)),
-        toggle: () => dispatch(toggleSidebar())
+        toggle: () => dispatch(toggleSidebar()),
+        gridView: () => dispatch(gridView())
     }
 }
 

@@ -16,7 +16,9 @@ const layout = (state = defaultState, action) => {
         case 'SET_LAYOUT_ITEM_LOADING':
             return { ...state, loading: true }
         case 'TOGGLE_SIDEBAR':
-            return {...state, toggle: !state.toggle}
+            return { ...state, toggle: !state.toggle }
+        case 'UPDATE_GRID':
+                return {...state, grid: state.grid==="column" ? "row" : "column"}
        default:
          return state;
     }

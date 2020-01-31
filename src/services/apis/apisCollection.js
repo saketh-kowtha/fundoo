@@ -55,6 +55,10 @@ const APIS = {
     archiveNotes: {
         method: POST,
         url: `${URL}/api/notes/archiveNotes`
+    },
+    noteLabesList: { 
+        method: GET,
+        url: `${URL}/api/noteLabels/getNoteLabelList`
     }
 }
 

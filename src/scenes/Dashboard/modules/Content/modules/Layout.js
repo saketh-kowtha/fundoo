@@ -1,6 +1,6 @@
 import React from 'react'
 
-import "./Layout.scss"
+import "../Content.scss"
 
 import { connect } from 'react-redux';
 
@@ -8,7 +8,7 @@ import { action } from "../../../../../store"
 
 import Empty from '../../../../../components/Empty'
 
-import Notes from '../../../../../components/Notes'
+import Notes, {Note} from '../../../../../components/Notes'
 
 import Loading from '../../../../../components/Loading'
 
@@ -41,12 +41,7 @@ class Layout extends React.PureComponent{
     }
 
 
-    input() {
-        return <div>
-            <input type="text" placeholder={"Take a Note"} />
-
-        </div>
-    }
+    
 
 
     UNSAFE_componentWillMount() {
@@ -72,16 +67,13 @@ class Layout extends React.PureComponent{
         if (!this.props.items || this.props.loading)
             return <Loading />
         
-        
-        return <div className="content">
-            {this.input()}
-
+        return <React.Fragment>
                 {
                     this.props.items && this.props.items.length === 0 
                         ? <Empty name={this.props.name} />
                     : <Notes data={this.props.items} type={this.props.name}/>
                }
-        </div>        
+        </React.Fragment>        
     }
 
 }
