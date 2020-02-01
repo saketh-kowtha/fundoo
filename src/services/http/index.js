@@ -175,5 +175,36 @@ http.archiveNotes = (data) => new Promise((resolve, reject) => {
 })
 
 
+http.deleteLabel = (id) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['deleteLabel']
+    axios({
+        method,
+        url: url(id)
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+http.updateNoteLabel = (id, data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['updateLabel']
+    axios({
+        method,
+        url: url(id),
+        data
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+http.newLabel = (data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['newLabel']
+    axios({
+        method,
+        url,
+        data
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
 export default http
 

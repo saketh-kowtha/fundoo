@@ -26,6 +26,16 @@
                 border-bottom: 1px solid $grey;
             }
         }
+
+
+        i[for='bin']:hover::after{
+            content: 'delete';
+        }
+        i[for='bin']::after{
+            content: 'label';
+        }
+
+
     }
 }
 

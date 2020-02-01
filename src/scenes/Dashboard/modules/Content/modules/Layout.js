@@ -29,19 +29,7 @@ class Layout extends React.PureComponent{
     }
 
     fetchArchive() {
-        action("FETCH_ARCHIVE")
     }
-
-    fetchTrash() {
-        action("FETCH_TRASH")
-    }
-
-    fetchLabel(name) {
-        action("FETCH_LABEL", name)
-    }
-
-
-    
 
 
     UNSAFE_componentWillMount() {

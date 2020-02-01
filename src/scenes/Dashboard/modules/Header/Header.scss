@@ -8,7 +8,7 @@
 .navbar{
     display: flex;
     height: 60px;
-    z-index: 1;
+    z-index: 9999;
     justify-content: space-between;
     border-bottom: 1px solid #d3d3d3;
     background-color: $white;
@@ -100,6 +100,7 @@
         right: 5px;
         background-color: $white;
         top: 50px;
+        z-index: 999;
         padding: 10px;
         .btn{
             background-color: rgba($black, 0.05);
@@ -151,6 +152,7 @@
             width: 90%;
             position: absolute;
             left: 50%;
+            z-index: 999;
             transform: translateX(-50%);
             top: 70px;
             div{

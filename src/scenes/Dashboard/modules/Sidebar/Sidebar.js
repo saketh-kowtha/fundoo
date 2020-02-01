@@ -9,7 +9,11 @@ import {toggleSidebar} from '../../../../actions/layoutActions'
 import { withRouter } from "react-router-dom";
 import Modal from '../../../../components/Modal';
 
+import showToast from '../../../../components/Toast';
+
 import {action} from '../../../../store'
+
+import http from "../../../../services/http"
 
 import {primary, secondary} from '../../../../config/sidebarItems'
 import Loading from '../../../../components/Loading';
@@ -17,10 +21,12 @@ import Loading from '../../../../components/Loading';
 class Sidebar extends React.PureComponent{
     state = {
         activeElement: this.props.location && this.props.location.pathname ? this.props.location.pathname.slice(1, this.props.location.pathname.length) : "Notes",
-        modal: false
+        modal: false,
+        labelInput: ""
     }
 
     componentWillMount() {
+        this.labelInput = []
         action("FETCH_LABELS")
     }
 
@@ -32,25 +38,67 @@ class Sidebar extends React.PureComponent{
 
     deleteLabel = (labelName) => {
         //Delete Action
+        http.deleteLabel(labelName).then(success => {
+            console.log("Success", success)
+            action("FETCH_LABELS")
+        })
+        .catch(error => {
+            console.log("Error", error)
+        })
     }
 
-    updateLabel = (labelName) => {
-        //Update Action
+    updateLabel = (id, index) => {
+        //Validation Required
+        let label = this.labelInput[index].value
+        if(!label || label === "" || label.trim() === "" ){
+            return showToast("Invalid Label Name", "error")
+        }
+
+        if(this.props.labels.data.filter(ele => label === ele.label).length != 0)
+            return showToast("Label already Exist", "error")
+        http.updateNoteLabel(id, {label: this.labelInput[index].value})
+        .then(success => {
+            console.log("Success", success)
+            action("FETCH_LABELS")
+        })
+        .catch(error => {
+            console.log("Error", error)
+        })
+
     }
 
-    newLabel = (labelName) => {
-        //Add Action
+    newLabel = (index) => {
+        let label = this.labelInput[index].value
+        if(!label || label === "" || label.trim() === "" ){
+            return showToast("Invalid Label Name", "error")
+        }
+        if(this.props.labels.data.filter(ele => label === ele.label).length != 0)
+            return showToast("Label already Exist", "error")
+        http.newLabel({label, isDeleted: false, userId: this.props.userId})
+        .then(success => {
+            console.log("Success", success)
+            action("FETCH_LABELS")
+        })
+        .catch(error => {
+            console.log("Error", error)
+        })
     }
 
-    setActiveLabelName = (item) => this.setState({activeLabel: item})
-
-    setNewLabel = (event) => this.setState({newLabel: event.target.value})
-
-    modalItem = (item, isActive) => {
+    modalItem = (item, index) => {
         return <div key={item} className="modal-item">
-                    <i className="material-icons-outlined" onClick={() => this.deleteLabel(item)}>close</i>
-                    <input value={this.state.activeLabel === item ? this.state.newLabel : item.label} type="text" autoFocus={isActive} onClick={() => this.setActiveLabelName(item)} onChange={this.setNewLabel}/>
-                    <i className="material-icons-outlined" onClick={() => this.updateLabel(item)}>done</i>
+                    {
+                        index === true
+                        ? <i className="material-icons-outlined" onClick={()=> {this.labelInput[index].value = ""; this.labelInput[index].focus()}}>close</i>
+                        : <i className="material-icons-outlined" for="bin" onClick={() => this.deleteLabel(item.id)}></i>
+
+                    }
+                    <input ref={(ref) => this.labelInput[index] = ref} defaultValue={item.label} type="text" autoFocus={true} />
+                    {
+                        index === true
+                        ? <i className="material-icons-outlined" onClick={() => this.newLabel(index)}>add</i>
+                        : <i className="material-icons-outlined"  for="edit" onClick={() => this.updateLabel(item.id, index)}>done</i>
+                    }
+                    
                 </div>
     }
 
@@ -64,8 +112,8 @@ class Sidebar extends React.PureComponent{
             <hr className="border"/>
 
             {
-                this.props.labels.loading 
-                    ? <Loading />
+                this.props.labels.loading || !this.props.labels || !this.props.labels.data
+                    ? <Loading type="small"/>
                     : <List key="labels" data={
                             [
                                 { heading: "Labels" },
@@ -88,7 +136,9 @@ class Sidebar extends React.PureComponent{
                     ? 
                         <Modal onClose={() => this.setState({modal: false})}>
                         {
-                            [...this.props.labels.data.map(this.modalItem), this.modalItem("New Label", true)]
+                            this.props.labels.loading || !this.props.labels || !this.props.labels.data 
+                                ? <Loading type="small"/>
+                                :[...this.props.labels.data.map(this.modalItem), this.modalItem("New Label", true)]
                         }
                         </Modal>
                     : null
@@ -107,7 +157,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
         toggle: state.layout.toggle,
-        labels: state.label
+        labels: state.label,
+        userId: state.user.userId
     }
 }
 

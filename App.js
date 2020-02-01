@@ -18,7 +18,7 @@ import NotFound from './src/scenes/NotFound/NotFound'
 
 import {LOGIN, SIGNUP, RESETPASSWORD} from './src/constants'
 
-//Creating Routes History 
+//Creating Routes History
 const createHistory =  require("history").createBrowserHistory;
 const history = createHistory();
 

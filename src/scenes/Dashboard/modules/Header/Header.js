@@ -54,7 +54,10 @@ class Header extends React.Component{
         })
     }
 
-    
+    queryNotesList = (event) => {
+        // const query = event.target.value
+        // this.props.notes.filter(item => item.title.indexOf(query) > -1 || item.description.indexOf(query) >-1 || item.)
+    }
 
     render() {
         const color = Math.ceil(Math.random() * 10 % this.colors.length) - 1
@@ -76,7 +79,7 @@ class Header extends React.Component{
                             ? <Search className="search-icon nav-icon"/>
                             : <ArrowBack onClick={this.toggleMobileSearchView} className="nav-icon left-icon"/>
                 }
-                <input type="text" placeholder={search}/>
+                <input type="text" onChange={this.queryNotesList} placeholder={search}/>
 
             </div>
 
@@ -117,7 +120,8 @@ const mapStateToProps = (state) => {
     return {
         title: state.title,
         user: state.user,
-        grid: state.layout.grid || "row"
+        grid: state.layout.grid || "row",
+        notes: state.layout.data
     }
 }
 
@@ -126,6 +130,7 @@ const mapDispatchToProps = (dispatch) => {
         updateImage: (imgPath) => dispatch(updateImage(imgPath)),
         toggle: () => dispatch(toggleSidebar()),
         gridView: () => dispatch(gridView())
+        // queryNotesList: () => 
     }
 }
 

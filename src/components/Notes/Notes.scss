@@ -32,7 +32,30 @@
             display: block;
             max-height: 500px;
             overflow: auto;
+        }
 
+        .collaberator{
+            border-radius: 50%;
+            margin: 45px 0px 20px 5px;
+            padding: 4px;
+            width: 15px;
+            font-size: $tooSmall;
+            text-align: center;
+            display: inline-block;
+            box-shadow: $cardInterActiveShadow;
+        }
+
+        .reminder{
+            border-radius: 10px;
+            font-size: $tooSmall;
+            position: relative;
+            box-shadow: $cardInterActiveShadow;
+            padding: 4px;
+            margin: 5px;
+            i{
+                font-size: 12px;
+                vertical-align: middle;             
+            }
         }
 
         &:hover{
@@ -53,13 +76,6 @@
                 &:hover{
                     background-color: $selectableHover;
                 }
-            }
-            .material-icons-outlined[title="Unarchive"]{
-                -webkit-transform:rotate(180deg);
-                -moz-transform: rotate(180deg);
-                -ms-transform: rotate(180deg);
-                -o-transform: rotate(180deg);
-                transform: rotate(180deg);
             }
         }
 

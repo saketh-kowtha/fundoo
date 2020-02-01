@@ -62,21 +62,41 @@ export class Note extends React.Component{
     }
 
     getNotesView = () => {
-            return <div className={"note"} style={{backgroundColor: this.state.color}}>
-                    <span className="title" dangerouslySetInnerHTML={{__html: this.props.item.title}} />
-                    <span className="description" dangerouslySetInnerHTML={{ __html: this.props.item.description }} />
-                    <span className="pin">
-                        <i className="material-icons-outlined" onClick={this.handlePin} title={this.state.pin ? "Unpin" : "Pin"}>{ !this.state.pin ? "link" : "link_off"}</i>
-                    </span>
-                    <span className="actions">
-                        <i className="material-icons-outlined" title="Reminder" title={"Reminder"}>notifications_active</i>
-                        <i className="material-icons-outlined" title="Add Collobarate">person_add</i>
-                        <i className="material-icons-outlined" title="Add Color">color_lens</i>
-                        <i className="material-icons-outlined" title="Add Image">panorama</i>
-                        <i className="material-icons-outlined" title={this.state.isArchived ? "Unarchive" : "Archive"} onClick={this.handleArchive}>archive</i>
-                        <i className="material-icons-outlined">more_vert</i>
-                    </span>
-                </div>
+        let reminder = []
+        if(this.props.item.reminder.length > 0){
+            reminder = this.props.item.reminder.map(date => {
+                const _date = new Date(date)
+                const month = _date.toLocaleString('default', { month: 'long' }).slice(0,3)
+                const day = _date.getDate().toLocaleString()
+                const time = _date.toLocaleString('default', { hour: 'numeric', minute: 'numeric',hour12: true }).toLocaleUpperCase()
+                return `${month} ${day}, ${time}`
+            })
+        }
+        return <div className={"note"} style={{backgroundColor: this.state.color}}>
+                <span className="title" dangerouslySetInnerHTML={{__html: this.props.item.title}} />
+                <span className="description" dangerouslySetInnerHTML={{ __html: this.props.item.description }} />
+                {
+                    reminder.map(rem => <span key={rem} title={"Reminder: " + rem} className="reminder"><i className="material-icons-outlined">query_builder</i> {rem}</span>)
+                }
+                {
+                    this.props.item.collaborators.map(user => {
+                        return <span key={user.email} className="collaberator" title={`${user.firstName} ${user.lastName} (${user.email})`}>{user.firstName[0]}</span>
+                    })
+                }
+
+
+                <span className="pin">
+                    <i className="material-icons-outlined" onClick={this.handlePin} title={this.state.pin ? "Unpin" : "Pin"}>{ !this.state.pin ? "link" : "link_off"}</i>
+                </span>
+                <span className="actions">
+                    <i className="material-icons-outlined" title="Reminder" title={"Reminder"}>notifications_active</i>
+                    <i className="material-icons-outlined" title="Add Collobarate">person_add</i>
+                    <i className="material-icons-outlined" title="Add Color">color_lens</i>
+                    <i className="material-icons-outlined" title="Add Image">panorama</i>
+                    <i className="material-icons-outlined" title={this.state.isArchived ? "Unarchive" : "Archive"} onClick={this.handleArchive}>{this.state.isArchived ? "unarchive" : "archive"}</i>
+                    <i className="material-icons-outlined">more_vert</i>
+                </span>
+            </div>
     }
 
     render() {

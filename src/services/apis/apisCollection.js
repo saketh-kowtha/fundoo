@@ -9,6 +9,8 @@ import store from "../../store"
  // HTTP Method Types 
 const POST = "post"
 const GET = "get"
+const DELETE = "delete"
+
 const URL = "http://fundoonotes.incubation.bridgelabz.com"
 //API end point URl's
 const APIS = {
@@ -59,6 +61,18 @@ const APIS = {
     noteLabesList: { 
         method: GET,
         url: `${URL}/api/noteLabels/getNoteLabelList`
+    },
+    deleteLabel: {
+        method: DELETE,
+        url: (id) => `${URL}/api/noteLabels/${id}/deleteNoteLabel` 
+    },
+    updateLabel: {
+        method: POST,
+        url: (id) => `${URL}/api/noteLabels/${id}/updateNoteLabel` 
+    },
+    newLabel: {
+        method: POST,
+        url: `${URL}/api/noteLabels` 
     }
 }
 
