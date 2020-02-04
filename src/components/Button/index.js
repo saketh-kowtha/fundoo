@@ -12,7 +12,7 @@ import './button.scss'
  * @description Button component
  */
 const Button = (props) => {
-    return <button className="btn" {...props}>
+    return <button tabindex="1" className="btn" {...props}>
         {props.children}
     </button>
 }

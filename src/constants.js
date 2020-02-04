@@ -17,7 +17,20 @@ export const OFFLINE = "Lost Connection you are in Offline"
 export const ONLINE = "Welcome Back to Online"
 
 
-
+export const NOTES_COLORS = [
+    "#ffffff",
+    "#e59086",
+    "#f2bd42",
+    "#fef388",
+    "#d7fc9d",
+    "#bbfdec",
+    "#d2eff7",
+    "#b3cbf6",
+    "#d1b2f6",
+    "#f6d1e7",
+    "#e2caac",
+    "#e9eaed"
+]
 
 
 // Redux 

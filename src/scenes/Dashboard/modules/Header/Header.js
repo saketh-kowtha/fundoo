@@ -12,7 +12,7 @@ import http from '../../../../services/http'
 import geti18N from '../../../../strings'
 import {withRouter} from 'react-router-dom'
 
-const {signOut, search} = geti18N()
+const {signOut, search, notes} = geti18N()
 
 class Header extends React.Component{
     constructor(props) {
@@ -68,8 +68,8 @@ class Header extends React.Component{
                 
         return <div className="navbar">
             <div className="left">
-                <div className="nav-icon" onClick={this.props.toggle}><Menu/></div>
-                <div> { this.props.title === "Notes" ?  <img src={logo} /> : null }</div>
+                <div className="nav-icon" tabindex="0" onKeyDown={(event) => event.keyCode === 13 ? this.props.toggle() : null} onClick={this.props.toggle}><Menu/></div>
+                <div> { this.props.title === notes ?  <img src={logo} /> : null }</div>
                 <div><strong>{this.props.title}</strong></div>
             </div>
 
@@ -84,26 +84,26 @@ class Header extends React.Component{
             </div>
 
             <div className="right">
-                <div className="nav-icon" >
+                <div className="nav-icon" tabindex="0">
                     {
                         !this.state.height.matches 
                             ? <Replay />
-                            : (() => !this.state.mobileSearchView ? <Search onClick={this.toggleMobileSearchView} />  : null)()
+                            : (() => !this.state.mobileSearchView ? <Search  onClick={this.toggleMobileSearchView} />  : null)()
                     }
                 </div>
-                <div className="nav-icon" onClick={this.props.gridView} title={ this.props.grid === "column" ? "Column View" : "Row View"}>{ this.props.grid === "column"? <ViewColumn /> : <ViewStream />}</div>
-                <div className="nav-icon"><SettingsSharp /></div>
+                <div className="nav-icon" tabindex="0" onKeyDown={(event) => event.keyCode === 13 ? this.props.gridView() : null} onClick={this.props.gridView} title={ this.props.grid === "column" ? "Column View" : "Row View"}>{ this.props.grid === "column"? <ViewColumn /> : <ViewStream />}</div>
+                <div className="nav-icon" tabindex="0"><SettingsSharp /></div>
                 <div>
-                    <div onClick={() => this.setState({ showActionCard: !this.state.showActionCard })}>{image}</div>
+                    <div tabindex="0" onKeyDown={(event) => event.keyCode === 13 ? this.setState({ showActionCard: !this.state.showActionCard }) : null} onClick={() => this.setState({ showActionCard: !this.state.showActionCard })}>{image}</div>
                     {
                         this.state.showActionCard
                             ?   <Card className="account-card">
                                     <div>
-                                        <div onClick={this.openFileDilog}>{image}</div><label><strong>{this.props.user.firstName} {this.props.user.lastName}</strong><br />{this.props.user.email}</label>
+                                        <div tabindex="0" onKeyDown={(event) => event.keyCode === 13 ? this.openFileDilog() : null } onClick={this.openFileDilog}>{image}</div><label><strong>{this.props.user.firstName} {this.props.user.lastName}</strong><br />{this.props.user.email}</label>
                                     </div>
                                     <hr className="border"/>
                                     <div>
-                                        <Button type="small" onClick={this.signOut}>{signOut}</Button>
+                                        <Button tabindex="0" type="small" onClick={this.signOut}>{signOut}</Button>
                                     </div>
                                 </Card>
                             : null

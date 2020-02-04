@@ -1,10 +1,14 @@
+import geti18N from '../strings'
+
+const {notes, trash, archive, reminders} = geti18N()
+
 export const primary = [
-    {label: "Notes", icon: 'emoji_objects', to: "Notes"},
-    {label: "Reminders", icon: 'notifications', to: "Reminders"},
+    {label: notes, icon: "emoji_objects", to: notes},
+    {label: reminders, icon: "notifications", to: reminders},
 ]
 
 
 export const secondary =                     [
-    {label: "Archive", icon: 'archive', to: "Archive"},
-    {label: "Trash", icon: 'delete', to: "Trash"},
+    {label: archive, icon: "archive", to: archive},
+    {label: trash, icon: "delete", to: trash},
 ]

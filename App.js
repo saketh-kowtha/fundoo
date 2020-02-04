@@ -61,10 +61,7 @@ export default App
  // TODO: 2. Update Notes Component
  // TODO: 3. ADD Reminder Modal
  // TODO: 4. Add Labels Dropdown
- // TODO: 5. Labels to Card View
- // TODO: 6. Delete Reminder
  // TODO: 7. Responsive Searchbar
  // TODO: 8. Search Feature
- // TODO: 9. Auth
  * 
  */

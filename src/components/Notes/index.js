@@ -13,7 +13,16 @@ import {useSelector} from 'react-redux'
 import Card from '../Card'
 import List from '../List'
 
+import {NOTES_COLORS, ERROR} from '../../constants.js'
+import geti18N from '../../strings'
+import Empty from '../Empty'
 
+const {updatedSuccessfullyMsg, somethingWrong, movedToTrash, recoverSuccessfully, deletedSuccessfully, recover, deletePeremently, deleteNotes, notes, trash, archive} = geti18N()
+/**
+ * @author Kowtha Saketh
+ * Notes Root Component
+ * @param {*} props List of notes
+ */
 const Notes = (props) => {
     const store = useSelector(store => store)
     return <div className={"notes" + (store.layout.grid === "column" ? " grid-column" : " grid-row")}>
@@ -24,7 +33,12 @@ const Notes = (props) => {
 }
 
 
+/**
+ * @author Kowtha Saketh
+ * @description Note Component Individual Notes Card
+ */
 export class Note extends React.Component{
+    //Constructor
     constructor(props) {
         super(props)
         this.state = {
@@ -37,61 +51,84 @@ export class Note extends React.Component{
         }
     }
 
+    /**
+     * @name handleArchive
+     * @description Handles Notes Archive Action
+     */
     handleArchive = () => {
         http.archiveNotes(this.props.item).then(success => {
             if (success.data.success === true) {
-                showToast("Updated Successfully")
+                showToast(updatedSuccessfullyMsg)
                 return this.setState({isArchived: !this.state.isArchived})                
             }
-            return showToast("Something Went Wrong", "error")
+            return showToast(somethingWrong, ERROR)
         })
         .catch(error => {
             console.log(error)
-            showToast("Something Went Wrong", "error")
+            showToast(somethingWrong, ERROR)
         })
     }
 
+    /**
+     * 
+     */
     handleForeverDelete = () => {
         http.deleteForeverNotes(this.props.item.id).then(success => {
             if (success.data.success === true) {
-                showToast("Deleted Successfully")
+                showToast(deletedSuccessfully)
                 return action("FETCH_TRASH")
             }
-            return showToast("Something Went Wrong", "error")
+            return showToast(somethingWrong, ERROR)
         })
         .catch(error => {
             console.log(error)
-            showToast("Something Went Wrong", "error")
+            showToast(somethingWrong, ERROR)
         })
     }
 
     handleDelete = () => {
         http.trashNotes(this.props.item).then(success => {
             if (success.data.success === true) {
-                showToast(!this.props.item.isDeleted ? "Moved To Trash..." : "Recovered Successfully...")
+                showToast(!this.props.item.isDeleted ? movedToTrash : recoverSuccessfully)
                 return this.setState({isDeleted: !this.state.isDeleted})                
             }
-            return showToast("Something Went Wrong", "error")
+            return showToast(somethingWrong, ERROR)
         })
         .catch(error => {
             console.log(error)
-            showToast("Something Went Wrong", "error")
+            showToast(somethingWrong, ERROR)
         })
     }
 
     handlePin = () => {
         http.pinUnpinNotes(this.props.item).then(success => {
             if (success.data.success === true) {
-                showToast("Updated Successfully")
+                showToast(updatedSuccessfullyMsg)
                 return this.setState({pin: !this.state.pin})                
 
             }
-            return showToast("Something Went Wrong", "error")
+            return showToast(somethingWrong, ERROR)
 
         })
             .catch(error => {
             console.log(error)
-            showToast("Something Went Wrong", "error")
+            showToast(somethingWrong, ERROR)
+        })
+    }
+
+    handleLabelDelete = (labelId) => {
+        http.removeLabel(this.props.item.id, labelId)
+        .then(success => {
+            if (success.data.success === true) {
+                showToast(updatedSuccessfullyMsg)
+                action("FETCH_" + this.props.type.toLocaleUpperCase())
+                return this.setState({pin: !this.state.pin})                
+            }
+            return showToast(somethingWrong, ERROR)    
+        })
+        .catch(error => {
+            console.log(error)
+            showToast(somethingWrong, ERROR)
         })
     }
 
@@ -100,23 +137,38 @@ export class Note extends React.Component{
         this.setState({color: COLOR}, () => {
             http.changesColorNotes(this.props.item,COLOR)
             .then(success => {
-                showToast("Updated Successfully")
+                showToast(updatedSuccessfullyMsg)
             })
             .catch(error => {
                 console.log(error)
-                showToast("Something Went Wrong", "error")
+                showToast(somethingWrong, ERROR)
             })
         })
     }
 
+    handleReminderDelete = () => {
+        http.removeReminderNotes(this.props.item.id)
+        .then(success => {
+            if (success.data.success === true) {
+                showToast(updatedSuccessfullyMsg)
+                action("FETCH_" + this.props.type.toLocaleUpperCase())
+                return this.setState({pin: !this.state.pin})                
+            }
+            return showToast(somethingWrong, ERROR)    
+        })
+        .catch(error => {
+            console.log(error)
+            showToast(somethingWrong, ERROR)
+        })
+    }
 
     moreOptions = () =>{
         return <div className="dropdown menu" onClick={() => this.setState({showMoreOptions: false})} onMouseLeave={() => this.setState({showMoreOptions: false})} >
             <Card className="more-menu">
                 {
                     this.state.isDeleted 
-                    ? <List data={[{label: "Recover", onClick: this.handleDelete}, {label: "Delete Forever", onClick: this.handleForeverDelete}]} />
-                    : <List data={[{label: "Delete Notes", onClick: this.handleDelete}]} />
+                    ? <List data={[{label: recover, onClick: this.handleDelete}, {label: deletePeremently, onClick: this.handleForeverDelete}]} />
+                    : <List data={[{label: deleteNotes, onClick: this.handleDelete}]} />
                 }
             </Card>
         </div>
@@ -126,20 +178,7 @@ export class Note extends React.Component{
         return <div className="dropdown color" onClick={() => this.setState({showColorPlate: false})} onMouseLeave={() => this.setState({showColorPlate: false})} >
             <Card className="color-list">
                 {
-                    [
-                        "#ffffff",
-                        "#e59086",
-                        "#f2bd42",
-                        "#fef388",
-                        "#d7fc9d",
-                        "#bbfdec",
-                        "#d2eff7",
-                        "#b3cbf6",
-                        "#d1b2f6",
-                        "#f6d1e7",
-                        "#e2caac",
-                        "#e9eaed"
-                    ].map((color, index) => <div onClick={this.handleColorPlateClick} value={color} style={{backgroundColor: color, border: `1px solid ${index === 0 ? "black" : color}`}}></div>)
+                    NOTES_COLORS.map((color, index) => <div onClick={this.handleColorPlateClick} value={color} style={{backgroundColor: color, border: `1px solid ${index === 0 ? "black" : color}`}}></div>)
                 }
             </Card>
         </div>
@@ -186,15 +225,28 @@ export class Note extends React.Component{
                 return `${month} ${day}, ${time}`
             })
         }
-        return <div className={"note"} style={{backgroundColor: this.state.color}} onDrop={()=>drop(event)} id={this.props.item.id} onDragOver={()=>allowDrop(event)} draggable={"true"} onDragStart={() => drag(event)}>
+        return <div tabindex="0" className={"note"} style={{backgroundColor: this.state.color}} onDrop={()=>drop(event)} id={this.props.item.id} onDragOver={()=>allowDrop(event)} draggable={"true"} onDragStart={() => drag(event)}>
                 <span className="title" dangerouslySetInnerHTML={{__html: this.props.item.title}} />
                 <span className="description" dangerouslySetInnerHTML={{ __html: this.props.item.description }} />
                 {
-                    reminder.map(rem => <span key={rem} title={"Reminder: " + rem} className="reminder"><i className="material-icons-outlined">query_builder</i> {rem}</span>)
+                    this.props.item.noteLabels.map(label => 
+                        <div key={label.label} title={"Label: " + label.label} className="labels" >
+                            <i className="material-icons-outlined">label</i> 
+                            {label.label}
+                            <span onClick={() => this.handleLabelDelete(label.id)}>&times;</span>
+                        </div>)
+                }
+                {
+                    reminder.map(rem => 
+                        <div key={rem} title={"Reminder: " + rem} className="reminder">
+                            <i className="material-icons-outlined">query_builder</i> 
+                            {rem}
+                            <span onClick={this.handleReminderDelete}>&times;</span>
+                        </div>)
                 }
                 {
                     this.props.item.collaborators.map(user => {
-                        return <span key={user.email} className="collaberator" title={`${user.firstName} ${user.lastName} (${user.email})`}>{user.firstName[0]}</span>
+                        return <div key={user.email} className="collaberator" title={`${user.firstName} ${user.lastName} (${user.email})`}>{user.firstName[0]}</div>
                     })
                 }
 
@@ -202,35 +254,35 @@ export class Note extends React.Component{
                 <span className="pin">
                     <i className="material-icons-outlined" onClick={this.handlePin} title={this.state.pin ? "Unpin" : "Pin"}>{ !this.state.pin ? "link" : "link_off"}</i>
                 </span>
-                <span className="actions">
+                <div className="actions">
                     <i className="material-icons-outlined" title="Reminder" title={"Reminder"}>notifications_active</i>
                     <i className="material-icons-outlined" title="Add Collobarate">person_add</i>
                     <i className="material-icons-outlined" title="Add Color" onClick={() => this.setState({showColorPlate: true})}>color_lens</i>
                     {this.state.showColorPlate ? this.colorPlate() : null}
                     <i className="material-icons-outlined" title="Add Image">panorama</i>
-                    <i className="material-icons-outlined" title={this.state.isArchived ? "Unarchive" : "Archive"} onClick={this.handleArchive}>{this.state.isArchived ? "unarchive" : "archive"}</i>
+                    <i className="material-icons-outlined" title={this.state.isArchived ? "Unarchive" : archive} onClick={this.handleArchive}>{this.state.isArchived ? "unarchive" : "archive"}</i>
                     <i className="material-icons-outlined" onClick={() => this.setState({showMoreOptions: true})}>more_vert</i>
                     {
                         this.state.showMoreOptions ? this.moreOptions() : null
                     }
-                </span>
+                </div>
             </div>
     }
 
     render() {
         switch (this.props.type) {
-            case 'notes':
+            case notes:
                 if (this.state.isArchived || this.state.isDeleted) {
                     return null                    
                 }
                 break
-            case 'archive':
+            case archive:
                 if (!this.state.isArchived || this.state.isDeleted)
-                    return null
+                    return null   
                 break
-            case 'trash':
+            case trash:
                 if (!this.state.isDeleted)
-                    return null
+                    return null     
                 break
 
         }

@@ -12,6 +12,9 @@ import Notes, {Note} from '../../../../../components/Notes'
 
 import Loading from '../../../../../components/Loading'
 
+import geti18N from '../../../../../strings'
+
+const {notes, trash, archive, reminders} = geti18N()
 
 class Layout extends React.PureComponent{
 
@@ -39,16 +42,16 @@ class Layout extends React.PureComponent{
 
     UNSAFE_componentWillMount() {
         switch (this.props.name) {
-            case "notes":
+            case notes:
                 this.fetchNotes()
                 break;
-            case "reminders":
+            case reminders:
                 this.fetchReminders()
                 break;
-            case "trash":
+            case trash:
                 this.fetchTrash()
                 break;
-            case "archive":
+            case archive:
                 this.fetchArchive()
                 break;
         }

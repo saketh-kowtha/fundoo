@@ -10,7 +10,6 @@
     .note{
         position: relative;
         width: 238px;
-        min-height: 50px;
         margin: 10px;
         padding: 20px;
         color : $grey;
@@ -30,6 +29,7 @@
             display: block;
             max-height: 500px;
             overflow: auto;
+            margin-bottom: 15px;
         }
 
         .collaberator{
@@ -41,28 +41,61 @@
             font-size: $tooSmall;
             text-align: center;
             display: inline-block;
-            box-shadow: $cardInterActiveShadow;
+            // box-shadow: $cardInterActiveShadow;
         }
 
-        .reminder{
-            cursor: pointer;
+        .labels{
+            display: inline-block;
             border-radius: 10px;
+            border: 1px solid rgba($grey, 0.2);
             font-size: $tooSmall;
             position: relative;
-            box-shadow: $cardInterActiveShadow;
-            padding: 4px;
-            margin: 5px;
+            padding: 5px;
+            margin: 2px;
+            padding-right: 20px;
             i{
                 font-size: 12px;
                 vertical-align: middle;             
             }
         }
 
+        .reminder{
+            cursor: pointer;
+            display: inline-block;
+            border-radius: 10px;
+            font-size: $tooSmall;
+            border: 1px solid rgba($grey, 0.2);
+            position: relative;
+            padding: 5px;
+            margin: 2px;
+            padding-right: 20px;
+            margin-bottom: 18px;
+
+            i{
+                font-size: 12px;
+                vertical-align: middle;             
+            }
+        }
+
+        .reminder  , .labels  {
+            span{
+                display: none;
+                cursor: pointer;
+                position: absolute;
+                right: 8px;
+            }
+            &:hover{
+                span{
+                    display: inline;
+                }
+            }
+       }
         &:hover{
         box-shadow: $cardInterActiveShadow;
             .actions{
                 width: 90%;
                 display: flex;
+                margin-top: 10px;
                 justify-content: space-between;
                 .color{
                     left: 90px;

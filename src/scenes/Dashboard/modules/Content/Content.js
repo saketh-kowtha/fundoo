@@ -6,16 +6,18 @@ import {HashRouter as Router, useRouteMatch ,Switch, Route, Redirect, withRouter
 
 import Layout from './modules/Layout.js'
 
+import geti18N from '../../../../strings'
 
+const {notes, trash, archive, reminders} = geti18N()
 
 const Content = (props) => {
   return <div className="content">
               <Switch>
-                  <Route exact path={`/Notes`} component={() => <Layout name="notes" />} />
-                  <Route path={`/Trash`} component={() => <Layout name="trash" />} />
-                  <Route path={`/Reminders`} component={() => <Layout name="reminders" />} />
-                  <Route path={`/Archive`} component={() => <Layout name="archive" />} />
-                  <Route exact path={`/`} component={() => <Layout name="notes" />} />
+                  <Route exact path={`/Notes`} component={() => <Layout name={notes} />} />
+                  <Route path={`/Trash`} component={() => <Layout name={trash} />} />
+                  <Route path={`/Reminders`} component={() => <Layout name={reminders} />} />
+                  <Route path={`/Archive`} component={() => <Layout name={archive} />} />
+                  <Route exact path={`/`} component={() => <Layout name={notes} />} />
               </Switch>
     </div>
 }

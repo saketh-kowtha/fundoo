@@ -7,15 +7,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './list.scss'
 
-class List extends React.Component  {
+const List = (props) =>  {
   
-    render(){
-        const active = this.props.active
+        const active = props.active
         return <div className="list">
-                    <ul {...this.props}>
+                    <ul {...props}>
                         {
-                            this.props.data.map(
-                                item => <li key={item.label || item.heading} name={item.label} onClick={() => this.props.onSelect ?  this.props.onSelect(item.label) : null}>
+                            props.data.map(
+                                item => <li key={item.label || item.heading} name={item.label} onClick={() => props.onSelect ?  props.onSelect(item.label) : null}>
                                 {
                                     item.heading 
                                         ? <a className="list-heading">{item.heading}</a>
@@ -31,7 +30,7 @@ class List extends React.Component  {
                     </ul>
                 </div>
     }
-}
+
 
 
 export default List

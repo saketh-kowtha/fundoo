@@ -13,19 +13,19 @@ const {emptyNotes, notificationsEmpty, emptyArchive, emptyTrash} = geti18N()
 
 const Empty = (props) => {
     const feild = {
-        "notes": {
+        "Notes": {
             icon: "emoji_objects",
             text: emptyNotes
         },
-        "reminders": {
+        "Reminders": {
             icon: "notifications",
             text: notificationsEmpty
         },
-        "archive": {
+        "Archive": {
             icon: "archive",
             text: emptyArchive
         },
-        "trash": {
+        "Trash": {
             icon: "delete",
             text: emptyTrash
         }

@@ -18,9 +18,14 @@ import http from "../../../../services/http"
 import {primary, secondary} from '../../../../config/sidebarItems'
 import Loading from '../../../../components/Loading';
 
+import geti18N from '../../../../strings'
+
+import {ERROR} from '../../../../constants.js'
+
+const {notes, inValidLabel, labelExist, labels, newLabel, editLabels} = geti18N()
 class Sidebar extends React.PureComponent{
     state = {
-        activeElement: this.props.location && this.props.location.pathname ? this.props.location.pathname.slice(1, this.props.location.pathname.length) : "Notes",
+        activeElement: this.props.location && this.props.location.pathname ? this.props.location.pathname.slice(1, this.props.location.pathname.length) : notes,
         modal: false,
         labelInput: ""
     }
@@ -43,7 +48,7 @@ class Sidebar extends React.PureComponent{
             action("FETCH_LABELS")
         })
         .catch(error => {
-            console.log("Error", error)
+            console.log(ERROR, error)
         })
     }
 
@@ -51,18 +56,18 @@ class Sidebar extends React.PureComponent{
         //Validation Required
         let label = this.labelInput[index].value
         if(!label || label === "" || label.trim() === "" ){
-            return showToast("Invalid Label Name", "error")
+            return showToast(inValidLabel, ERROR)
         }
 
         if(this.props.labels.data.filter(ele => label === ele.label).length != 0)
-            return showToast("Label already Exist", "error")
+            return showToast(labelExist, ERROR)
         http.updateNoteLabel(id, {label: this.labelInput[index].value})
         .then(success => {
             console.log("Success", success)
             action("FETCH_LABELS")
         })
         .catch(error => {
-            console.log("Error", error)
+            console.log(ERROR, error)
         })
 
     }
@@ -70,17 +75,17 @@ class Sidebar extends React.PureComponent{
     newLabel = (index) => {
         let label = this.labelInput[index].value
         if(!label || label === "" || label.trim() === "" ){
-            return showToast("Invalid Label Name", "error")
+            return showToast(inValidLabel, ERROR)
         }
         if(this.props.labels.data.filter(ele => label === ele.label).length != 0)
-            return showToast("Label already Exist", "error")
+            return showToast(labelExist, ERROR)
         http.newLabel({label, isDeleted: false, userId: this.props.userId})
         .then(success => {
             console.log("Success", success)
             action("FETCH_LABELS")
         })
         .catch(error => {
-            console.log("Error", error)
+            console.log(ERROR, error)
         })
     }
 
@@ -116,9 +121,9 @@ class Sidebar extends React.PureComponent{
                     ? <Loading type="small"/>
                     : <List key="labels" data={
                             [
-                                { heading: "Labels" },
+                                { heading: labels },
                                 ...this.props.labels.data.map(label => ({label: label.label, icon: "label"})),
-                                { label: "Edit Labels", icon: 'edit', onClick: () => this.setState({ modal: true }) },
+                                { label: editLabels, icon: 'edit', onClick: () => this.setState({ modal: true }) },
                             ]
                         } />
             }
@@ -138,7 +143,7 @@ class Sidebar extends React.PureComponent{
                         {
                             this.props.labels.loading || !this.props.labels || !this.props.labels.data 
                                 ? <Loading type="small"/>
-                                :[...this.props.labels.data.map(this.modalItem), this.modalItem("New Label", true)]
+                                :[...this.props.labels.data.map(this.modalItem), this.modalItem(newLabel, true)]
                         }
                         </Modal>
                     : null

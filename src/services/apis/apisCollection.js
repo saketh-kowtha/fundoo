@@ -85,7 +85,16 @@ const APIS = {
     deleteForeverNotes: {
         method: POST,
         url: `${URL}/api/notes/deleteForeverNotes` 
+    },
+    removeLabel: {
+        method: POST,
+        url: (notesId, labelId) => `${URL}/api/notes/${notesId}/addLabelToNotes/${labelId}/remove`
+    },
+    removeReminderNotes: {
+        method: POST,
+        url: `${URL}/api/notes/removeReminderNotes`
     }
+    
 
 }
 

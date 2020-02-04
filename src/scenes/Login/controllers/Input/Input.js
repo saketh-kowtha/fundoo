@@ -62,7 +62,7 @@ class LoginInput extends React.PureComponent {
             name = this.props.name.toLowerCase().replace(/\s/g,'')
 
         return <div className={className.join(" ")} onClick={() => this.props.onClick ? this.props.onClick(this.props.label) : ""}>
-                    <input value={this.state.input} disabled={this.props.disabled == "true" ? true : false} name={name} type={this.props.secret ? "password" : "text"} onChange={this.handleInput} onKeyDown={this.handleInputKeyPress}/>
+                    <input tabindex="1" value={this.state.input} disabled={this.props.disabled == "true" ? true : false} name={name} type={this.props.secret ? "password" : "text"} onChange={this.handleInput} onKeyDown={this.handleInputKeyPress}/>
                     {this.props.disabled !== "true" ? <span>{this.props.label}</span> : ""}
                     <span className="input-error-msg">{this.state.errorMsg}</span>
                 </div>
