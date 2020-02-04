@@ -174,6 +174,21 @@ http.archiveNotes = (data) => new Promise((resolve, reject) => {
     .catch((error) => reject(error.response))
 })
 
+http.trashNotes = (data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['trashNotes']
+    let payLoad = {
+        isDeleted: !data.isDeleted,
+        noteIdList: [data.id]
+    }
+    axios({
+        url: url,
+        method: method,
+        data: payLoad
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
 
 http.deleteLabel = (id) => new Promise((resolve, reject) => {
     let { url, method } = APIS['deleteLabel']
@@ -206,5 +221,39 @@ http.newLabel = (data) => new Promise((resolve, reject) => {
     .then((success) => resolve(success.data))
     .catch((error) => reject(error.response))
 })
+
+
+http.changesColorNotes = (data, color) => new Promise((resolve, reject) => {
+    let payLoad = {
+        noteIdList: [data.id],
+        color: color
+    }
+    let { url, method } = APIS['changesColorNotes']
+    axios({
+        method,
+        url,
+        data: payLoad
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+
+http.deleteForeverNotes = (id) => new Promise((resolve, reject) => {
+    let payLoad = {
+        noteIdList: [id],
+    }
+    let { url, method } = APIS['deleteForeverNotes']
+    axios({
+        method,
+        url,
+        data: payLoad
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+
+
 export default http
 

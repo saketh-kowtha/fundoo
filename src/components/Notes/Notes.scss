@@ -1,5 +1,4 @@
 @import "../../../index.scss";
-
 .notes{
     display: flex;
     width: 90%;
@@ -7,13 +6,12 @@
     margin-top: 10px;
     flex-wrap: wrap;
     justify-content: center;
-
+    align-items: flex-start;
     .note{
         position: relative;
         width: 238px;
-        min-height: 104px;
+        min-height: 50px;
         margin: 10px;
-        z-index: 0;
         padding: 20px;
         color : $grey;
         font-size: $large;
@@ -35,6 +33,7 @@
         }
 
         .collaberator{
+            cursor: pointer;
             border-radius: 50%;
             margin: 45px 0px 20px 5px;
             padding: 4px;
@@ -46,6 +45,7 @@
         }
 
         .reminder{
+            cursor: pointer;
             border-radius: 10px;
             font-size: $tooSmall;
             position: relative;
@@ -64,18 +64,57 @@
                 width: 90%;
                 display: flex;
                 justify-content: space-between;
+                .color{
+                    left: 90px;
+                }
+                .menu {
+                    right: 0px;
+                }
+                .dropdown{
+                    position: absolute;
+                    z-index: 1;
+                    top: 35px;
+                    .color-list{
+                        &{
+                            left: 90px;
+                        }
+                        padding: 10px;
+                        background-color: $white;
+                        display: flex;
+                        width: 90px;
+                        flex-wrap: wrap;
+                        div{
+                            min-width: 30px;
+                            min-height: 30px;
+                            border-radius: 50%;
+                            margin: 5px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .more-menu{
+                        width: auto;
+                        padding: 10px;
+                        font-size: $tooSmall;
+                        font-weight:100;
+                        li .list-item{
+                            border-radius: 5px;
+                            padding: 10px;
+                        }
+                    }
+                }
+                .material-icons-outlined{
+                    cursor: pointer;
+                    padding: 5px;
+                    border-radius: 50%;
+                    &:hover{
+                        background-color: $selectableHover;
+                    }
+                }
             }
 
             .pin{
                 display: block;
-            }
-            .material-icons-outlined{
-                cursor: pointer;
-                padding: 5px;
-                border-radius: 50%;
-                &:hover{
-                    background-color: $selectableHover;
-                }
             }
         }
 

@@ -16,6 +16,7 @@ import Login from './src/scenes/Login/Login'
 import Dashboard from './src/scenes/Dashboard/Dashboard'
 import NotFound from './src/scenes/NotFound/NotFound'
 
+import ProtectedRoute from './src/config/ProtectedRoute.js'
 
 import {LOGIN, SIGNUP, RESETPASSWORD} from './src/constants'
 
@@ -34,15 +35,14 @@ history.listen((location, action) => {
  * @class App
  * @description Root Component of this project routes are declared here
  */
-export default class App extends React.Component {
-		render() {
+const App = (props) => {
 				return (
 						<Router history={history} basename={"/"}>
 							<Switch>
-								<Route path="/login" component={() => <Login view={LOGIN}/>} />
-								<Route path="/signup" component={() => <Login view={SIGNUP}/>} />
-								<Route path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
-								<Route path="/Dashboard" component={Dashboard} />
+								<ProtectedRoute role="login" path="/login" component={() => <Login view={LOGIN}/>} />
+								<ProtectedRoute role="login" path="/signup" component={() => <Login view={SIGNUP}/>} />
+								<ProtectedRoute role="login" path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
+								<ProtectedRoute path="/Dashboard" component={Dashboard} />
 								<Route exact path="/">
 									{() => history.push("/login")}
 								</Route>
@@ -50,5 +50,21 @@ export default class App extends React.Component {
 							</Switch>
 					</Router>
 				)
-		}
 }
+
+export default App
+
+
+/**
+ * 
+ // TODO: 1. New Notes Component
+ // TODO: 2. Update Notes Component
+ // TODO: 3. ADD Reminder Modal
+ // TODO: 4. Add Labels Dropdown
+ // TODO: 5. Labels to Card View
+ // TODO: 6. Delete Reminder
+ // TODO: 7. Responsive Searchbar
+ // TODO: 8. Search Feature
+ // TODO: 9. Auth
+ * 
+ */

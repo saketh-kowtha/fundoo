@@ -29,6 +29,11 @@ class Layout extends React.PureComponent{
     }
 
     fetchArchive() {
+        action("FETCH_ARCHIVE")
+    }
+
+    fetchTrash() {
+        action("FETCH_TRASH")
     }
 
 
@@ -54,13 +59,14 @@ class Layout extends React.PureComponent{
     render() {
         if (!this.props.items || this.props.loading)
             return <Loading />
-        
+
+        console.log(this.props.name)
         return <React.Fragment>
-                {
-                    this.props.items && this.props.items.length === 0 
-                        ? <Empty name={this.props.name} />
+            {
+                this.props.items && this.props.items.length === 0 
+                    ? <Empty name={this.props.name} />
                     : <Notes data={this.props.items} type={this.props.name}/>
-               }
+            }
         </React.Fragment>        
     }
 

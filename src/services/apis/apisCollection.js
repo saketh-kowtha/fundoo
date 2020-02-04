@@ -73,7 +73,20 @@ const APIS = {
     newLabel: {
         method: POST,
         url: `${URL}/api/noteLabels` 
+    },
+    changesColorNotes: {
+        method: POST,
+        url: `${URL}/api/notes/changesColorNotes` 
+    },
+    trashNotes: {
+        method: POST,
+        url: `${URL}/api/notes/trashNotes` 
+    },
+    deleteForeverNotes: {
+        method: POST,
+        url: `${URL}/api/notes/deleteForeverNotes` 
     }
+
 }
 
 export default APIS
