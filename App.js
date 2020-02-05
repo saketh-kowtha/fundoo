@@ -71,10 +71,8 @@ export default App
 /**
  * 
  // TODO: 1. New Notes Component
- // TODO: 2. Update Notes Component
- // TODO: 3. ADD Reminder Modal
- // TODO: 4. Add Labels Dropdown
- // TODO: 7. Responsive Searchbar
- // TODO: 8. Search Feature
+ // TODO: 2. ADD Reminder Modal
+ // TODO: 3. Add Labels Dropdown
+ // TODO: 5. Testing
  * L
  */

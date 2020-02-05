@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../../../../components/Card'
-import {Menu, Replay, GridOnSharp,  SettingsSharp, Search, ArrowBack, ViewModuleOutlined, ViewColumn, ViewStream } from '@material-ui/icons/'
+import {Menu, Replay, GridOnSharp,  SettingsSharp, Search, ArrowBack, ViewModuleOutlined, ViewColumn, ViewStream,CloseOutlined } from '@material-ui/icons/'
 import './Header.scss'
 import logo from '../../../../../assets/logo.png'
 import {connect} from 'react-redux'
@@ -20,14 +20,19 @@ class Header extends React.Component{
         this.state = {
             mobileSearchView: false,
             showActionCard: false,
+            searchQuery: "",
+            queryCount: 0,
             height: window.matchMedia && window.matchMedia("(max-width: 768px)") || {}
         }
         this.colors=["purple", "blue", "green", "pink", "orange", "merun"]
+        this.count = 0
     }
    
 
     toggleMobileSearchView = () => {
         this.setState({mobileSearchView: !this.state.mobileSearchView})
+        if(this.state.mobileSearchView)
+            this.handleCloseBtn()
     }
 
     openFileDilog = () => {
@@ -55,8 +60,17 @@ class Header extends React.Component{
     }
 
     queryNotesList = (event) => {
-        // const query = event.target.value
-        // this.props.notes.filter(item => item.title.indexOf(query) > -1 || item.description.indexOf(query) >-1 || item.)
+        if(!this.state.searchQuery)
+            this.setState({closeBtn: true})
+        this.setState({searchQuery: event.target.value, queryCount: this.state.queryCount + 1}, () => {
+            this.props.history.push("/Search/" + this.state.searchQuery)
+        })
+    }
+
+    handleCloseBtn = () => {
+        this.props.history.go((this.state.queryCount * -1))
+        console.log(this.state.queryCount)
+        this.setState({closeBtn: false, searchQuery: "", queryCount: 0})
     }
 
     render() {
@@ -73,13 +87,22 @@ class Header extends React.Component{
                 <div><strong>{this.props.title}</strong></div>
             </div>
 
-            <div className="center">
+            <div className="center" >
                 {
                         !this.state.mobileSearchView
                             ? <Search className="search-icon nav-icon"/>
                             : <ArrowBack onClick={this.toggleMobileSearchView} className="nav-icon left-icon"/>
                 }
-                <input type="text" onChange={this.queryNotesList} placeholder={search}/>
+                {
+                    !this.state.height.matches || this.state.mobileSearchView
+                        ? <input type="text" value={this.state.searchQuery} onChange={this.queryNotesList} placeholder={search}/>
+                        : null
+                }
+                {
+                    this.state.closeBtn 
+                        ? <CloseOutlined onClick={this.handleCloseBtn} className="nav-icon close-btn"/>
+                        : null
+                }
 
             </div>
 

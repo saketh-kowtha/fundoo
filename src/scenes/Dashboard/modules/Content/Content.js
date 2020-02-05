@@ -12,6 +12,8 @@ import geti18N from '../../../../strings'
 
 const {notes, trash, archive, reminders} = geti18N()
 
+import Search from '../../modules/Content/modules/Search'
+
 const Content = (props) => {
   return <div className="content">
               <Switch>
@@ -21,6 +23,7 @@ const Content = (props) => {
                   <Route path={`/Archive`} component={() => <Layout name={archive} />} />
                   <Route exact path={`/`} component={() => <Redirect to={'/Notes'} />} />
                   <Route exact path={`/Note/:id`} component={UpdateNotes} />
+                  <Route exact path={`/Search/:query`} component={Search} />
               </Switch>
     </div>
 }
