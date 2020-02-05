@@ -4,6 +4,7 @@ import { put, takeEvery, call, all, delay } from 'redux-saga/effects'
 import axios from '../services/http/axios'
 import APIS from '../services/apis/apisCollection'
 
+import {SET_LAYOUT_ITEM_LOADING, SET_LAYOUT_ITEM} from '../constants'
 
 /**
  * Notes
@@ -11,14 +12,14 @@ import APIS from '../services/apis/apisCollection'
 function* getNoteList() {
     let { url } = APIS["notesList"]
     try {
-        yield put({type: "SET_LAYOUT_ITEM_LOADING"})
+        yield put({type: SET_LAYOUT_ITEM_LOADING})
         const response = yield call(axios.get, url)
         if(response && response.data && response.data.data && response.data.data.success)
-            yield put({type: "SET_LAYOUT_ITEM", data: response.data.data.data })
+            yield put({type: SET_LAYOUT_ITEM, data: response.data.data.data })
     }
     catch(err){
         console.log(err)
-        yield put({type: "SET_LAYOUT_ITEM", data: "Error" })
+        yield put({type: SET_LAYOUT_ITEM, data: "Error" })
     }
 }
 
@@ -26,10 +27,10 @@ function* getNoteList() {
 function* getRemindersList() {
     let { url } = APIS["remindersList"]
     try {
-        yield put({type: "SET_LAYOUT_ITEM_LOADING"})
+        yield put({type: SET_LAYOUT_ITEM_LOADING})
         const response = yield call(axios.get, url)
         if(response && response.data && response.data.data && response.data.data.success)
-            yield put({type: "SET_LAYOUT_ITEM", data: response.data.data.data })
+            yield put({type: SET_LAYOUT_ITEM, data: response.data.data.data })
     }
     catch(err){
         console.log(err)

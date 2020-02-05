@@ -16,6 +16,8 @@ import geti18N from '../../../../../strings'
 
 const {notes, trash, archive, reminders} = geti18N()
 
+import {FETCH_NOTES, FETCH_REMINDERS, FETCH_ARCHIVE, FETCH_TRASH} from '../../../../../constants'
+
 class Layout extends React.PureComponent{
 
     constructor(props) {
@@ -24,20 +26,21 @@ class Layout extends React.PureComponent{
 
 
     fetchNotes() {
-        action("FETCH_NOTES")
+        action(FETCH_NOTES)
     }
 
     fetchReminders() {
-        action("FETCH_REMINDERS")
+        action(FETCH_REMINDERS)
     }
 
     fetchArchive() {
-        action("FETCH_ARCHIVE")
+        action(FETCH_ARCHIVE)
     }
 
     fetchTrash() {
-        action("FETCH_TRASH")
+        action(FETCH_TRASH)
     }
+
 
 
     UNSAFE_componentWillMount() {
@@ -63,7 +66,6 @@ class Layout extends React.PureComponent{
         if (!this.props.items || this.props.loading)
             return <Loading />
 
-        console.log(this.props.name)
         return <React.Fragment>
             {
                 this.props.items && this.props.items.length === 0 
@@ -77,7 +79,7 @@ class Layout extends React.PureComponent{
 
 
 
-const mapStateToProps = (state) => ({ items: state.layout.data, loading: state.layout.loading })
+const mapStateToProps = (state) => ({ items: state.notes.data, loading: state.notes.loading })
 
 
 export default connect(mapStateToProps, null)(Layout)

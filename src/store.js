@@ -45,6 +45,6 @@ store.subscribe(() => {
 
 sagaMiddleWare.run(rootSaga) 
 
-export const action = (type) => store.dispatch({type})
+export const action = (type, data = null) => store.dispatch({type, data});
 
 export default store

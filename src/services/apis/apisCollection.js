@@ -93,8 +93,15 @@ const APIS = {
     removeReminderNotes: {
         method: POST,
         url: `${URL}/api/notes/removeReminderNotes`
+    },
+    getNoteById: {
+        method: GET,
+        url: (id) => `${URL}/api/notes/getNotesDetail/${id}`
+    },
+    updateNotes: {
+        method: POST,
+        url :`${URL}/api/notes/updateNotes`
     }
-    
 
 }
 

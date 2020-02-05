@@ -165,7 +165,7 @@ http.archiveNotes = (data) => new Promise((resolve, reject) => {
         isArchived: !data.isArchived,
         noteIdList: [data.id]
     }
-    axios({
+    return axios({
         url: url,
         method: method,
         data: payLoad
@@ -273,6 +273,39 @@ http.removeReminderNotes = (notesId) => new Promise((resolve, reject) => {
         method,
         url,
         data: payLoad
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+
+http.getNoteById = (id) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['getNoteById']
+    axios({
+        method,
+        url: url(id)
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+http.getNoteById = (id) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['getNoteById']
+    axios({
+        method,
+        url: url(id)
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+http.updateNotes = (data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['updateNotes']
+    delete data.type
+    axios({
+        method,
+        url,
+        data
     })
     .then((success) => resolve(success.data))
     .catch((error) => reject(error.response))

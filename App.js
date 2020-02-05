@@ -35,21 +35,34 @@ history.listen((location, action) => {
  * @class App
  * @description Root Component of this project routes are declared here
  */
-const App = (props) => {
-				return (
-						<Router history={history} basename={"/"}>
-							<Switch>
-								<ProtectedRoute role="login" path="/login" component={() => <Login view={LOGIN}/>} />
-								<ProtectedRoute role="login" path="/signup" component={() => <Login view={SIGNUP}/>} />
-								<ProtectedRoute role="login" path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
-								<ProtectedRoute path="/Dashboard" component={Dashboard} />
-								<Route exact path="/">
-									{() => history.push("/login")}
-								</Route>
-								<Route component={NotFound}/>
-							</Switch>
-					</Router>
-				)
+class App extends React.Component{
+	state={
+		error: false
+	}
+	componentDidCatch(error, info) {
+        this.setState({
+         error: error + "<br />" + info.componentStack.replace(new RegExp('\r?\n','g'), '<br />')
+        });
+	}
+	render(){
+		if(this.state.error)
+	return <div dangerouslySetInnerHTML={{__html:this.state.error}} />
+
+		return (
+			<Router history={history} basename={"/"}>
+				<Switch>
+					<ProtectedRoute role="login" path="/login" component={() => <Login view={LOGIN}/>} />
+					<ProtectedRoute role="login" path="/signup" component={() => <Login view={SIGNUP}/>} />
+					<ProtectedRoute role="login" path="/resetpassword" component={() => <Login view={RESETPASSWORD} />} />
+					<ProtectedRoute path="/Dashboard" component={Dashboard} />
+					<Route exact path="/">
+						{() => history.push("/login")}
+					</Route>
+					<Route component={NotFound}/>
+				</Switch>
+		</Router>
+	)
+	}
 }
 
 export default App
@@ -63,5 +76,5 @@ export default App
  // TODO: 4. Add Labels Dropdown
  // TODO: 7. Responsive Searchbar
  // TODO: 8. Search Feature
- * 
+ * L
  */

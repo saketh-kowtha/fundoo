@@ -30,7 +30,7 @@ class Sidebar extends React.PureComponent{
         labelInput: ""
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.labelInput = []
         action("FETCH_LABELS")
     }
@@ -90,18 +90,18 @@ class Sidebar extends React.PureComponent{
     }
 
     modalItem = (item, index) => {
-        return <div key={item} className="modal-item">
+        return <div key={item} tabIndex="-1" className="modal-item">
                     {
                         index === true
-                        ? <i className="material-icons-outlined" onClick={()=> {this.labelInput[index].value = ""; this.labelInput[index].focus()}}>close</i>
-                        : <i className="material-icons-outlined" for="bin" onClick={() => this.deleteLabel(item.id)}></i>
+                        ? <i className="material-icons-outlined" tabIndex="1" onClick={()=> {this.labelInput[index].value = ""; this.labelInput[index].focus()}}>close</i>
+                        : <i className="material-icons-outlined" tabIndex="2"  for="bin" onClick={() => this.deleteLabel(item.id)}></i>
 
                     }
-                    <input ref={(ref) => this.labelInput[index] = ref} defaultValue={item.label} type="text" autoFocus={true} />
+                    <input ref={(ref) => this.labelInput[index] = ref} tabIndex="2" defaultValue={item.label} type="text" autoFocus={true} />
                     {
                         index === true
-                        ? <i className="material-icons-outlined" onClick={() => this.newLabel(index)}>add</i>
-                        : <i className="material-icons-outlined"  for="edit" onClick={() => this.updateLabel(item.id, index)}>done</i>
+                        ? <i className="material-icons-outlined" tabIndex="1" onClick={() => this.newLabel(index)}>add</i>
+                        : <i className="material-icons-outlined" tabIndex="2"  for="edit" onClick={() => this.updateLabel(item.id, index)}>done</i>
                     }
                     
                 </div>
@@ -139,7 +139,7 @@ class Sidebar extends React.PureComponent{
             {   
                 this.state.modal
                     ? 
-                        <Modal onClose={() => this.setState({modal: false})}>
+                        <Modal onClose={() => this.setState({modal: false})} closeBtn={true}>
                         {
                             this.props.labels.loading || !this.props.labels || !this.props.labels.data 
                                 ? <Loading type="small"/>

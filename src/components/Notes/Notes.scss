@@ -1,5 +1,6 @@
 @import "../../../index.scss";
-.notes{
+
+.notes {
     display: flex;
     width: 90%;
     margin: 0 auto;
@@ -7,32 +8,33 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    .note{
+
+    .note {
         position: relative;
         width: 238px;
         margin: 10px;
         padding: 20px;
-        color : $grey;
+        color: $grey;
         font-size: $large;
         border: 1px solid $borderColor;
         font-weight: bold;
         border-radius: 5px;
         text-align: left;
-    
-        .title{
+
+        .title {
             font-size: $small;
             color: $black;
-            display: block;   
+            display: block;
         }
 
-        .description{
+        .description {
             display: block;
             max-height: 500px;
             overflow: auto;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .collaberator{
+        .collaberator {
             cursor: pointer;
             border-radius: 50%;
             margin: 45px 0px 20px 5px;
@@ -41,10 +43,11 @@
             font-size: $tooSmall;
             text-align: center;
             display: inline-block;
+            margin-bottom: 20px;
             // box-shadow: $cardInterActiveShadow;
         }
 
-        .labels{
+        .labels {
             display: inline-block;
             border-radius: 10px;
             border: 1px solid rgba($grey, 0.2);
@@ -53,13 +56,15 @@
             padding: 5px;
             margin: 2px;
             padding-right: 20px;
-            i{
+            margin-bottom: 20px;
+
+            i {
                 font-size: 12px;
-                vertical-align: middle;             
+                vertical-align: middle;
             }
         }
 
-        .reminder{
+        .reminder {
             cursor: pointer;
             display: inline-block;
             border-radius: 10px;
@@ -69,96 +74,118 @@
             padding: 5px;
             margin: 2px;
             padding-right: 20px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
 
-            i{
+            i {
                 font-size: 12px;
-                vertical-align: middle;             
+                vertical-align: middle;
             }
         }
 
-        .reminder  , .labels  {
-            span{
+        .reminder,
+        .labels {
+            span {
                 display: none;
                 cursor: pointer;
                 position: absolute;
                 right: 8px;
             }
-            &:hover{
-                span{
+
+            &:hover {
+                span {
                     display: inline;
                 }
             }
-       }
-        &:hover{
-        box-shadow: $cardInterActiveShadow;
-            .actions{
-                width: 90%;
-                display: flex;
-                margin-top: 10px;
-                justify-content: space-between;
-                .color{
-                    left: 90px;
-                }
-                .menu {
-                    right: 0px;
-                }
-                .dropdown{
-                    position: absolute;
-                    z-index: 1;
-                    top: 35px;
-                    .color-list{
-                        &{
-                            left: 90px;
-                        }
-                        padding: 10px;
-                        background-color: $white;
-                        display: flex;
-                        width: 90px;
-                        flex-wrap: wrap;
-                        div{
-                            min-width: 30px;
-                            min-height: 30px;
-                            border-radius: 50%;
-                            margin: 5px;
-                            cursor: pointer;
-                        }
+        }
+
+        .actions {
+            width: 90%;
+            display: flex;
+            margin-top: 15px;
+            justify-content: space-between;
+
+            .color {
+                left: 90px;
+            }
+
+            .menu {
+                right: 0px;
+            }
+
+            .dropdown {
+                position: absolute;
+                z-index: 1;
+                top: 35px;
+
+                .color-list {
+                    & {
+                        left: 90px;
                     }
 
-                    .more-menu{
-                        width: auto;
-                        padding: 10px;
-                        font-size: $tooSmall;
-                        font-weight:100;
-                        li .list-item{
-                            border-radius: 5px;
-                            padding: 10px;
-                        }
+                    padding: 10px;
+                    background-color: $white;
+                    display: flex;
+                    width: 90px;
+                    flex-wrap: wrap;
+
+                    div {
+                        min-width: 30px;
+                        min-height: 30px;
+                        border-radius: 50%;
+                        margin: 5px;
+                        cursor: pointer;
                     }
                 }
-                .material-icons-outlined{
-                    cursor: pointer;
-                    padding: 5px;
-                    border-radius: 50%;
-                    &:hover{
-                        background-color: $selectableHover;
+
+                .more-menu {
+                    width: auto;
+                    padding: 10px;
+                    font-size: $tooSmall;
+                    font-weight: 100;
+
+                    li .list-item {
+                        border-radius: 5px;
+                        padding: 10px;
                     }
                 }
             }
 
-            .pin{
+            .material-icons-outlined {
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 50%;
+
+                &:hover {
+                    background-color: $selectableHover;
+                }
+            }
+
+            .closeBtn {
+                display: none;
+            }
+        }
+
+
+        &:hover {
+            box-shadow: $cardInterActiveShadow;
+
+            .actions {
+                display: flex;
+            }
+
+            .pin {
                 display: block;
             }
         }
 
-        .pin{
+        .pin {
             position: absolute;
             right: 10px;
             top: 10px;
             display: none;
         }
 
-        .actions{
+        .actions {
             position: absolute;
             bottom: 5px;
             display: none;
@@ -166,23 +193,71 @@
     }
 }
 
-.grid-row{
+.grid-row {
     flex-direction: row;
 }
 
-.grid-column{
+.grid-column {
     flex-direction: column;
-    .note{
+
+    .note {
         width: 500px;
         margin: 0 auto;
         margin-top: 10px;
     }
 }
 
-@media only screen and (max-width: 768px){
-    .grid-row, .grid-column{
-        .note{
-            width: 100%;
+.modal>.notes>div {
+    width: 50%;
+    margin-top: 80px;
+
+    .note {
+        width: 100%;
+        min-height: 100px;
+        padding: 20px;
+
+        .pin,
+        .actions {
+            display: flex;
+
+            .closeBtn {
+                display: inline;
+                font-size: $small;
+                margin-top: 10px;
+                cursor: pointer;
+            }
         }
     }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .grid-row,
+    .grid-column {
+        .note {
+            width: 100%;
+            min-height: 100px;
+        }
+    }
+
+    .modal{
+        display: flex;
+        align-items: center;
+    }
+    .modal>.notes>div {
+        width: 95%;
+        margin: 0px;
+        .note{
+            width: 90%;
+            min-height: 200px;
+        }
+    }
+
+    .modal>.notes {
+        display: block;
+        width: 100%;
+        margin: 0px;
+        margin: 0 auto;
+    }
+
 }

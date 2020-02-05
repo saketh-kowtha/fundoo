@@ -13,9 +13,10 @@ import {useSelector} from 'react-redux'
 import Card from '../Card'
 import List from '../List'
 
-import {NOTES_COLORS, ERROR} from '../../constants.js'
+import {NOTES_COLORS, ERROR, FETCH_TRASH} from '../../constants.js'
 import geti18N from '../../strings'
-import Empty from '../Empty'
+
+import { withRouter } from "react-router-dom";
 
 const {updatedSuccessfullyMsg, somethingWrong, movedToTrash, recoverSuccessfully, deletedSuccessfully, recover, deletePeremently, deleteNotes, notes, trash, archive} = geti18N()
 /**
@@ -27,7 +28,7 @@ const Notes = (props) => {
     const store = useSelector(store => store)
     return <div className={"notes" + (store.layout.grid === "column" ? " grid-column" : " grid-row")}>
         {
-            props.data.map(item => <Note key={item.title} item={item} type={props.type}/>)    
+            props.data.map(item => <Note history={props.history} key={item.title} item={item} type={props.type}/>)    
         }
     </div>
 }
@@ -37,24 +38,26 @@ const Notes = (props) => {
  * @author Kowtha Saketh
  * @description Note Component Individual Notes Card
  */
+
 export class Note extends React.Component{
-    //Constructor
-    constructor(props) {
-        super(props)
-        this.state = {
-            pin: this.props.item.isPined || false,
-            isArchived: this.props.item.isArchived || false,
-            isDeleted: this.props.item.isDeleted || false,
-            color: this.props.item.color || "",
-            showColorPlate: false,
-            showMoreOptions: false
-        }
+    state = {
+        pin: this.props.item.isPined || false,
+        isArchived: this.props.item.isArchived || false,
+        isDeleted: this.props.item.isDeleted || false,
+        color: this.props.item.color || "",
+        showColorPlate: false,
+        showMoreOptions: false
     }
 
     /**
      * @name handleArchive
      * @description Handles Notes Archive Action
      */
+
+     //sagas
+    // handleArchive = () => {
+    //     action("UPDATE_ARCHIVE", this.props.item)
+    // }
     handleArchive = () => {
         http.archiveNotes(this.props.item).then(success => {
             if (success.data.success === true) {
@@ -76,7 +79,7 @@ export class Note extends React.Component{
         http.deleteForeverNotes(this.props.item.id).then(success => {
             if (success.data.success === true) {
                 showToast(deletedSuccessfully)
-                return action("FETCH_TRASH")
+                return action(FETCH_TRASH)
             }
             return showToast(somethingWrong, ERROR)
         })
@@ -184,6 +187,26 @@ export class Note extends React.Component{
         </div>
     }
 
+    updatedContent = (e) => {
+        this.setState({
+            [e.currentTarget.getAttribute("name")]: e.currentTarget.textContent
+        })
+    }
+
+    handleNotesUpdate = () => {
+        if(!this.state.title && !this.state.description)
+            return this.props.history.go(-1)
+        else if((this.state.title && this.state.title === this.props.item.title) || (this.state.description && this.state.description === this.props.item.description))
+            return this.props.history.go(-1)
+        action("UPDATE_NOTES", {
+            title: this.state.title || this.props.item.title, 
+            description: this.state.description || this.props.item.description, 
+            type: this.props.type,
+            noteId: this.props.item.id
+        })
+        this.props.history.go(-1)
+    }
+
     getNotesView = () => {
         const allowDrop = (ev) => ev.preventDefault();
           
@@ -212,7 +235,7 @@ export class Note extends React.Component{
             
                 P1.removeChild(T1);
                 P2.removeChild(T2);
-            }
+            } 
         }
 
         let reminder = []
@@ -225,9 +248,11 @@ export class Note extends React.Component{
                 return `${month} ${day}, ${time}`
             })
         }
-        return <div tabindex="0" className={"note"} style={{backgroundColor: this.state.color}} onDrop={()=>drop(event)} id={this.props.item.id} onDragOver={()=>allowDrop(event)} draggable={"true"} onDragStart={() => drag(event)}>
-                <span className="title" dangerouslySetInnerHTML={{__html: this.props.item.title}} />
-                <span className="description" dangerouslySetInnerHTML={{ __html: this.props.item.description }} />
+        return <div tabIndex="0" editable={this.props.edit ? true : false}  className={"note"}  style={{backgroundColor: this.state.color}} onDrop={()=>drop(event)} id={this.props.item.id} onDragOver={()=>allowDrop(event)} draggable={"true"} onDragStart={() => drag(event)}>
+                <section onClick={this.props.edit ? ()=>{} : () => this.props.history.push("/Note/" + this.props.item.id)}>
+                    <div contentEditable={this.props.edit ? true : false} name="title" className="title" onBlur={this.updatedContent} dangerouslySetInnerHTML={{__html: this.props.item.title}} />
+                    <div contentEditable={this.props.edit ? true : false} name="description" onBlur={this.updatedContent} className="description" dangerouslySetInnerHTML={{ __html: this.props.item.description }} />
+                </section>
                 {
                     this.props.item.noteLabels.map(label => 
                         <div key={label.label} title={"Label: " + label.label} className="labels" >
@@ -265,6 +290,7 @@ export class Note extends React.Component{
                     {
                         this.state.showMoreOptions ? this.moreOptions() : null
                     }
+                    <span className="closeBtn" onClick={this.handleNotesUpdate}>Close</span>
                 </div>
             </div>
     }
@@ -292,5 +318,4 @@ export class Note extends React.Component{
 
 
 
-
-export default Notes
+export default withRouter(Notes)

@@ -10,11 +10,11 @@ import "./modal.scss"
 
 const Modal = (props) => {
     return <div className="modal">
-                <div className="modal-content">
+                <div className={(props.className ? ` ${props.className}` : "modal-content")}>
                     <div>
                         {props.children}
                     </div>
-                    <span className="close" onClick={props.onClose}>Close</span>        
+                    {props.closeBtn ? <span className="close" onClick={props.onClose}>Close</span> : null}
                 </div>
             </div> 
 }

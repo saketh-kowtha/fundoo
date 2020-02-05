@@ -3,24 +3,20 @@
  * @description Layout reducer
  */
 
-import { SET_LAYOUT_ITEM } from '../constants'
+ import {UPDATE_GRID, TOGGLE_SIDEBAR} from './../constants'
 
 const defaultState = {
-    toggle: false
+    toggle: true
 }
 
 const layout = (state = defaultState, action) => {
     switch(action.type) {
-        case SET_LAYOUT_ITEM:
-            return { ...state, data: action.data, loading: false};
-        case 'SET_LAYOUT_ITEM_LOADING':
-            return { ...state, loading: true }
-        case 'TOGGLE_SIDEBAR':
+        case TOGGLE_SIDEBAR:
             return { ...state, toggle: !state.toggle }
-        case 'UPDATE_GRID':
+        case UPDATE_GRID:
                 return {...state, grid: state.grid==="column" ? "row" : "column"}
-       default:
-         return state;
+        default:
+            return state;
     }
 };
 
