@@ -1,0 +1,91 @@
+@import "../../../index.scss";
+
+.new-notes{
+    width: 40%;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-style: none;
+    padding: 5px;
+    box-shadow: $cardOulinedShadow;
+    text-align:left;
+    margin: 0 auto;
+    input{
+        border-style: none;
+        font-size: $default;
+        display: block;
+        outline: none;
+        color: $grey;
+        background-color: transparent;    
+        margin: 10px;
+    }
+
+    .dropdown {
+        position: absolute;
+        z-index: 1;
+        top: 35px;
+
+        .color-list {
+            & {
+                left: 90px;
+            }
+
+            padding: 10px;
+            background-color: $white;
+            display: flex;
+            width: 90px;
+            flex-wrap: wrap;
+
+            div {
+                min-width: 30px;
+                min-height: 30px;
+                border-radius: 50%;
+                margin: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .label-items{
+            display: inline-block;
+            padding: 3px;
+            margin: 5px;
+            position: relative;
+            font-size: $small;
+            border-radius: 5px;
+            padding-right: 15px;
+            border: 1px solid $borderColor;
+            i {
+                font-size: 12px;
+                vertical-align: middle;
+            }
+
+            span {
+                display: none;
+                cursor: pointer;
+                position: absolute;
+                right: 3px;
+            }
+            &:hover {
+                span {
+                    display: inline;
+                }
+            }
+        }
+
+        .action-items{
+            i{
+                cursor: pointer;
+            }
+            display: flex;
+            padding: 5px 10px;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+    }
+
+
+    @media only screen and (max-width: 768px) {
+        .new-notes{
+            width: 90%;
+        }
+    }

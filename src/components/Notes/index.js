@@ -11,6 +11,7 @@ import { action } from "../../store"
 import {useSelector} from 'react-redux'
 
 import Card from '../Card'
+
 import List from '../List'
 
 import {NOTES_COLORS, ERROR, FETCH_TRASH} from '../../constants.js'
@@ -28,7 +29,7 @@ const Notes = (props) => {
     const store = useSelector(store => store)
     return <div className={"notes" + (store.layout.grid === "column" ? " grid-column" : " grid-row")}>
         {
-            props.data.map(item => <Note history={props.history} key={item.title} item={item} type={props.type}/>)    
+            props.data.map(item => <Note history={props.history} key={item.id} item={item} type={props.type}/>)    
         }
     </div>
 }

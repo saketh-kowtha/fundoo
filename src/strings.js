@@ -57,6 +57,7 @@ const strings =
         newLabel: "New Label",
         editLabels: "Edit Labels",
         labels: "Labels",
+        inValidNotes: "Please provide title or description of notes"
     },
     "fr":{
         title:"Fundoo", 

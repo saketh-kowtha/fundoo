@@ -42,10 +42,27 @@ function* handleNotesChange(payLoad){
     }
 }
 
+function* handleAddNotes(payLoad){
+    try{
+        let response = yield call(http.addNotes, payLoad.data)
+        if(response.status && response.status.success === true){
+            
+            showToast(updatedSuccessfullyMsg)
+        }
+        else
+            yield showToast(somethingWrong, ERROR)
+    }
+    catch(exception){
+        console.log(exception)
+        showToast(somethingWrong, ERROR)       
+    }
+}
+
 
 export default function* notesOperationsSaga() {
     yield all([
         takeEvery(UPDATE_ARCHIVE, handleArchive),
-        takeEvery("UPDATE_NOTES", handleNotesChange)
+        takeEvery("UPDATE_NOTES", handleNotesChange),
+        takeEvery("ADD_NOTES", handleAddNotes)
     ])
 }

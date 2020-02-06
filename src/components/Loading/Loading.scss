@@ -6,7 +6,8 @@
     border: 5px solid rgba($black, 0.1);
     border-radius: 50%;
     border-top: 5px solid rgba($black, 0.6);
-    width: 20px;
+    width: 30px;
+    height: 30px;
     -webkit-animation: spin 1s linear infinite; 
     animation: spin 1s linear infinite;
 }
@@ -22,5 +23,5 @@
 }
 
 .small-loader{
-  height: 20px;
+  height: 30px;
 }

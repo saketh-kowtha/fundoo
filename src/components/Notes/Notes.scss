@@ -20,20 +20,19 @@
         font-weight: bold;
         border-radius: 5px;
         text-align: left;
-
         .title {
             font-size: $small;
             color: $black;
             display: block;
         }
-
+        
         .description {
             display: block;
             max-height: 500px;
             overflow: auto;
             margin-bottom: 20px;
         }
-
+        
         .collaberator {
             cursor: pointer;
             border-radius: 50%;
@@ -46,7 +45,7 @@
             margin-bottom: 20px;
             // box-shadow: $cardInterActiveShadow;
         }
-
+        
         .labels {
             display: inline-block;
             border-radius: 10px;
@@ -57,13 +56,12 @@
             margin: 2px;
             padding-right: 20px;
             margin-bottom: 20px;
-
             i {
                 font-size: 12px;
                 vertical-align: middle;
             }
         }
-
+        
         .reminder {
             cursor: pointer;
             display: inline-block;
@@ -75,13 +73,13 @@
             margin: 2px;
             padding-right: 20px;
             margin-bottom: 20px;
-
+        
             i {
                 font-size: 12px;
                 vertical-align: middle;
             }
         }
-
+        
         .reminder,
         .labels {
             span {
@@ -90,44 +88,44 @@
                 position: absolute;
                 right: 8px;
             }
-
+        
             &:hover {
                 span {
                     display: inline;
                 }
             }
         }
-
+        
         .actions {
             width: 90%;
             display: flex;
             margin-top: 15px;
             justify-content: space-between;
-
+        
             .color {
                 left: 90px;
             }
-
+        
             .menu {
                 right: 0px;
             }
-
+        
             .dropdown {
                 position: absolute;
                 z-index: 1;
                 top: 35px;
-
+        
                 .color-list {
                     & {
                         left: 90px;
                     }
-
+        
                     padding: 10px;
                     background-color: $white;
                     display: flex;
                     width: 90px;
                     flex-wrap: wrap;
-
+        
                     div {
                         min-width: 30px;
                         min-height: 30px;
@@ -136,55 +134,55 @@
                         cursor: pointer;
                     }
                 }
-
+        
                 .more-menu {
                     width: auto;
                     padding: 10px;
                     font-size: $tooSmall;
                     font-weight: 100;
-
+        
                     li .list-item {
                         border-radius: 5px;
                         padding: 10px;
                     }
                 }
             }
-
+        
             .material-icons-outlined {
                 cursor: pointer;
                 padding: 5px;
                 border-radius: 50%;
-
+        
                 &:hover {
                     background-color: $selectableHover;
                 }
             }
-
+        
             .closeBtn {
                 display: none;
             }
         }
-
-
+        
+        
         &:hover {
             box-shadow: $cardInterActiveShadow;
-
+        
             .actions {
                 display: flex;
             }
-
+        
             .pin {
                 display: block;
             }
         }
-
+        
         .pin {
             position: absolute;
             right: 10px;
             top: 10px;
             display: none;
         }
-
+        
         .actions {
             position: absolute;
             bottom: 5px;
@@ -197,6 +195,8 @@
     flex-direction: row;
 }
 
+
+
 .grid-column {
     flex-direction: column;
 
@@ -206,6 +206,7 @@
         margin-top: 10px;
     }
 }
+
 
 .modal>.notes>div {
     width: 50%;
@@ -261,3 +262,7 @@
     }
 
 }
+
+
+
+

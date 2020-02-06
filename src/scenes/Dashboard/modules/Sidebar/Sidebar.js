@@ -135,8 +135,8 @@ class Sidebar extends React.PureComponent{
                 active={this.state.activeElement}
                 onSelect={this.setActivelement}
             />
-
             {   
+            
                 this.state.modal
                     ? 
                         <Modal onClose={() => this.setState({modal: false})} closeBtn={true}>

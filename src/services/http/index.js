@@ -311,5 +311,16 @@ http.updateNotes = (data) => new Promise((resolve, reject) => {
     .catch((error) => reject(error.response))
 })
 
+http.addNotes = (data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['addNotes']
+    axios({
+        url,
+        method,
+        data
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
 export default http
 

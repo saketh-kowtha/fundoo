@@ -101,6 +101,10 @@ const APIS = {
     updateNotes: {
         method: POST,
         url :`${URL}/api/notes/updateNotes`
+    },
+    addNotes: {
+        method: POST,
+        url: `${URL}/api/notes/addNotes`
     }
 
 }

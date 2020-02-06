@@ -10,6 +10,8 @@ import Empty from '../../../../../components/Empty'
 
 import Notes, {Note} from '../../../../../components/Notes'
 
+import NewNote from '../../../../../components/Notes/NewNotes'
+
 import Loading from '../../../../../components/Loading'
 
 import geti18N from '../../../../../strings'
@@ -63,10 +65,22 @@ class Layout extends React.PureComponent{
 
 
     render() {
-        if (!this.props.items || this.props.loading)
-            return <Loading />
+        const empty = {
+            isPined: false,
+            title:"Hello",
+            description: "world",
+            isArchived: false,
+            isDeleted: false,
+            reminder: [],
+            noteLabels: [],
+            collaborators: []
+        }
 
-        return <React.Fragment>
+        if (!this.props.items || this.props.loading)
+            return <Loading small/>
+
+        return <React.Fragment>  
+            <NewNote />         
             {
                 this.props.items && this.props.items.length === 0 
                     ? <Empty name={this.props.name} />
