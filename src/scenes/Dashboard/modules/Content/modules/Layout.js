@@ -4,11 +4,13 @@ import "../Content.scss"
 
 import { connect } from 'react-redux';
 
+import { withRouter } from 'react-router-dom';
+
 import { action } from "../../../../../store"
 
 import Empty from '../../../../../components/Empty'
 
-import Notes, {Note} from '../../../../../components/Notes'
+import Notes from '../../../../../components/Notes'
 
 import NewNote from '../../../../../components/Notes/NewNotes'
 
@@ -21,11 +23,6 @@ const {notes, trash, archive, reminders} = geti18N()
 import {FETCH_NOTES, FETCH_REMINDERS, FETCH_ARCHIVE, FETCH_TRASH} from '../../../../../constants'
 
 class Layout extends React.PureComponent{
-
-    constructor(props) {
-        super(props)
-    }
-
 
     fetchNotes() {
         action(FETCH_NOTES)
@@ -43,7 +40,12 @@ class Layout extends React.PureComponent{
         action(FETCH_TRASH)
     }
 
-
+    fetchByLabel(){
+        const labelName = (this.props.match.params && this.props.match.params.name)
+        if(labelName === "") 
+            return
+        action("FETCH_BY_LABEL", labelName)
+    }
 
     UNSAFE_componentWillMount() {
         switch (this.props.name) {
@@ -58,29 +60,19 @@ class Layout extends React.PureComponent{
                 break;
             case archive:
                 this.fetchArchive()
+                break
+            case 'Label':
+                this.fetchByLabel()
                 break;
         }
     }
 
-
-
     render() {
-        const empty = {
-            isPined: false,
-            title:"Hello",
-            description: "world",
-            isArchived: false,
-            isDeleted: false,
-            reminder: [],
-            noteLabels: [],
-            collaborators: []
-        }
-
         if (!this.props.items || this.props.loading)
             return <Loading small/>
-
+            
         return <React.Fragment>  
-            <NewNote />         
+            {this.props.name === archive || this.props.name ===trash || this.props.name === "Label" ? null : <NewNote/>  }
             {
                 this.props.items && this.props.items.length === 0 
                     ? <Empty name={this.props.name} />
@@ -96,4 +88,5 @@ class Layout extends React.PureComponent{
 const mapStateToProps = (state) => ({ items: state.notes.data, loading: state.notes.loading })
 
 
-export default connect(mapStateToProps, null)(Layout)
+
+export default withRouter(connect(mapStateToProps, null)(Layout))

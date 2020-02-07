@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
 
+import {useSelector, useDispatch} from 'react-redux'
+
 import './NewNotes.scss'
 
 import {NOTES_COLORS} from '../../constants.js'
 
 import Card from '../Card'
+
+import Colleborators from '../Colleborators'
 
 import showToast from '../Toast'
 
@@ -29,7 +33,7 @@ const colorPlate = (props) =>{
 const NewNote = (props) => {
 
 
-    const [isExpanded, _props, getItem, isArchived , showColorPlate, color] = useNotes()
+    const [isExpanded, _props, getItem, isArchived , showColorPlate, color, showColleborators] = useNotes()
 
     const feilds = ["reminder", "collaberators", "labelIdList"]
 
@@ -39,22 +43,27 @@ const NewNote = (props) => {
         {
                 feilds.map(e => {
                     return getItem(e).labels.map(rem => 
-                        <div key={rem} title={`${e} ${rem}`}  className={`label-items ${e}`}>
+                        <div key={rem} title={`${e} ${e === "collaberators" ? rem.email : rem}`}  className={`label-items ${e}`}>
                              {e !== "collaberators" ? <i className="material-icons-outlined">{e === "labelIdList" ? "label" : "query_builder" }</i> : null}
-                             {e !== "collaberators" ? rem : rem[0].toLocaleUpperCase() }
+                             {e !== "collaberators" ? rem : rem.email[0].toLocaleUpperCase() }
                             <span name={rem} {...getItem(e).props}>&times;</span>
                     </div>)
                 })
         }
         <div className="action-items">
                     <i className="material-icons-outlined" title="Reminder" title={"Reminder"}>notifications_active</i>
-                    <i className="material-icons-outlined" title="Add Collobarate">person_add</i>
+                    <i className="material-icons-outlined" title="Add Collobarate" {..._props.collaberators}>person_add</i>
                     <i className="material-icons-outlined" title="Add Color" {..._props.colorPlate.root}>color_lens</i>
                     {showColorPlate ? colorPlate(_props.colorPlate) : null}
                     <i className="material-icons-outlined" title="Add Image">panorama</i>
                     <i className="material-icons-outlined" {..._props.archive} title={isArchived ? "Unarchive" : "archive"} >{isArchived ? "unarchive" : "archive"}</i>
                     <i className="closeBtn" {..._props.save}>Close</i>
         </div>
+        {
+            showColleborators 
+                ? <Colleborators {..._props.collaberatorsModal} />
+                : null
+        }
     </React.Fragment>
 
     return <div name="NewNote" style={{backgroundColor: color}} className="new-notes " {..._props.root}>
@@ -74,6 +83,8 @@ const useNotes = () => {
 
     })
 
+    const dispatch = useDispatch()
+
 
     const defaultNotes = {
         title: "", 
@@ -91,6 +102,8 @@ const useNotes = () => {
     const [notes, setNotes] = useState(defaultNotes)
 
     const [showColorPlate, setColorPlate] = React.useState(false)
+    
+    const [showColleborators, setShowColleborators] = React.useState(false)
 
     const reset = () => {
         setNotes(defaultNotes)
@@ -131,6 +144,17 @@ const useNotes = () => {
         archive:{
             onClick: () => setNotes({...notes, isArchived: !notes.isArchived})
         },
+        collaberators: {
+            onClick: () => setShowColleborators(true)
+        },
+        collaberatorsModal: {
+            list: notes.collaberators,
+            onClose: (list) => {
+                console.log(list, notes.collaberators)
+                setNotes({...notes, collaberators: [...list]})
+                setShowColleborators(false)
+            }
+        },
         colorPlate: {
             root:{
                 onClick: () => setColorPlate(true)
@@ -158,9 +182,7 @@ const useNotes = () => {
         }
     })
 
-
-
-    return [isExpanded, _props, getItem, notes.isArchived, showColorPlate , notes.color]
+    return [isExpanded, _props, getItem, notes.isArchived, showColorPlate , notes.color, showColleborators]
 
 }
 

@@ -105,8 +105,23 @@ const APIS = {
     addNotes: {
         method: POST,
         url: `${URL}/api/notes/addNotes`
+    },
+    searchUserList: {
+        method: POST,
+        url: `${URL}/api/user/searchUserList`
+    },
+    addCollaborator: {
+        method: POST,
+        url: (id) => `${URL}/api/notes/${id}/AddcollaboratorsNotes`
+    },
+    deleteCollaborator: {
+        method: DELETE,
+        url: (notesId, userId) => `${URL}/api/notes/${notesId}/removeCollaboratorsNotes/${userId}`
+    },
+    getNotesByLabel: {
+        method: POST,
+        url: (label) => `${URL}/api/notes/getNotesListByLabel/${label}`
     }
-
 }
 
 export default APIS

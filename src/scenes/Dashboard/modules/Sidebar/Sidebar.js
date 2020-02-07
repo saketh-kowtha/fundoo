@@ -36,6 +36,8 @@ class Sidebar extends React.PureComponent{
     }
 
     setActivelement = (element) =>{
+        if(element === editLabels)
+            return
         this.setState({activeElement: element}, () => {
             this.props.modifyTitle(this.state.activeElement)
         })
@@ -44,7 +46,6 @@ class Sidebar extends React.PureComponent{
     deleteLabel = (labelName) => {
         //Delete Action
         http.deleteLabel(labelName).then(success => {
-            console.log("Success", success)
             action("FETCH_LABELS")
         })
         .catch(error => {
@@ -55,9 +56,12 @@ class Sidebar extends React.PureComponent{
     updateLabel = (id, index) => {
         //Validation Required
         let label = this.labelInput[index].value
+        alert(label)
         if(!label || label === "" || label.trim() === "" ){
             return showToast(inValidLabel, ERROR)
         }
+        else if(label === editLabels)
+            return showToast("Please Choose other name", ERROR)
 
         if(this.props.labels.data.filter(ele => label === ele.label).length != 0)
             return showToast(labelExist, ERROR)
@@ -77,6 +81,8 @@ class Sidebar extends React.PureComponent{
         if(!label || label === "" || label.trim() === "" ){
             return showToast(inValidLabel, ERROR)
         }
+        else if(label === editLabels)
+            return showToast("Please Choose other name", ERROR)
         if(this.props.labels.data.filter(ele => label === ele.label).length != 0)
             return showToast(labelExist, ERROR)
         http.newLabel({label, isDeleted: false, userId: this.props.userId})
@@ -122,10 +128,12 @@ class Sidebar extends React.PureComponent{
                     : <List key="labels" data={
                             [
                                 { heading: labels },
-                                ...this.props.labels.data.map(label => ({label: label.label, icon: "label"})),
+                                ...this.props.labels.data.map(label => ({label: label.label, icon: "label", to: "/Labels/"+label.label})),
                                 { label: editLabels, icon: 'edit', onClick: () => this.setState({ modal: true }) },
                             ]
-                        } />
+                        }                 
+                        active={this.state.activeElement}
+                        onSelect={this.setActivelement} />
             }
 
             

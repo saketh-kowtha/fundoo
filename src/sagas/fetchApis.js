@@ -82,12 +82,28 @@ function* getNoteLabels() {
     }
 }
 
+function* getLabelNotes(payLoad) {
+    let { url } = APIS["getNotesByLabel"]
+    try {
+        yield put({ type: "SET_LAYOUT_ITEM_LOADING" })
+        const response = yield call(axios.post, url(payLoad.data))
+        if(response && response.data && response.data.data && response.data.data.success)
+            yield put({ type: "SET_LAYOUT_ITEM", data: response.data.data.data })
+    }
+    catch(err){
+        console.log(err)
+        yield put({type: "SET_LAYOUT_ITEM", data: "Error" })
+    }
+}
+
+
 export default function* watchFetchList() {
     yield all([ takeEvery("FETCH_NOTES", getNoteList),
                 takeEvery("FETCH_REMINDERS", getRemindersList),
                 takeEvery("FETCH_ARCHIVE", getArchiveList),
                 takeEvery("FETCH_TRASH", getTrashList),
-                takeEvery("FETCH_LABELS", getNoteLabels)
+                takeEvery("FETCH_LABELS", getNoteLabels),
+                takeEvery("FETCH_BY_LABEL", getLabelNotes)
             ])
 }
 

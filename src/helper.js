@@ -2,7 +2,7 @@
  * @author Kowtha Saketh
  * @description Fundoo helper functions 
  */
-import {LANGUAGES, OFFLINE, ONLINE} from './constants'
+import {LANGUAGES, OFFLINE, ONLINE, COLORS} from './constants'
 import showToast from './components/Toast'
 
 /**
@@ -37,3 +37,10 @@ window.addEventListener("online", () => showToast(ONLINE))
 
 //Network Status event for Offline
 window.addEventListener("offline", () => showToast(OFFLINE))
+
+export const getRandomColor = () => {
+    const colors=["purple", "blue", "green", "pink", "orange", "merun"]
+
+    const color = Math.ceil(Math.random() * 10 % colors.length) - 1
+    return colors[color]
+}

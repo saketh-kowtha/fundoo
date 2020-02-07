@@ -8,14 +8,19 @@ import "./Notes.scss"
 
 import { action } from "../../store"
 
-import {useSelector} from 'react-redux'
+import {useSelector, connect} from 'react-redux'
 
 import Card from '../Card'
+
+import Colleborators from '../Colleborators'
 
 import List from '../List'
 
 import {NOTES_COLORS, ERROR, FETCH_TRASH} from '../../constants.js'
+
 import geti18N from '../../strings'
+
+import {getRandomColor} from '../../helper'
 
 import { withRouter } from "react-router-dom";
 
@@ -29,7 +34,7 @@ const Notes = (props) => {
     const store = useSelector(store => store)
     return <div className={"notes" + (store.layout.grid === "column" ? " grid-column" : " grid-row")}>
         {
-            props.data.map(item => <Note history={props.history} key={item.id} item={item} type={props.type}/>)    
+            props.data.map(item => <Note  history={props.history} key={item.id} item={item} type={props.type}/>)    
         }
     </div>
 }
@@ -40,14 +45,16 @@ const Notes = (props) => {
  * @description Note Component Individual Notes Card
  */
 
-export class Note extends React.Component{
+class NoteCard extends React.Component{
     state = {
         pin: this.props.item.isPined || false,
         isArchived: this.props.item.isArchived || false,
         isDeleted: this.props.item.isDeleted || false,
         color: this.props.item.color || "",
         showColorPlate: false,
-        showMoreOptions: false
+        showMoreOptions: false,
+        colleboartorModal: false,
+        collaborators: this.props.item.collaborators || []
     }
 
     /**
@@ -239,6 +246,11 @@ export class Note extends React.Component{
             } 
         }
 
+        const handleCollobratorClose = (list) => {
+            this.setState({collaborators: list})
+            this.setState({colleboartorModal: false})
+        }
+
         let reminder = []
         if(this.props.item.reminder.length > 0){
             reminder = this.props.item.reminder.map(date => {
@@ -271,8 +283,8 @@ export class Note extends React.Component{
                         </div>)
                 }
                 {
-                    this.props.item.collaborators.map(user => {
-                        return <div key={user.email} className="collaberator" title={`${user.firstName} ${user.lastName} (${user.email})`}>{user.firstName[0]}</div>
+                    this.state.collaborators.map(user => {
+                        return <div key={user.email} className={`collaberator ${getRandomColor()}`} title={`${user.firstName} ${user.lastName} (${user.email})`}>{user.firstName[0]}</div>
                     })
                 }
 
@@ -282,7 +294,7 @@ export class Note extends React.Component{
                 </span>
                 <div className="actions">
                     <i className="material-icons-outlined" title="Reminder" title={"Reminder"}>notifications_active</i>
-                    <i className="material-icons-outlined" title="Add Collobarate">person_add</i>
+                    <i className="material-icons-outlined" title="Add Collobarate" onClick={() => this.setState({colleboartorModal: true})}>person_add</i>
                     <i className="material-icons-outlined" title="Add Color" onClick={() => this.setState({showColorPlate: true})}>color_lens</i>
                     {this.state.showColorPlate ? this.colorPlate() : null}
                     <i className="material-icons-outlined" title="Add Image">panorama</i>
@@ -292,7 +304,13 @@ export class Note extends React.Component{
                         this.state.showMoreOptions ? this.moreOptions() : null
                     }
                     <span className="closeBtn" onClick={this.handleNotesUpdate}>Close</span>
+
                 </div>
+                {
+                        this.state.colleboartorModal 
+                        ? <Colleborators list={this.props.item.collaborators} notesId={this.props.item.id} onClose={handleCollobratorClose} />
+                        : null
+                    }
             </div>
     }
 
@@ -317,6 +335,14 @@ export class Note extends React.Component{
     }
 }
 
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openCollaborator: (colleboartors) => dispatch({type: "OPEN_COLLABORATOR", data: colleboartors})
+    }
+}
+
+export const Note = connect(null,mapDispatchToProps)(NoteCard)
 
 
 export default withRouter(Notes)

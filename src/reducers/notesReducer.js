@@ -13,6 +13,7 @@ const notes = (state = {}, action) => {
             return { ...state, data: action.data, loading: false};
         case SET_LAYOUT_ITEM_LOADING:
             return { ...state, loading: true }
+            
         default:
             return state;
     }

@@ -6,7 +6,7 @@
  import {UPDATE_GRID, TOGGLE_SIDEBAR} from './../constants'
 
 const defaultState = {
-    toggle: true
+    toggle: true,
 }
 
 const layout = (state = defaultState, action) => {
@@ -14,7 +14,7 @@ const layout = (state = defaultState, action) => {
         case TOGGLE_SIDEBAR:
             return { ...state, toggle: !state.toggle }
         case UPDATE_GRID:
-                return {...state, grid: state.grid==="column" ? "row" : "column"}
+                return {...state, grid: state.grid==="column" ? "row" : "column"} 
         default:
             return state;
     }

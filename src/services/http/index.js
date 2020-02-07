@@ -316,7 +316,41 @@ http.addNotes = (data) => new Promise((resolve, reject) => {
     axios({
         url,
         method,
+        data,
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+http.removeCollaborator = (data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['deleteCollaborator']
+    axios({
+        url: url(data.notesId, data.colleboartorId),
+        method,
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+{{}}
+http.addCollaborator = (data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['addCollaborator']
+    axios({
+        url: url(data.notesId),
+        method,
         data
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+http.searchUserList = (query) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['searchUserList']
+    axios({
+        url,
+        method,
+        data: {
+            searchWord: query
+        }
     })
     .then((success) => resolve(success.data))
     .catch((error) => reject(error.response))

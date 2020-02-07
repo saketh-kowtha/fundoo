@@ -52,13 +52,6 @@
         }
     }
 
-    @each $key, $value in (green: #4caf50, pink: #e91e63, purple: #651fff, blue: #00b0ff, orange: #ff3d00, merun: #a31545){
-        .#{$key}{
-            background-color: $value;
-            color: $white;
-        }
-    }
-
     .text{
         font-size: 16px; 
         text-align: center;

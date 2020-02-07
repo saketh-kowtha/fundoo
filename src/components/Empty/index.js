@@ -28,6 +28,10 @@ const Empty = (props) => {
         "Trash": {
             icon: "delete",
             text: emptyTrash
+        },
+        "Label":{
+            icon: "label",
+            text: "No notes are found"
         }
     }
     return <div className="empty-container">

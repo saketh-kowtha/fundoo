@@ -21,9 +21,10 @@ const Content = (props) => {
                   <Route path={`/Trash`} component={() => <Layout name={trash} />} />
                   <Route path={`/Reminders`} component={() => <Layout name={reminders} />} />
                   <Route path={`/Archive`} component={() => <Layout name={archive} />} />
-                  <Route exact path={`/`} component={() => <Redirect to={'/Notes'} />} />
+                  <Route exact path={`/Labels/:name`} component={() => <Layout name={"Label"}  />} />
+                  <Route exact path={`/`} component={() => <Redirect to={notes} />} />
                   <Route exact path={`/Note/:id`} component={UpdateNotes} />
-                  <Route exact path={`/Search/:query`} component={Search} />
+                  <Route path={`/Search/:query`} component={Search} />
               </Switch>
     </div>
 }
