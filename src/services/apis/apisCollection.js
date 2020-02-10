@@ -90,6 +90,10 @@ const APIS = {
         method: POST,
         url: (notesId, labelId) => `${URL}/api/notes/${notesId}/addLabelToNotes/${labelId}/remove`
     },
+    addLabel: {
+        method: POST,
+        url: (notesId, labelId) => `${URL}/api/notes/${notesId}/addLabelToNotes/${labelId}/add`
+    },
     removeReminderNotes: {
         method: POST,
         url: `${URL}/api/notes/removeReminderNotes`
@@ -121,6 +125,10 @@ const APIS = {
     getNotesByLabel: {
         method: POST,
         url: (label) => `${URL}/api/notes/getNotesListByLabel/${label}`
+    },
+    addUpdateReminder: {
+        method: POST,
+        url: `${URL}/api/notes/addUpdateReminderNotes`
     }
 }
 

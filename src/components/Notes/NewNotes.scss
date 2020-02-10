@@ -20,15 +20,11 @@
     }
 
     .dropdown {
-        position: absolute;
+        position: relative;
         z-index: 1;
-        top: 35px;
 
         .color-list {
-            & {
-                left: 90px;
-            }
-
+            position: absolute;
             padding: 10px;
             background-color: $white;
             display: flex;
@@ -44,6 +40,7 @@
             }
         }
     }
+
 
     .label-items{
             display: inline-block;

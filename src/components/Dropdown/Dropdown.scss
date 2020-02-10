@@ -1,0 +1,58 @@
+@import '../../../index.scss';
+
+.custom-dropdown {
+    ul {
+        list-style: none;
+        padding: 0;
+        left: 100%;
+        margin-left: 1px;
+        margin-top: 0px;
+        position: absolute;
+        display: block;
+        background-color: $white;
+        z-index: 99;
+        box-shadow: $cardElevatedShadow;
+        border-radius: 5px;
+
+        input {
+            font-size: $default
+        }
+
+        ul {
+            top: 0px;
+        }
+
+        li {
+            font-size: $default;
+            display: block;
+            list-style: none;
+            position: relative;
+
+            ul {
+                display: none;
+            }
+
+            a {
+                display: block;
+                padding: 1em;
+                text-decoration: none;
+                white-space: nowrap;
+
+                &:hover {
+                    background-color: $selectableHover
+                }
+            }
+
+            &:hover>ul {
+                display: block;
+                position: absolute;
+            }
+        }
+
+    }
+
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator{
+    display:inline;
+}

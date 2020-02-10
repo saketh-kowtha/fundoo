@@ -14,8 +14,6 @@ import Card from '../Card'
 
 import Colleborators from '../Colleborators'
 
-import List from '../List'
-
 import {NOTES_COLORS, ERROR, FETCH_TRASH} from '../../constants.js'
 
 import geti18N from '../../strings'
@@ -23,6 +21,7 @@ import geti18N from '../../strings'
 import {getRandomColor} from '../../helper'
 
 import { withRouter } from "react-router-dom";
+import Dropdown from '../Dropdown/Dropdown'
 
 const {updatedSuccessfullyMsg, somethingWrong, movedToTrash, recoverSuccessfully, deletedSuccessfully, recover, deletePeremently, deleteNotes, notes, trash, archive} = geti18N()
 /**
@@ -53,8 +52,11 @@ class NoteCard extends React.Component{
         color: this.props.item.color || "",
         showColorPlate: false,
         showMoreOptions: false,
+        showReminder: false,
         colleboartorModal: false,
-        collaborators: this.props.item.collaborators || []
+        collaborators: this.props.item.collaborators || [],
+        noteLabels: this.props.item.noteLabels || [],
+        reminder: this.props.item.reminder
     }
 
     /**
@@ -132,8 +134,7 @@ class NoteCard extends React.Component{
         .then(success => {
             if (success.data.success === true) {
                 showToast(updatedSuccessfullyMsg)
-                action("FETCH_" + this.props.type.toLocaleUpperCase())
-                return this.setState({pin: !this.state.pin})                
+                return this.setState({noteLabels: [...this.state.noteLabels.filter(e => e.id !== labelId)]})
             }
             return showToast(somethingWrong, ERROR)    
         })
@@ -162,8 +163,24 @@ class NoteCard extends React.Component{
         .then(success => {
             if (success.data.success === true) {
                 showToast(updatedSuccessfullyMsg)
-                action("FETCH_" + this.props.type.toLocaleUpperCase())
-                return this.setState({pin: !this.state.pin})                
+                return action("FETCH_" + this.props.type.toLocaleUpperCase())                        
+            }
+            return showToast(somethingWrong, ERROR)    
+        })
+        .catch(error => {
+            console.log(error)
+            showToast(somethingWrong, ERROR)
+        })
+    }
+
+    handleAddLabel = (e) => {
+        const labelId = e.target.parentNode.id
+        const value = e.target.parentNode.getAttribute("data")
+        http.addLabel(this.props.item.id, labelId)
+        .then(success => {
+            if (success.data.success === true) {
+                showToast(updatedSuccessfullyMsg)
+                return this.setState({noteLabels: [...this.state.noteLabels, {label: value, id: labelId}]})
             }
             return showToast(somethingWrong, ERROR)    
         })
@@ -174,15 +191,18 @@ class NoteCard extends React.Component{
     }
 
     moreOptions = () =>{
-        return <div className="dropdown menu" onClick={() => this.setState({showMoreOptions: false})} onMouseLeave={() => this.setState({showMoreOptions: false})} >
-            <Card className="more-menu">
-                {
-                    this.state.isDeleted 
-                    ? <List data={[{label: recover, onClick: this.handleDelete}, {label: deletePeremently, onClick: this.handleForeverDelete}]} />
-                    : <List data={[{label: deleteNotes, onClick: this.handleDelete}]} />
-                }
-            </Card>
-        </div>
+        return <div className="dropdown menu" onMouseLeave={() => this.setState({showMoreOptions: false})}>
+            {
+            !this.state.isDeleted ?
+                <Dropdown items={[{label: deleteNotes, onClick: this.handleDelete}, {
+                            label:"Add Labels", 
+                            type: "menu",
+                            filter: true, 
+                            items: [...this.props.labels.filter(({label}) => !this.state.noteLabels.some(ele => ele.label === label)).map(e => ({...e,data: e.label, onClick: this.handleAddLabel}))]}
+                    ]}/>
+                : <Dropdown  items={[{label: recover, onClick: this.handleDelete}, {label: deletePeremently, onClick: this.handleForeverDelete}]} />
+            }
+            </div>
     }
 
     colorPlate = () =>{
@@ -215,6 +235,22 @@ class NoteCard extends React.Component{
         this.props.history.go(-1)
     }
 
+    handleAddReminder = () =>{
+        const payLoad = {reminder: new Date(this.state.rdate + " " + this.state.rtime).toISOString(), noteIdList: [this.props.item.id]}
+        http.addUpdateReminder(payLoad)
+        .then(success => {
+            if (success.data.success === true) {
+                showToast(updatedSuccessfullyMsg)
+                return this.setState({reminder: [payLoad.reminder]})
+            }
+            return showToast(somethingWrong, ERROR)    
+        })
+        .catch(error => {
+            console.log(error)
+            showToast(somethingWrong, ERROR)
+        })
+    }
+
     getNotesView = () => {
         const allowDrop = (ev) => ev.preventDefault();
           
@@ -240,7 +276,7 @@ class NoteCard extends React.Component{
         
                 P1.insertBefore(N2, T1);
                 P2.insertBefore(N1, T2);
-            
+            2
                 P1.removeChild(T1);
                 P2.removeChild(T2);
             } 
@@ -253,7 +289,7 @@ class NoteCard extends React.Component{
 
         let reminder = []
         if(this.props.item.reminder.length > 0){
-            reminder = this.props.item.reminder.map(date => {
+            reminder = this.state.reminder.map(date => {
                 const _date = new Date(date)
                 const month = _date.toLocaleString('default', { month: 'long' }).slice(0,3)
                 const day = _date.getDate().toLocaleString()
@@ -267,7 +303,7 @@ class NoteCard extends React.Component{
                     <div contentEditable={this.props.edit ? true : false} name="description" onBlur={this.updatedContent} className="description" dangerouslySetInnerHTML={{ __html: this.props.item.description }} />
                 </section>
                 {
-                    this.props.item.noteLabels.map(label => 
+                    this.state.noteLabels.map(label => 
                         <div key={label.label} title={"Label: " + label.label} className="labels" >
                             <i className="material-icons-outlined">label</i> 
                             {label.label}
@@ -284,7 +320,7 @@ class NoteCard extends React.Component{
                 }
                 {
                     this.state.collaborators.map(user => {
-                        return <div key={user.email} className={`collaberator ${getRandomColor()}`} title={`${user.firstName} ${user.lastName} (${user.email})`}>{user.firstName[0]}</div>
+                        return <div key={user.email} className={`collaberator ${getRandomColor(user.email[0])}`} title={`${user.firstName} ${user.lastName} (${user.email})`}>{user.firstName[0]}</div>
                     })
                 }
 
@@ -293,22 +329,53 @@ class NoteCard extends React.Component{
                     <i className="material-icons-outlined" onClick={this.handlePin} title={this.state.pin ? "Unpin" : "Pin"}>{ !this.state.pin ? "link" : "link_off"}</i>
                 </span>
                 <div className="actions">
-                    <i className="material-icons-outlined" title="Reminder" title={"Reminder"}>notifications_active</i>
-                    <i className="material-icons-outlined" title="Add Collobarate" onClick={() => this.setState({colleboartorModal: true})}>person_add</i>
-                    <i className="material-icons-outlined" title="Add Color" onClick={() => this.setState({showColorPlate: true})}>color_lens</i>
-                    {this.state.showColorPlate ? this.colorPlate() : null}
+                    <span style={{position: "relative"}}>
+                        <i className="material-icons-outlined" title="Reminder" onClick={() => this.setState({showReminder: !this.state.showReminder})} title={"Reminder"}>notifications_active</i>
+                        {
+                            this.state.showReminder ? 
+                                <Dropdown items={[{
+                                    id: new Date(new Date(new Date()).getTime() + 60 * 60 * 8 * 1000).toISOString().toString(),
+                                    label: `Later Today`,
+                                    onClick: (e) => this.setState({reminder: [e.target.parentNode.id]})
+                                },
+                                {
+                                    id: new Date(new Date(new Date()).getTime() + 60 * 60 * 24).toLocaleDateString().toString(),
+                                    label: `Tomorrow ${new Date().toLocaleString('en-US', { hour: 'numeric', hour12: true })}`,
+                                    onClick: (e) =>  this.setState({reminder: [e.target.parentNode.id]})
+                                },
+                                {
+                                    id: new Date(new Date(new Date()).getTime() + 60 * 60 * 24 * 8000).toISOString().toString(),
+                                    label: `Next Week ${new Date().toLocaleString('en-US', { hour: 'numeric', hour12: true })}`,
+                                    onClick: (e) =>  this.setState({reminder: [e.target.parentNode.id]})
+                                },
+                                {
+                                    label: "Custom",
+                                    type: "menu",
+                                    items: [
+                                        {label: "Select Custom Date", type: "input", format: "date", onChange: (e) => this.setState({rdate: e.target.value})},
+                                        {label: "Select Custom Time", type: "input", format: "Time", onChange: (e) => this.setState({rtime: e.target.value})},
+                                        {label: "SAVE", onClick: this.handleAddReminder }
+                                    ]
+                                }]} />
+                            : null
+                        }
+                    </span>
+                        <i className="material-icons-outlined" title="Add Collobarate" onClick={() => this.setState({colleboartorModal: true})}>person_add</i>
+                    <span>
+                        <i className="material-icons-outlined" title="Add Color" onClick={() => this.setState({showColorPlate: !this.state.showColorPlate})}>color_lens</i>
+                        {this.state.showColorPlate ? this.colorPlate() : null}
+                    </span>
                     <i className="material-icons-outlined" title="Add Image">panorama</i>
                     <i className="material-icons-outlined" title={this.state.isArchived ? "Unarchive" : archive} onClick={this.handleArchive}>{this.state.isArchived ? "unarchive" : "archive"}</i>
-                    <i className="material-icons-outlined" onClick={() => this.setState({showMoreOptions: true})}>more_vert</i>
+                    <i className="material-icons-outlined" onClick={() => this.setState({showMoreOptions: !this.state.showMoreOptions})}>more_vert</i>
                     {
                         this.state.showMoreOptions ? this.moreOptions() : null
                     }
                     <span className="closeBtn" onClick={this.handleNotesUpdate}>Close</span>
-
                 </div>
                 {
                         this.state.colleboartorModal 
-                        ? <Colleborators list={this.props.item.collaborators} notesId={this.props.item.id} onClose={handleCollobratorClose} />
+                        ? <Colleborators list={this.state.collaborators} notesId={this.props.item.id} onClose={handleCollobratorClose} />
                         : null
                     }
             </div>
@@ -342,7 +409,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export const Note = connect(null,mapDispatchToProps)(NoteCard)
+const mapStateToProps = (state) => {
+    return {labels: state.label.data}
+}
+export const Note = connect(mapStateToProps,mapDispatchToProps)(NoteCard)
 
 
 export default withRouter(Notes)

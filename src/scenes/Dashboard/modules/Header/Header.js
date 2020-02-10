@@ -11,6 +11,7 @@ import { toggleSidebar, gridView } from '../../../../actions/layoutActions'
 import http from '../../../../services/http'
 import geti18N from '../../../../strings'
 import {withRouter} from 'react-router-dom'
+import {getRandomcolor} from '../../../../helper'
 
 const {signOut, search, notes} = geti18N()
 
@@ -24,7 +25,6 @@ class Header extends React.Component{
             queryCount: 0,
             height: window.matchMedia && window.matchMedia("(max-width: 768px)") || {}
         }
-        this.colors=["purple", "blue", "green", "pink", "orange", "merun"]
         this.count = 0
     }
    
@@ -69,16 +69,14 @@ class Header extends React.Component{
 
     handleCloseBtn = () => {
         this.props.history.go((this.state.queryCount * -1))
-        console.log(this.state.queryCount)
         this.setState({closeBtn: false, searchQuery: "", queryCount: 0})
     }
 
     render() {
-        const color = Math.ceil(Math.random() * 10 % this.colors.length) - 1
         
         const image = this.props.user.imageUrl
-            ? <img className="nav-icon profile" src={`http://fundoonotes.incubation.bridgelabz.com/${this.props.user.imageUrl}`} />
-            : <span className={`nav-icon profile text ${this.colors[color]}`}>{this.props.user.email[0].toLocaleUpperCase()}</span>
+            ? <img alt="Profile Pic" className="nav-icon profile" src={`http://fundoonotes.incubation.bridgelabz.com/${this.props.user.imageUrl}`} />
+            : <span className={`nav-icon profile text ${getRandomcolor(this.props.user.email[0])}`}>{this.props.user.email[0].toLocaleUpperCase()}</span>
                 
         return <div className="navbar">
             <div className="left">

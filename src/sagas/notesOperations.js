@@ -44,10 +44,10 @@ function* handleNotesChange(payLoad){
 
 function* handleAddNotes(payLoad){
     try{
-        let response = yield call(http.addNotes, payLoad.data)
+        let response = yield call(http.addNotes, payLoad.data.form)
         if(response.status && response.status.success === true){
-            
             showToast(updatedSuccessfullyMsg)
+            yield put({type: "FETCH_"+payLoad.data.type.toLocaleUpperCase()})
         }
         else
             yield showToast(somethingWrong, ERROR)

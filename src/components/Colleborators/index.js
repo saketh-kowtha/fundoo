@@ -41,7 +41,7 @@ const Colleboartors = (props) => {
                 {
                     list.map(user => {
                         return <div className="item">
-                            <span className={getRandomColor() + " avatar"}>{user.email[0]}</span>
+                            <span className={getRandomColor(user.email[0]) + " avatar"}>{user.email[0]}</span>
                             <span className="mail" title={user.email}>{user.email}</span>
                             <span onClick={()=>handleDelete(user.userId)}>&times;</span>
                         </div>

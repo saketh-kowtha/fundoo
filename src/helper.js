@@ -38,9 +38,11 @@ window.addEventListener("online", () => showToast(ONLINE))
 //Network Status event for Offline
 window.addEventListener("offline", () => showToast(OFFLINE))
 
-export const getRandomColor = () => {
-    const colors=["purple", "blue", "green", "pink", "orange", "merun"]
+export const getRandomColor = (char) => {
 
-    const color = Math.ceil(Math.random() * 10 % colors.length) - 1
-    return colors[color]
+    char = char.charCodeAt(0)
+
+    const colors=["purple", "blue", "green", "pink", "orange", "merun"]
+   
+    return colors[char % 6]
 }

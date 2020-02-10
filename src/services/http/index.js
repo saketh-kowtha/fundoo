@@ -264,6 +264,17 @@ http.removeLabel = (notesId, labelId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error.response))
 })
 
+http.addLabel = (notesId, labelId) => new Promise((resolve, reject) => {
+
+    let { url, method } = APIS['addLabel']
+    axios({
+        method,
+        url: url(notesId, labelId),
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
 http.removeReminderNotes = (notesId) => new Promise((resolve, reject) => {
     let payLoad = {
         noteIdList: [notesId],
@@ -351,6 +362,17 @@ http.searchUserList = (query) => new Promise((resolve, reject) => {
         data: {
             searchWord: query
         }
+    })
+    .then((success) => resolve(success.data))
+    .catch((error) => reject(error.response))
+})
+
+http.addUpdateReminder = (data) => new Promise((resolve, reject) => {
+    let { url, method } = APIS['addUpdateReminder']
+    axios({
+        url,
+        method,
+        data
     })
     .then((success) => resolve(success.data))
     .catch((error) => reject(error.response))

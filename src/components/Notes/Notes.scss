@@ -8,7 +8,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-
+    padding-bottom: 20px;
     .note {
         position: relative;
         width: 238px;
@@ -16,10 +16,20 @@
         padding: 20px;
         color: $grey;
         font-size: $large;
+        background: $white;
         border: 1px solid $borderColor;
         font-weight: bold;
         border-radius: 5px;
         text-align: left;
+        input{
+            border-style: none;
+            font-size: $default;
+            display: block;
+            outline: none;
+            color: $grey;
+            background-color: transparent;    
+            margin: 10px;
+        }
         .title {
             font-size: $small;
             color: $black;
@@ -107,14 +117,15 @@
             }
         
             .menu {
-                right: 0px;
+                right: 30px;
             }
         
             .dropdown {
                 position: absolute;
                 z-index: 1;
                 top: 35px;
-        
+                right: 20%;
+
                 .color-list {
                     & {
                         left: 90px;

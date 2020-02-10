@@ -4,8 +4,6 @@ import List from '../../../../components/List'
 import { connect } from 'react-redux';
 import { modifyTitle } from '../../../../actions/fundooTitleAction'
 
-import {toggleSidebar} from '../../../../actions/layoutActions'
-
 import { withRouter } from "react-router-dom";
 import Modal from '../../../../components/Modal';
 
@@ -56,7 +54,6 @@ class Sidebar extends React.PureComponent{
     updateLabel = (id, index) => {
         //Validation Required
         let label = this.labelInput[index].value
-        alert(label)
         if(!label || label === "" || label.trim() === "" ){
             return showToast(inValidLabel, ERROR)
         }

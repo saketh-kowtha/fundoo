@@ -72,7 +72,7 @@ class Layout extends React.PureComponent{
             return <Loading small/>
             
         return <React.Fragment>  
-            {this.props.name === archive || this.props.name ===trash || this.props.name === "Label" ? null : <NewNote/>  }
+            {this.props.name === archive || this.props.name ===trash || this.props.name === "Label" ? null : <NewNote type={this.props.name}/>  }
             {
                 this.props.items && this.props.items.length === 0 
                     ? <Empty name={this.props.name} />
