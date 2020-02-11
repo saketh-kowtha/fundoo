@@ -8,7 +8,7 @@ npm start
 
 ## Initiate Dev Build
 ```
-npm run dev
+npm run build
 ```
 Build Location: fundoo/dev
 
@@ -20,12 +20,7 @@ npm run prod
 Build Location: fundoo/prod
 
 
-## Starting Dev Build
+## Testing
 ```
-npm run start-dev
+npm run test
 ``` 
-
-## Starting Production Build
-```
-npm run start-prod
-```
