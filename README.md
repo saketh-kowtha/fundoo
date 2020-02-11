@@ -24,3 +24,4 @@ Build Location: fundoo/prod
 ```
 npm run test
 ``` 
+Note : If you face any issue while testing run it with `sudo` i.e `sudo npm test`
