@@ -209,7 +209,7 @@ class NoteCard extends React.Component{
         return <div className="dropdown color" onClick={() => this.setState({showColorPlate: false})} onMouseLeave={() => this.setState({showColorPlate: false})} >
             <Card className="color-list">
                 {
-                    NOTES_COLORS.map((color, index) => <div onClick={this.handleColorPlateClick} value={color} style={{backgroundColor: color, border: `1px solid ${index === 0 ? "black" : color}`}}></div>)
+                    NOTES_COLORS.map((color, index) => <div onClick={this.handleColorPlateClick} value={color} key={color} style={{backgroundColor: color, border: `1px solid ${index === 0 ? "black" : color}`}}></div>)
                 }
             </Card>
         </div>
@@ -297,7 +297,7 @@ class NoteCard extends React.Component{
                 return `${month} ${day}, ${time}`
             })
         }
-        return <div tabIndex="0" editable={this.props.edit ? true : false}  className={"note"}  style={{backgroundColor: this.state.color}} onDrop={()=>drop(event)} id={this.props.item.id} onDragOver={()=>allowDrop(event)} draggable={"true"} onDragStart={() => drag(event)}>
+        return <div tabIndex="0" editable={this.props.edit ? "true" : "false"}  className={"note"}  style={{backgroundColor: this.state.color}} onDrop={()=>drop(event)} id={this.props.item.id} onDragOver={()=>allowDrop(event)} draggable={"true"} onDragStart={() => drag(event)}>
                 <section onClick={this.props.edit ? ()=>{} : () => this.props.history.push("/Note/" + this.props.item.id)}>
                     <div contentEditable={this.props.edit ? true : false} name="title" className="title" onBlur={this.updatedContent} dangerouslySetInnerHTML={{__html: this.props.item.title}} />
                     <div contentEditable={this.props.edit ? true : false} name="description" onBlur={this.updatedContent} className="description" dangerouslySetInnerHTML={{ __html: this.props.item.description }} />
@@ -367,7 +367,7 @@ class NoteCard extends React.Component{
                     </span>
                     <i className="material-icons-outlined" title="Add Image">panorama</i>
                     <i className="material-icons-outlined" title={this.state.isArchived ? "Unarchive" : archive} onClick={this.handleArchive}>{this.state.isArchived ? "unarchive" : "archive"}</i>
-                    <i className="material-icons-outlined" onClick={() => this.setState({showMoreOptions: !this.state.showMoreOptions})}>more_vert</i>
+                    <i className="material-icons-outlined" name="more" onClick={() => this.setState({showMoreOptions: !this.state.showMoreOptions})}>more_vert</i>
                     {
                         this.state.showMoreOptions ? this.moreOptions() : null
                     }

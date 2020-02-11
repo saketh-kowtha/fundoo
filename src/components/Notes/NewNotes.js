@@ -49,8 +49,8 @@ const NewNote = (props) => {
     const feilds = ["collaberators", "labelIdList"]
 
     const expandedContent = <React.Fragment>
-        <input type="text" autoComplete="new-password" name="title" placeholder={"Title"} {..._props.title}/>
-        <input type="text" autoComplete="new-password" name="description" placeholder={"Take a Note"} {..._props.description}/>
+        <textarea cols='60' rows='8' className="input"  autoComplete="new-password" name="title" placeholder={"Title"} {..._props.title}/>
+        <textarea cols='60' rows='8' className="input" autoComplete="new-password" name="description" placeholder={"Take a Note"} {..._props.description}/>
         {
             getReminder ?
                 <div key={"reminder"} title={`Remonder ${formatDate(getReminder)}`}  className={`label-items reminder`}>
@@ -105,7 +105,7 @@ const NewNote = (props) => {
                 }
             </span>
             <span>
-                <i className="closeBtn" {..._props.save}>Close</i>
+                <i name="close" className="closeBtn" {..._props.save}>Close</i>
             </span>
         </div>
         {
@@ -119,7 +119,7 @@ const NewNote = (props) => {
         {
             isExpanded 
             ? expandedContent
-            : <input type="text" name="description" placeholder={"Take a Note"} {..._props.description}/>
+            : <textarea cols='60' rows='8' className="input" type="text" name="description" placeholder={"Take a Note"} {..._props.description}/>
         }
     </div>
 }
@@ -128,14 +128,12 @@ const NewNote = (props) => {
 //Custom Hooks
 const useNotes = (name) => {
 
-    useEffect(() => {
 
-    })
 
     const dispatch = useDispatch()
 
 
-    const defaultNotes = {
+    const defaultNotes =  {
         title: "", 
         description: "", 
         isPined: false, 

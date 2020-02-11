@@ -9,14 +9,19 @@
     box-shadow: $cardOulinedShadow;
     text-align:left;
     margin: 0 auto;
-    input{
+    .input{
+        resize: none;
         border-style: none;
         font-size: $default;
         display: block;
         outline: none;
         color: $grey;
+        width: 100%;
         background-color: transparent;    
         margin: 10px;
+        margin-bottom: 0px;
+        height: 25px;
+        max-height: 100px;
     }
 
     .dropdown {

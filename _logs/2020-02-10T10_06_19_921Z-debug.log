@@ -1,0 +1,15 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'test' ]
+2 info using npm@6.13.4
+3 info using node@v12.14.0
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle fundoo@1.0.0~pretest: fundoo@1.0.0
+6 info lifecycle fundoo@1.0.0~test: fundoo@1.0.0
+7 verbose lifecycle fundoo@1.0.0~test: unsafe-perm in lifecycle true
+8 verbose lifecycle fundoo@1.0.0~test: PATH: /usr/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/admin1/Desktop/fundoo/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+9 verbose lifecycle fundoo@1.0.0~test: CWD: /home/admin1/Desktop/fundoo
+10 silly lifecycle fundoo@1.0.0~test: Args: [ '-c', 'jest' ]
+11 timing npm Completed in 146764ms
+12 error cb() never called!
+13 error This is an error with npm itself. Please report this error at:
+14 error <https://npm.community>
